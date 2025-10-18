@@ -1,33 +1,78 @@
+'use client'
+
 import { Card } from "../ui/card"
+import { Button } from "../ui/button"
 
 export default function ContactForm() {
 
 
-    const sumbitEmail = (e) => {
-        e.preventDefault()
+    const formFields = [
+        {
+            label: 'Name:',
+            type: 'text',
+            name: 'name',
+            placeholder: 'Full Name',
+            require: true,
+            className: "border-2 w-[400px]"
+        },
+        {
+            label: 'Email',
+            type: 'email',
+            name: 'email',
+            placeholder: 'Email Address',
+            require: true,
+            className: "border-2 w-[400px]"
+        },        
+        {
+            label: 'Phone Number',
+            type: 'tel',
+            name: 'phone',
+            placeholder: '360-555-5555',
+            require: true,
+            className: "border-2 w-[400px]"
+        },
+        {
+            label: 'Tell us more',
+            type: 'textarea',
+            name: 'body',
+            placeholder: 'Tell us more',
+            require: true,
+            className: "border-2 w-[400px] h-[400px]"
+        },
+    ]
 
-        
+    function renderForm() {
+
+        return formFields.map((formFields, index) => (
+            <div key={index}>
+                <div><label>{formFields.label}</label></div>
+                <input 
+                    type={formFields.type}
+                    name={formFields.name}
+                    required={formFields.require}
+                    placeholder={formFields.placeholder}
+                    className={formFields.className}
+                />
+            </div>
+        ))
     }
+
+    function submitForm(e) {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const data = Object.fromEntries(formData)
+        console.log(data)
+        e.target.reset()
+    }
+
 
     return (
         <div>
             <Card>
-                <div>
-                    <form>
-                        <label>Email: </label>
-                        <input
-                            type='email'
-                            id="email"
-                            name="emailAddress"
-                            placeholder="Email Address goes here"
-                            required
-                            className="border-2 w-[400px]"
-                            onSubmit={sumbitEmail()}
-                        />
-                        <input type="submit"/>
-                    </form>
-                </div>
-
+            <form onSubmit={submitForm}>
+            {renderForm()}
+            <Button type='submit'>This button</Button>
+            </form>
             </Card>
         </div>
     )

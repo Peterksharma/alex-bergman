@@ -6,7 +6,9 @@ export default function Contact() {
         <div>
 
             Contact Us
+            <div className="w-[45vw]">
         <ContactForm />
+            </div>
         </div>
     )
 }

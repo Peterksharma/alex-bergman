@@ -14,7 +14,7 @@ export default function ContactForm() {
             name: 'name',
             placeholder: 'Full Name',
             require: true,
-            className: "border-2 w-[400px]"
+            className: "border-2 w-full"
         },
         {
             label: 'Email',
@@ -22,7 +22,7 @@ export default function ContactForm() {
             name: 'email',
             placeholder: 'Email Address',
             require: true,
-            className: "border-2 w-[400px]"
+            className: "border-2 w-full"
         },        
         {
             label: 'Phone Number',
@@ -30,7 +30,7 @@ export default function ContactForm() {
             name: 'phone',
             placeholder: '360-555-5555',
             require: true,
-            className: "border-2 w-[400px]"
+            className: "border-2 w-full"
         },
         {
             label: 'Tell us more',
@@ -38,7 +38,7 @@ export default function ContactForm() {
             name: 'body',
             placeholder: 'Tell us more',
             require: true,
-            className: "border-2 w-[400px] h-[400px]"
+            className: "border-2 w-full h-[300px]"
         },
     ]
 
@@ -47,6 +47,15 @@ export default function ContactForm() {
         return formFields.map((formFields, index) => (
             <div key={index}>
                 <div><label>{formFields.label}</label></div>
+                {formFields.type === 'textarea' ? (
+                  <textarea 
+                      type={formFields.type}
+                      name={formFields.name}
+                      required={formFields.require}
+                      placeholder={formFields.placeholder}
+                      className={formFields.className}
+                  />
+                ) : 
                 <input 
                     type={formFields.type}
                     name={formFields.name}
@@ -54,6 +63,7 @@ export default function ContactForm() {
                     placeholder={formFields.placeholder}
                     className={formFields.className}
                 />
+                }
             </div>
         ))
     }
@@ -61,7 +71,7 @@ export default function ContactForm() {
 
     return (
         <div>
-            <Card>
+            <Card className='p-4'>
             <form action={submitContactForm}>
             {renderForm()}
             <Button type='submit' >This button</Button>

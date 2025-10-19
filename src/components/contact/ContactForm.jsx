@@ -2,6 +2,7 @@
 
 import { Card } from "../ui/card"
 import { Button } from "../ui/button"
+import { submitContactForm } from "@/app/actions/sendContactForm"
 
 export default function ContactForm() {
 
@@ -57,21 +58,13 @@ export default function ContactForm() {
         ))
     }
 
-    function submitForm(e) {
-        e.preventDefault()
-        const formData = new FormData(e.target)
-        const data = Object.fromEntries(formData)
-        console.log(data)
-        e.target.reset()
-    }
-
 
     return (
         <div>
             <Card>
-            <form onSubmit={submitForm}>
+            <form action={submitContactForm}>
             {renderForm()}
-            <Button type='submit'>This button</Button>
+            <Button type='submit' >This button</Button>
             </form>
             </Card>
         </div>

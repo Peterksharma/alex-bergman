@@ -3,6 +3,10 @@ import "./globals.css";
 
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import { Toaster } from "@/components/ui/sonner";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +32,7 @@ export default function RootLayout({ children }) {
        <Header/>
 
         {children}
+        <Toaster />
         <Footer />
       </body>
     </html>

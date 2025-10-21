@@ -1,7 +1,11 @@
 'use server'
 
-export async function submitContactForm(formData) {
+export async function submitContactForm(previousState, formData) {
     
+  if (!formData) { 
+    return { success: false}
+  }
+  
     const data = {
         name: formData.get('name'),
         email: formData.get('email'),

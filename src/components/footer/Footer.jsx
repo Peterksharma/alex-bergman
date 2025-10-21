@@ -1,11 +1,8 @@
 import { links } from "@/data/links"
-import { contactData } from "@/data/contact"
-import Link from "next/link"
-
+import { renderContacts } from "@/lib/renderContacts";
+import { contactData } from "@/data/contact";
 //Icons
-import { FaPhone } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
-import { FaSquareFacebook, FaInstagram, FaLocationDot } from "react-icons/fa6";
+import { FaSquareFacebook, FaInstagram} from "react-icons/fa6";
 
 let headerStyle = 'underline text-lg'
 
@@ -19,21 +16,16 @@ export default function Footer() {
         ))
     }
 
-    const renderContact = (contactData) => {
-
-        const hrefPhone = contactData.Phone.replace(/\D/g, '')
-
-        return (
-            <div>
-                <a className="flex" href={`tel:${hrefPhone}`}><FaPhone />{contactData.Phone}</a>
-                <a className="flex" href={`mailto:${contactData.email}`} ><MdEmail />{contactData.Email}</a>
-                <div className="flex">
-                    <FaLocationDot />
-                    <div>{contactData.Address1}<br /> {contactData.Address2}</div>
-                </div>
-            </div>
-        )
-    }
+    // const renderContact = (contactData) => {
+    //     const hrefPhone = contactData.phone.number.replace(/\D/g, '')
+    //     return (
+    //         <div>
+    //         <a className="flex gap-2" href={`tel:${hrefPhone}`}>{contactData.phone.icon}{contactData.phone.number}</a>
+    //         <a className="flex gap-2" href={`mailto:${contactData.email}`} >{contactData.email.icon}{contactData.email.address}</a>
+    //         <div className="flex gap-2">{contactData.address.icon}<div>{contactData.address.line1}<br />{contactData.address.line2}</div></div>
+    //         </div>
+    //     )
+    // }
 
     const renderFollow = () => {
 
@@ -58,7 +50,7 @@ export default function Footer() {
                 </div>
                 <div>
                     <h2 className={headerStyle}>Contact Us</h2>
-                    <div>{renderContact(contactData)} </div>
+                    {renderContacts(contactData)}
                 </div>
                 <div>
                     <h2 className={headerStyle}> Drafting and Designs</h2>

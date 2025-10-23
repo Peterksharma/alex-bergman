@@ -10,13 +10,12 @@ import { Button } from "@/components/ui/button";
 
 export const renderTrustCards = (cardData) => {
   return cardData.map((cardData, index) => (
-    <div key={index} className="flex-1">
+    <div key={index} className="flex-1 p-4">
       <Card className="h-full hover:scale-102">
         <CardHeader className="text-center">
-          <CardTitle>{cardData.title}</CardTitle>
-          <CardDescription>{cardData.description}</CardDescription>
+          <CardTitle className='text-xl'>{cardData.description}</CardTitle>
         </CardHeader>
-        <CardContent className="text-center">
+        <CardContent className="text-center h-[14vh]">
           <p>{cardData.content}</p>
         </CardContent>
         <CardFooter className="justify-center">

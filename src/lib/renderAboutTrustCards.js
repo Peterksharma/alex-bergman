@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export const renderTrustCards = (cardData) => {
   return cardData.map((cardData, index) => (
-    <div key={index} className="flex-1">
+    <div key={index} className="flex-1 p-2">
       <Card className="h-full hover:scale-102">
         <CardHeader>
           <CardTitle className="flex gap-2">

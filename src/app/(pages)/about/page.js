@@ -4,6 +4,38 @@ import { Button } from "@/components/ui/button";
 import { FaRegHeart } from "react-icons/fa";
 
 export default function About() {
+
+
+const expertiseCardData = [
+  {
+    title: 'Residential Construction',
+    content: 'Mid-size residential projects, additions, remodels, and auxiliary structures.',
+  },
+  {
+    title: 'Residential Construction',
+    content: 'Mid-size residential projects, additions, remodels, and auxiliary structures.',
+  },
+  {
+    title: 'Residential Construction',
+    content: 'Mid-size residential projects, additions, remodels, and auxiliary structures.',
+  },
+]
+
+function renderExpertiseCards() {
+  return (
+    expertiseCardData.map((data, index) => (
+      <div key={index} className="pb-4">
+        <Card>
+          <CardHeader className='font-bold'>{data.title}</CardHeader>
+          <CardContent>{data.content}</CardContent>
+        </Card>
+      </div>
+    ))
+  )
+}
+
+
+
   return (
     <div>
       <div className="text-center p-8 ">
@@ -49,28 +81,13 @@ export default function About() {
       <AboutTrustCards />
       <div className="pt-8">
         <h2 className="text-center text-2xl font-bold pb-8 "> Our Expertise </h2>
-        <Card>
-          <CardHeader className='font-bold'>Residential Construction</CardHeader>
-          <CardContent>
-            Mid-size residential projects, additions, remodels, and auxiliary
-            structures.
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>Residential Construction</CardHeader>
-          <CardContent>
-            Mid-size residential projects, additions, remodels, and auxiliary
-            structures.
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>Residential Construction</CardHeader>
-          <CardContent>
-            Mid-size residential projects, additions, remodels, and auxiliary
-            structures.
-          </CardContent>
-        </Card>
+        <div className="flex justify-center">
+          <div>
+            {renderExpertiseCards()}
+          </div>
+        </div>
       </div>
     </div>
   );
 }
+

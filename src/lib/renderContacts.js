@@ -2,6 +2,7 @@ export const renderContacts = (data) => {
   const hrefPhone = data.phone.number.replace(/\D/g, '')
 
   return (
+    <div className="">
     <div>
       <a className="flex gap-2" href={`tel:${hrefPhone}`}>
         <span className="flex-shrink-0">{data.phone.icon}</span>
@@ -19,6 +20,7 @@ export const renderContacts = (data) => {
           {data.address.line2}
         </div>
       </div>
+    </div>
     </div>
   );
 };

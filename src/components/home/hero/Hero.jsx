@@ -11,13 +11,15 @@ export default function Hero() {
     }
 
     return (
-        <div className="relative h-[600px] bg-blue-100">
+        <div className="relative h-[600px] bg-blue-100 border-b-2 border-gray-700">
             <Image
                 src='/assets/hero-bg.jpg'
                 alt='An image of houses'
                 fill
                 className="object-cover"
             />
+            <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_0%,rgba(0,0,0,0.25)_100%)] z-[5]"></div>
+
                         <div className="absolute inset-0 bg-black/30 z-[5]"></div>
 
             <div className="absolute inset-0 flex items-center justify-center z-10">

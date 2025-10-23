@@ -1,10 +1,10 @@
 export const trustCardData = [
     {
-        title: 'Projects',
-        description: 'Our Projects',
-        content: "Explore our portfolio of successfully completed projects that showcase our expertise in construction drafting and design. From residential remodels to drafting plans, each project demonstrates our commitment to precision, quality, and client satisfaction. Browse through our work to see how we've helped bring our clients' visions to life.",
-        button: 'See past works',
-        url: '/portfolio'
+        title: 'About',
+        description: 'About Us',
+        content: "We're dedicated to making quality construction drafting accessible to everyone. Our mission is to provide fast and friendly service and consultations that empower builders, contractors, and homeowners to realize their construction goals. With 15 years of experience and a passion for precision, we're here to support your project every step of the way.",
+        button: 'Read more about us',
+        url: '/about'
     },
     {
         title: 'Services',
@@ -14,10 +14,10 @@ export const trustCardData = [
         url: '/services'        
     },
     {
-        title: 'About',
-        description: 'About Us',
-        content: "We're dedicated to making quality construction drafting accessible to everyone. Our mission is to provide fast and friendly service and consultations that empower builders, contractors, and homeowners to realize their construction goals. With 15 years of experience and a passion for precision, we're here to support your project every step of the way.",
-        button: 'Read more about us',
-        url: '/about'
-    }
+        title: 'Projects',
+        description: 'Our Projects',
+        content: "Explore our portfolio of successfully completed projects that showcase our expertise in construction drafting and design. From residential remodels to drafting plans, each project demonstrates our commitment to precision, quality, and client satisfaction. Browse through our work to see how we've helped bring our clients' visions to life.",
+        button: 'See past works',
+        url: '/portfolio'
+    },
 ]

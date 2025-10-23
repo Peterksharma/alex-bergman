@@ -5,7 +5,7 @@ export default function Trust() {
 
     return (
       <div>
-        <div className="w-full h-[40vh] bg-gray-100 flex items-center">
+        <div className="w-full  bg-gray-900 flex items-center py-16">
             <div className='flex w-full gap-2 justify-center pl-16 pr-16'>
                 {renderTrustCards(trustCardData)}
             </div>

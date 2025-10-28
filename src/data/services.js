@@ -1,7 +1,6 @@
 export const services = [
   {
     name: 'Remodels',
-    icon: null,
     category: 'Residential',
     image: '/assets/portfolio/homeRemodel/4.jpg',
     description: 'It is often that families outgrow their homes, or that new home buyers desire to alter their homes to suit their needs. We are here to help with that! Whether you are adding bedrooms, opening up the floorplan, or updating the layout to fit your lifestyle we are here to offer help based on our experience and expertise.',

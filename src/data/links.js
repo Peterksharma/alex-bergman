@@ -1,6 +1,9 @@
 import { IoHome } from "react-icons/io5";
-import { FaInfoCircle, FaRegNewspaper, FaPhone } from "react-icons/fa";
-import { MdOutlineHomeWork } from "react-icons/md";
+import { FaInfoCircle, FaRegNewspaper, FaPhone, FaQuestionCircle } from "react-icons/fa";
+import { MdOutlineRateReview } from "react-icons/md";
+import { VscOpenPreview } from "react-icons/vsc";
+import { RiLoopLeftFill } from "react-icons/ri";
+
 
 export const links = [
   {
@@ -22,7 +25,7 @@ export const links = [
     link: "/portfolio",
     type: "button",
     variant: "ghost",
-    icon: <MdOutlineHomeWork />,
+    icon: <VscOpenPreview />,
   },
   {
     name: "Services",
@@ -33,30 +36,30 @@ export const links = [
   },
   {
     name: "Testimonials",
-    link: "/services",
+    link: "/testimonials",
     type: "button",
     variant: "ghost",
-    icon: <FaRegNewspaper />,
+    icon: <MdOutlineRateReview/>,
   },
   {
     name: "FAQ",
-    link: "/services",
+    link: "/faq",
     type: "button",
     variant: "ghost",
-    icon: <FaRegNewspaper />,
+    icon: <FaQuestionCircle />,
   },
   {
     name: "Our Process",
-    link: "/services",
+    link: "/process",
     type: "button",
     variant: "ghost",
-    icon: <FaRegNewspaper />,
+    icon: <RiLoopLeftFill/>,
   },
   {
     name: "Contact Us",
     link: "/contact",
     type: "button",
     variant: "ghost",
-    icon: <FaRegNewspaper />,
+    icon: <FaPhone />,
   },
 ];

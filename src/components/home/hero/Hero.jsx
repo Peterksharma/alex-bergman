@@ -11,7 +11,7 @@ export default function Hero() {
     }
 
     return (
-        <div className="relative h-[600px] bg-blue-100 border-b-2 border-gray-700">
+        <div className="relative h-[600px] bg-blue-100 border-b-3 border-gray-700">
             <Image
                 src='/assets/hero-bg.jpg'
                 alt='An image of houses'

@@ -13,7 +13,7 @@ export const renderTrustCards = (cardData) => {
           
           <CardTitle className='flex gap-2'>{cardData.icon}{cardData.title}</CardTitle>
         </CardHeader>
-        <CardContent className="text-center">
+        <CardContent>
           <p>{cardData.content}</p>
         </CardContent>
       </Card>

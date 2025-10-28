@@ -4,7 +4,6 @@ import { contactData } from "@/data/contact";
 //Icons
 import { FaSquareFacebook, FaInstagram } from "react-icons/fa6";
 
-let headerStyle = 'underline text-lg pb-2 font-bold'
 
 export default function Footer() {
 
@@ -21,10 +20,10 @@ export default function Footer() {
 
 
     return (
-        <footer className="h-[400px] bg-gray-900 border-t border-gray-800 text-gray-100" >
+        <footer className="h-[400px] bg-gray-900 border-t-3 border-gray-800 text-gray-100" >
             <div className="grid grid-cols-3 gap-2 p-16">
                 <div>
-                    <h2 className='underline text-lg pb-2 font-bold'>Contact Us</h2>
+                    <h2 className='underline text-lg pb-2 font-bold text-center'>Contact Us</h2>
                     {renderContacts(contactData)}
                 </div>
                 <div>

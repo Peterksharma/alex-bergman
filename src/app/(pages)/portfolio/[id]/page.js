@@ -1,5 +1,5 @@
-import { projects } from "@/data/projects";
-import Project from "@/components/portfolio/project";
+import { projects } from "@/components/portfolio/projects/data/projectData";
+import Project from "@/components/portfolio/projects/Project";
 
 
 

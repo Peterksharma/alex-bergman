@@ -1,12 +1,14 @@
 import Hero from "@/components/home/hero/Hero";
-import Trust from "@/components/home/trust/Trust";
-import ServicesCards from "@/components/services/ServiceCards";
+import TrustCards from "@/components/home/trust/TrustCards";
+import ServicesCards from "@/components/services/AllServicesCards";
 
 export default function Home() {
   return (
     <div>
       <Hero/>
-      <Trust />
+      <div className='py-8 bg-gray-900'>
+        <TrustCards />
+      </div>
       <ServicesCards /> 
     </div>
   );

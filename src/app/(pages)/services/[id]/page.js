@@ -1,28 +1,22 @@
-import { projects } from "@/data/projects";
-import Project from "@/components/portfolio/project";
+import { services } from "@/components/services/data/servicesData";
+import SingleService from "@/components/services/SingleService";
 
-
-
-export default async function ProjectPage({params}) {
+export default async function ServicePage({ params }) {
     const { id } = await params;
 
-    
-    if(!id){
+    if (!id) {
         return <div>Loading the project...</div>
     }
-    
-    const project = projects.find(p => p.id === id)
 
-    if (!project) {
-        return <div>No project found.</div>
+    const service = services.find(s => s.url === `/services/${id}`)
+
+    if (!service) {
+        return <div>No service found.</div>
     }
 
-
-    return(
+    return (
         <div>
-            <div>
-            <Project project={project}/>
-            </div>
+            <SingleService service={service} />
         </div>
     )
 }

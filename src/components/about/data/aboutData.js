@@ -3,7 +3,7 @@ import { FiTarget } from "react-icons/fi";
 import { FaClockRotateLeft } from "react-icons/fa6";
 
 
-export const trustCardData = [
+export const aboutTrustCardData = [
     {
         title: 'Community Focus',
         content: 'Serving our community through affordable, high-quality building plans and charitable giving.',

@@ -1,5 +1,6 @@
 export const services = [
   {
+    id: '1',
     name: 'Remodels',
     category: 'Residential',
     image: '/assets/portfolio/homeRemodel/4.jpg',
@@ -19,9 +20,10 @@ export const services = [
       'Enhanced living comfort',
     ],
     timeline: '4-8 weeks for design and documents',
-    link: '/services/remodels'
+    url: '/services/remodels'
   },
   {
+    id: '2',
     name: 'Garages',
     icon: null,
     category: 'Residential',
@@ -42,9 +44,10 @@ export const services = [
       'Climate-controlled environment',
     ],
     timeline: '3-6 weeks for design and documents',
-    link: '/services/garages'
+    url: '/services/garages'
   },
   {
+    id: '3',
     name: 'Additions',
     icon: null,
     category: 'Residential',
@@ -53,9 +56,10 @@ export const services = [
     process: null,
     benefits: null,
     timeline: null,
-    link: '/services/additions'
+    url: '/services/additions'
   },
   {
+    id: '4',
     name: 'Conceptual Design',
     icon: null,
     category: 'Planning',
@@ -64,9 +68,10 @@ export const services = [
     process: null,
     benefits: null,
     timeline: null,
-    link: '/services/conceptual-design'
+    url: '/services/conceptual-design'
   },
   {
+    id: '5',
     name: 'New Construction',
     icon: null,
     category: 'New Build',
@@ -75,9 +80,10 @@ export const services = [
     process: null,
     benefits: null,
     timeline: null,
-    link: '/services/new-construction'
+    url: '/services/new-construction'
   },
   {
+    id: '6',
     name: 'A.D.U.',
     icon: null,
     category: 'Residential',
@@ -86,6 +92,6 @@ export const services = [
     process: null,
     benefits: null,
     timeline: null,
-    link: '/services/adu'
+    url: '/services/adu'
   }
 ];

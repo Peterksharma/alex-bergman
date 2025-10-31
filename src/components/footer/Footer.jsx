@@ -1,48 +1,97 @@
-import { links } from "@/data/links"
-import { renderContacts } from "@/lib/renderContacts";
-import { contactData } from "@/data/contact";
-//Icons
+import { links } from "@/data/global/links"
+import ContactDetails from "@/components/footer/ContactsDetails";
 import { FaSquareFacebook, FaInstagram } from "react-icons/fa6";
 
-
 export default function Footer() {
-
-    const iconStyle = "w-[25px] h-[25px] hover:text-blue-500"
-
+    const iconStyle = "w-8 h-8 hover:text-blue-400 transition-colors duration-300"
 
     const renderLinks = (links) => {
         return links.map((link, index) => (
-            <div key={index}  className="text-center">
-                <a href={link.link}>{link.name}</a>
-            </div>
+            <a
+                key={index}
+                href={link.link}
+                className="block py-2 hover:text-blue-400 transition-colors duration-200"
+            >
+                {link.name}
+            </a>
         ))
     }
 
-
     return (
-        <footer className="h-[400px] bg-gray-900 border-t-3 border-gray-800 text-gray-100" >
-            <div className="grid grid-cols-3 gap-2 p-16">
-                <div>
-                    <h2 className='underline text-lg pb-2 font-bold text-center'>Contact Us</h2>
-                    {renderContacts(contactData)}
+        <footer className="bg-gradient-to-b from-gray-900 to-gray-950 border-t-2 border-gray-800 text-gray-100">
+            {/* Main Footer Content */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                    {/* Quick Links Section */}
+                    <div>
+                        <h2 className='text-xl pb-4 font-bold text-white border-b-2 border-blue-400 inline-block mb-6'>
+                            Quick Links
+                        </h2>
+                        <nav className="flex flex-col">
+                            {renderLinks(links)}
+                        </nav>
+                    </div>
+
+
+                    {/* About Section */}
+                    <div>
+                        <h2 className='text-xl pb-4 font-bold text-white border-b-2 border-blue-400 inline-block mb-6'>
+                            A.R.Bergman Drafting
+                        </h2>
+                        <p className="text-gray-300 leading-relaxed">
+                            Professional architectural drafting services for residential projects serving the Pacific Northwest. From custom home designs to remodels, additions, and ADUs, we provide detailed construction documents, permit packages, and expert consultations.
+                        </p>
+                    </div>
+
+
+                    {/* Contact Section */}
+                    <div>
+                        <h2 className='text-xl pb-4 font-bold text-white border-b-2 border-blue-400 inline-block mb-6'>
+                            Contact Us
+                        </h2>
+                        <ContactDetails />
+                    </div>
                 </div>
-                <div>
-                    <h2 className='underline text-lg pb-2 font-bold text-center'> Drafting and Designs</h2>
-                    <p className="text-center">
-                        Professional architectural drafting services for residential projects serving the Pacific Northwest. From custom home designs to remodels, additions, and ADUs, we provide detailed construction documents, permit packages, and expert consultations. Quality drafting made accessible—fast, friendly, and affordable.</p>
-                </div>
-                <div>
-                    <h2 className='underline text-lg pb-2 font-bold text-center'>Quick Links</h2>
-                    <div className="">{renderLinks(links)}</div>
+
+                {/* Social Media Icons */}
+                <div className="flex justify-center gap-6 mt-12 pt-8 border-t border-gray-800">
+                    <a
+                        href="https://facebook.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebook"
+                    >
+                        <FaSquareFacebook className={iconStyle} />
+                    </a>
+                    <a
+                        href="https://instagram.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                    >
+                        <FaInstagram className={iconStyle} />
+                    </a>
                 </div>
             </div>
-            <div className="flex justify-center gap-4 ">
-                <FaSquareFacebook className={iconStyle} />
-                <FaInstagram className={iconStyle} />
-            </div>
-            <div className="pt-8 text-center bg-gray-900 w-[100vw]">
-                <p className="text-gray-100">&copy; {new Date().getFullYear()} ARBergman Drafting LLC. All rights reserved.</p>
-                <p className="text-gray-500 py-2">Site created by <a href="https://petersharma.dev" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 transition-colors">Peter Sharma</a></p>
+
+            {/* Copyright Section */}
+            <div className="bg-gray-950 border-t border-gray-800">
+                <div className="max-w-7xl mx-auto px-4 py-6 text-center">
+                    <p className="text-gray-300 mb-2">
+                        &copy; {new Date().getFullYear()} ARBergman Drafting LLC. All rights reserved.
+                    </p>
+                    <p className="text-gray-500 text-sm">
+                        Site created by{" "}
+                        <a
+                            href="https://petersharma.dev"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-400 hover:text-blue-300 transition-colors font-medium"
+                        >
+                            Peter Sharma
+                        </a>
+                    </p>
+                </div>
             </div>
         </footer>
     )

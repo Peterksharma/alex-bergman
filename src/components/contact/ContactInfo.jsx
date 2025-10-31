@@ -1,5 +1,5 @@
-import { contactData } from "@/data/contact";
-import { renderContacts } from "@/lib/renderContacts";
+import { contactData } from "@/data/global/contactInfo";
+import { renderContacts } from "@/components/footer/ContactsDetails";
 import { Card } from "../ui/card";
 
 export default function ContactInfo() {

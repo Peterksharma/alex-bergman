@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "../ui/card";
+import { Card, CardHeader, CardTitle } from "../ui/card";
 import { Button } from "../ui/button";
 import { submitContactForm } from "@/app/actions/sendContactForm";
 import { useActionState } from "react";
@@ -18,63 +18,61 @@ export default function ContactForm() {
       toast.error("Error sending message");
     }
   }, [state]);
-  
+
   const formFields = [
     {
-      label: "Name:",
+      label: "Name",
       type: "text",
       name: "name",
-      placeholder: "Full Name",
       require: true,
-      className: "border-2 w-full",
+      placeholder: "John Doe"
     },
     {
       label: "Email",
       type: "email",
       name: "email",
-      placeholder: "Email Address",
       require: true,
-      className: "border-2 w-full",
+      placeholder: "john@example.com"
     },
     {
       label: "Phone Number",
       type: "tel",
       name: "phone",
-      placeholder: "360-555-5555",
       require: true,
-      className: "border-2 w-full",
+      placeholder: "(555) 123-4567"
     },
     {
-      label: "Tell us more",
+      label: "Message",
       type: "textarea",
       name: "body",
-      placeholder: "Tell us more",
       require: true,
-      className: "border-2 w-full h-[300px]",
+      placeholder: "Tell us about your project..."
     },
   ];
 
   function renderForm() {
-    return formFields.map((formFields, index) => (
-      <div key={index}>
-        <div>
-          <label>{formFields.label}</label>
-        </div>
-        {formFields.type === "textarea" ? (
+    return formFields.map((formField, index) => (
+      <div
+        key={index}
+        className={`flex gap-6 mb-6 ${formField.type === "textarea" ? "items-start" : "items-center"}`}
+      >
+        <label className="text-gray-200 font-medium w-[140px] flex-shrink-0 text-sm">
+          {formField.label}
+        </label>
+        {formField.type === "textarea" ? (
           <textarea
-            type={formFields.type}
-            name={formFields.name}
-            required={formFields.require}
-            placeholder={formFields.placeholder}
-            className={formFields.className}
+            name={formField.name}
+            required={formField.require}
+            placeholder={formField.placeholder}
+            className='w-full h-[280px] bg-white border border-gray-300 rounded-md p-3 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none'
           />
         ) : (
           <input
-            type={formFields.type}
-            name={formFields.name}
-            required={formFields.require}
-            placeholder={formFields.placeholder}
-            className={formFields.className}
+            type={formField.type}
+            name={formField.name}
+            required={formField.require}
+            placeholder={formField.placeholder}
+            className="w-full h-11 bg-white border border-gray-300 rounded-md px-4 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
           />
         )}
       </div>
@@ -82,11 +80,26 @@ export default function ContactForm() {
   }
 
   return (
-    <div>
-      <Card className=" w-[45vw]  h-[65vh] p-4">
-        <form action={formAction}>
+    <div className='w-full max-w-4xl mx-auto px-4'>
+      <Card className="bg-gradient-to-br from-gray-600 to-gray-700 shadow-xl border-0">
+        <CardHeader className="pb-6">
+          <CardTitle className="text-center text-3xl text-white font-bold tracking-tight">
+            Have an idea? Let's talk!
+          </CardTitle>
+          <p className="text-center text-gray-300 text-sm mt-2">
+            Fill out the form below and we'll get back to you soon
+          </p>
+        </CardHeader>
+        <form action={formAction} className="px-8 pb-8">
           {renderForm()}
-          <Button type="submit">Submit</Button>
+          <div className="flex justify-center mt-8">
+            <Button
+              type="submit"
+              className="w-full max-w-md h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-colors shadow-lg hover:shadow-xl"
+            >
+              Send Message
+            </Button>
+          </div>
         </form>
       </Card>
     </div>

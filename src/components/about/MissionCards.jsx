@@ -1,0 +1,47 @@
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { FaRegHeart } from "react-icons/fa";
+
+export default function MissionCards() {
+    return (
+        <div className="py-16">
+            <div className="w-full max-w-4xl mx-auto px-4">
+                <Card className='bg-gradient-to-br from-gray-600 to-gray-700 shadow-xl border-0'>
+                    <CardHeader className="pb-6">
+                        <div className="flex justify-center mb-4">
+                            <FaRegHeart className="h-16 w-16 text-red-400 hover:text-pink-500 transition-all duration-300 ease-in-out hover:scale-110" />
+                        </div>
+                        <CardTitle className="text-center text-3xl text-white font-bold tracking-tight">
+                            Our Mission
+                        </CardTitle>
+                    </CardHeader>
+
+                    <CardContent className="px-8 pb-8 text-center">
+                        <div className="mb-6">
+                            <p className="text-xl text-red-300 font-semibold mb-3">
+                                Our work is driven to make the world a better place
+                            </p>
+                            <p className="text-gray-200 text-lg leading-relaxed">
+                                Which is why 3% of all profits are donated to charitable
+                                organizations within our community.
+                            </p>
+                        </div>
+
+                        <Button
+                            asChild
+                            className="h-12 px-8 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md transition-colors shadow-lg hover:shadow-xl"
+                        >
+                            <a
+                                href="https://www.redcross.org/donate/donation.html/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Donate to the American <span className="font-bold ml-1">Red Cross</span>
+                            </a>
+                        </Button>
+                    </CardContent>
+                </Card>
+            </div>
+        </div>
+    )
+}

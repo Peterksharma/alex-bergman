@@ -1,5 +1,5 @@
 import { Button } from "../ui/button"
-import { links } from "../../data/links"
+import { links } from "../../data/global/links"
 import Image from "next/image"
 import Link from "next/link"
 

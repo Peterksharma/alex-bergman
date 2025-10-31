@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
-import { links } from "../../data/links";
-import { services } from "../../data/services";
+import { links } from "../../data/global/links";
+import { services } from "../services/data/servicesData";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -31,10 +31,10 @@ export default function Header() {
               <NavigationMenuContent className=" bg-gray-800 border  border-blue-900">
                 <ul className="w-[250px] p-2">
                   {services.map((service) => (
-                    <li key={service.name}>
+                    <li key={service.id}>
                       <NavigationMenuLink asChild>
                         <Link
-                          href={service.link}
+                          href={service.url}
                           className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-700 hover:text-gray-100"
                         >
                           <div className="text-lg font-medium text-gray-100">
@@ -43,8 +43,20 @@ export default function Header() {
                           <p className="text-gray-400">This name</p>
                         </Link>
                       </NavigationMenuLink>
+
                     </li>
                   ))}
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href='/services'
+                      className="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-700 hover:text-gray-100"
+                    >
+                      <div className="text-lg font-medium text-gray-100">
+                        All Services
+                      </div>
+                      <p className="text-gray-400">See all the services we offer</p>
+                    </Link>
+                  </NavigationMenuLink>
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
@@ -70,15 +82,12 @@ export default function Header() {
         <div className="flex gap-2 text-gray-100 justify-end items-center">
           {leftLinks.map((link, index) => renderNavigationItem(link, index))}
         </div>
-
         <Link href="/" className="flex flex-col items-center">
           <Image src="/assets/logo.png" width={75} height={75} alt="Logo" />
           <span className="text-xl text-gray-100 font-[family-name:var(--font-lexend)] font-medium mt-2 whitespace-nowrap">
             A.R.Bergman Drafting
           </span>
         </Link>
-
-        {/* Right Links */}
         <div className="flex gap-2 text-gray-100 justify-start items-center">
           {rightLinks.map((link, index) => renderNavigationItem(link, index))}
         </div>

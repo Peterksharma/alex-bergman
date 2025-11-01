@@ -5,19 +5,19 @@ export default function ContactDetails() {
   const hrefPhone = contactData.phone.number.replace(/\D/g, '')
 
   return (
-    <div className="w-full max-w-2xl mx-auto px-4">
+    <div className="w-full lg:w-1/2 lg:px-0">
       <Card className="bg-gradient-to-br from-gray-600 to-gray-700 shadow-xl border-0">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-center text-3xl text-white font-bold tracking-tight">
+        <CardHeader className="pb-4 px-4 sm:px-6">
+          <CardTitle className="text-center text-2xl sm:text-3xl text-white font-bold tracking-tight">
             Get In Touch
           </CardTitle>
-          <p className="text-center text-gray-300 text-sm mt-2">
+          <p className="text-center text-gray-300 text-xs sm:text-sm mt-2">
             We'd love to hear from you
           </p>
         </CardHeader>
 
-        <CardContent className="px-8 pb-8">
-          <div className="grid grid-cols-[140px_1fr] gap-x-6 gap-y-6">
+        <CardContent className="px-4 sm:px-8 pb-6 sm:pb-8">
+          <div className="flex flex-col sm:grid sm:grid-cols-[140px_1fr] gap-y-4 sm:gap-x-6 sm:gap-y-6">
 
             <p className="text-gray-200 font-medium text-sm">Phone Number</p>
             <a

@@ -54,9 +54,9 @@ export default function ContactForm() {
     return formFields.map((formField, index) => (
       <div
         key={index}
-        className={`flex gap-6 mb-6 ${formField.type === "textarea" ? "items-start" : "items-center"}`}
+        className={`flex flex-col sm:flex-row gap-2 sm:gap-6 mb-6 ${formField.type === "textarea" ? "items-start" : "sm:items-center"}`}
       >
-        <label className="text-gray-200 font-medium w-[140px] flex-shrink-0 text-sm">
+        <label className="text-gray-200 font-medium w-full sm:w-[140px] flex-shrink-0 text-sm">
           {formField.label}
         </label>
         {formField.type === "textarea" ? (
@@ -64,7 +64,7 @@ export default function ContactForm() {
             name={formField.name}
             required={formField.require}
             placeholder={formField.placeholder}
-            className='w-full h-[280px] bg-white border border-gray-300 rounded-md p-3 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none'
+            className='w-full h-[200px] sm:h-[280px] bg-white border border-gray-300 rounded-md p-3 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none'
           />
         ) : (
           <input
@@ -80,19 +80,19 @@ export default function ContactForm() {
   }
 
   return (
-    <div className='w-full max-w-4xl mx-auto px-4'>
+    <div className='w-full lg:w-1/2 lg:px-0'>
       <Card className="bg-gradient-to-br from-gray-600 to-gray-700 shadow-xl border-0">
-        <CardHeader className="pb-6">
-          <CardTitle className="text-center text-3xl text-white font-bold tracking-tight">
+        <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
+          <CardTitle className="text-center text-2xl sm:text-3xl text-white font-bold tracking-tight">
             Have an idea? Let's talk!
           </CardTitle>
-          <p className="text-center text-gray-300 text-sm mt-2">
+          <p className="text-center text-gray-300 text-xs sm:text-sm mt-2">
             Fill out the form below and we'll get back to you soon
           </p>
         </CardHeader>
-        <form action={formAction} className="px-8 pb-8">
+        <form action={formAction} className="px-4 sm:px-8 pb-6 sm:pb-8">
           {renderForm()}
-          <div className="flex justify-center mt-8">
+          <div className="flex justify-center mt-6 sm:mt-8">
             <Button
               type="submit"
               className="w-full max-w-md h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-colors shadow-lg hover:shadow-xl"

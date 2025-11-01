@@ -4,14 +4,14 @@ import Project from "@/components/portfolio/projects/Project";
 
 
 export default async function ProjectPage({params}) {
-    const { id } = await params;
+    const { slug } = await params;
 
     
-    if(!id){
+    if(!slug){
         return <div>Loading the project...</div>
     }
     
-    const project = projects.find(p => p.id === id)
+    const project = projects.find(p => p.slug === slug)
 
     if (!project) {
         return <div>No project found.</div>

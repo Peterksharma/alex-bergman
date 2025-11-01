@@ -7,6 +7,7 @@ import Header from "@/components/header/AltHeader";
 import Footer from "@/components/footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import StructuredData from "@/components/seo/StructuredData";
+import { siteConfig } from "@/config/site";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -34,7 +35,7 @@ const lexend = Lexend({
 });
 
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.arbergman.com'),
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: "A.R.Bergman Drafting | Professional Architectural Drafting Services",
     template: "%s | A.R.Bergman Drafting"
@@ -63,13 +64,13 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.arbergman.com",
+    url: siteConfig.url,
     siteName: "A.R.Bergman Drafting",
     title: "A.R.Bergman Drafting | Professional Architectural Drafting Services",
     description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
     images: [
       {
-        url: "https://www.arbergman.com/assets/logo.png",
+        url: `${siteConfig.url}/assets/logo.png`,
         width: 1200,
         height: 630,
         alt: "A.R.Bergman Drafting Logo",
@@ -80,7 +81,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "A.R.Bergman Drafting | Professional Architectural Drafting Services",
     description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
-    images: ["https://www.arbergman.com/assets/logo.png"],
+    images: [`${siteConfig.url}/assets/logo.png`],
   },
   robots: {
     index: true,
@@ -100,7 +101,7 @@ export const metadata = {
     // bing: "your-bing-verification-code",
   },
   alternates: {
-    canonical: "https://www.arbergman.com",
+    canonical: siteConfig.url,
   },
   category: "Architecture & Construction",
   icons: {

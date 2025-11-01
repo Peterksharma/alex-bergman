@@ -1,8 +1,9 @@
 import { services } from "@/components/services/data/servicesData";
 import { projects } from "@/components/portfolio/projects/data/projectData";
+import { siteConfig } from "@/config/site";
 
 export default function sitemap() {
-  const baseUrl = "https://www.arbergman.com";
+  const baseUrl = siteConfig.url;
 
   // Static pages
   const staticPages = [

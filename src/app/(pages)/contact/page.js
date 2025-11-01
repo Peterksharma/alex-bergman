@@ -1,5 +1,6 @@
 import ContactForm from "@/components/contact/ContactForm"
 import ContactPageDetails from "@/components/contact/ContactsPageDetails"
+import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Contact Us",
@@ -15,7 +16,7 @@ export const metadata = {
   openGraph: {
     title: "Contact A.R.Bergman Drafting | Get a Free Consultation",
     description: "Contact A.R.Bergman Drafting for your architectural drafting needs. Located in Tacoma, WA. Get a free consultation for your project.",
-    url: "https://www.arbergman.com/contact",
+    url: `${siteConfig.url}/contact`,
     type: "website",
   },
   twitter: {

@@ -1,6 +1,7 @@
 import AboutTrustCards from "@/components/about/AboutTrustCards";
 import Staff from "@/components/about/people/Staff";
 import MissionCards from "@/components/about/MissionCards";
+import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "About Us",
@@ -16,7 +17,7 @@ export const metadata = {
   openGraph: {
     title: "About A.R.Bergman Drafting | Professional Drafting Services",
     description: "Founded in 2008, A.R.Bergman Drafting is committed to producing high-quality building plans at affordable rates in Tacoma, WA.",
-    url: "https://www.arbergman.com/about",
+    url: `${siteConfig.url}/about`,
     type: "website",
   },
   twitter: {

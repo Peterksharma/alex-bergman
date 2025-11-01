@@ -1,5 +1,6 @@
 import RenderFAQItems from "@/components/faq/renderFAQ";
 import FAQSchema from "@/components/seo/FAQSchema";
+import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Frequently Asked Questions",
@@ -15,7 +16,7 @@ export const metadata = {
   openGraph: {
     title: "FAQ | A.R.Bergman Drafting",
     description: "Get answers to frequently asked questions about architectural drafting services, building permits, and construction plans.",
-    url: "https://www.arbergman.com/faq",
+    url: `${siteConfig.url}/faq`,
     type: "website",
   },
   twitter: {

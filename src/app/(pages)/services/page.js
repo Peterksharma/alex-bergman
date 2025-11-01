@@ -1,4 +1,5 @@
 import ServiceCards from "@/components/services/AllServicesCards";
+import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Services",
@@ -15,7 +16,7 @@ export const metadata = {
   openGraph: {
     title: "Services | A.R.Bergman Drafting",
     description: "Professional architectural drafting services for custom homes, remodels, additions, garages, and commercial projects in Tacoma, WA.",
-    url: "https://www.arbergman.com/services",
+    url: `${siteConfig.url}/services`,
     type: "website",
   },
   twitter: {

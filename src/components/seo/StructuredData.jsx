@@ -1,11 +1,12 @@
 import { contactData } from "@/data/global/contactInfo";
+import { siteConfig } from "@/config/site";
 
 export default function StructuredData() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "A.R.Bergman Drafting",
-    "image": "https://www.arbergman.com/assets/logo.png",
+    "image": `${siteConfig.url}/assets/logo.png`,
     "description": "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
     "address": {
       "@type": "PostalAddress",
@@ -20,7 +21,7 @@ export default function StructuredData() {
       "addressLocality": "Tacoma",
       "addressRegion": "WA"
     },
-    "url": "https://www.arbergman.com",
+    "url": siteConfig.url,
     "telephone": contactData.phone.number,
     "email": contactData.email.address,
     "priceRange": "$$",

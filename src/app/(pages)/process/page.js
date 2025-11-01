@@ -1,4 +1,5 @@
 import { ProcessHeader, ProcessTimeline, ProcessBenefits, ProcessCTA } from "@/components/process";
+import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Our Process",
@@ -14,7 +15,7 @@ export const metadata = {
   openGraph: {
     title: "Our Process | A.R.Bergman Drafting",
     description: "Learn about our step-by-step process for architectural drafting projects from consultation to permit approval.",
-    url: "https://www.arbergman.com/process",
+    url: `${siteConfig.url}/process`,
     type: "website",
   },
   twitter: {

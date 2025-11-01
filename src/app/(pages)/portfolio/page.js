@@ -1,4 +1,5 @@
 import { PortfolioHeader, PortfolioGrid, PortfolioCTA } from "@/components/portfolio";
+import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Portfolio",
@@ -14,7 +15,7 @@ export const metadata = {
   openGraph: {
     title: "Portfolio | A.R.Bergman Drafting Projects",
     description: "View our portfolio of completed architectural drafting projects including custom homes, remodels, and additions.",
-    url: "https://www.arbergman.com/portfolio",
+    url: `${siteConfig.url}/portfolio`,
     type: "website",
   },
   twitter: {

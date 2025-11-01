@@ -1,3 +1,5 @@
+import { siteConfig } from "@/config/site";
+
 export default function robots() {
   return {
     rules: {
@@ -5,7 +7,7 @@ export default function robots() {
       allow: "/",
       disallow: ["/api/"],
     },
-    sitemap: "https://www.arbergman.com/sitemap.xml",
+    sitemap: `${siteConfig.url}/sitemap.xml`,
   };
 }
 

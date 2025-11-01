@@ -1,5 +1,6 @@
 import { TestimonialsHeader, TestimonialsGrid, TestimonialsCTA, TrustIndicators } from "@/components/testimonials";
 import AggregateRatingSchema from "@/components/seo/AggregateRatingSchema";
+import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Testimonials",
@@ -14,7 +15,7 @@ export const metadata = {
   openGraph: {
     title: "Testimonials | A.R.Bergman Drafting",
     description: "Read client testimonials and reviews for A.R.Bergman Drafting services.",
-    url: "https://www.arbergman.com/testimonials",
+    url: `${siteConfig.url}/testimonials`,
     type: "website",
   },
   twitter: {

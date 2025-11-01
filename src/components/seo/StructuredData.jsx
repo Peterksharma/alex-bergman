@@ -1,0 +1,103 @@
+import { contactData } from "@/data/global/contactInfo";
+
+export default function StructuredData() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "A.R.Bergman Drafting",
+    "image": "https://www.arbergman.com/assets/logo.png",
+    "description": "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "3720 6th Ave",
+      "addressLocality": "Tacoma",
+      "addressRegion": "WA",
+      "postalCode": "98406",
+      "addressCountry": "US"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "addressLocality": "Tacoma",
+      "addressRegion": "WA"
+    },
+    "url": "https://www.arbergman.com",
+    "telephone": contactData.phone.number,
+    "email": contactData.email.address,
+    "priceRange": "$$",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "08:00",
+      "closes": "17:00"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "Tacoma"
+    },
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "addressLocality": "Tacoma",
+        "addressRegion": "WA"
+      }
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Architectural Drafting Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Custom Home Design",
+            "description": "Professional custom home design and architectural drafting services"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Home Remodels",
+            "description": "Architectural drafting for home remodels and renovations"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Home Additions",
+            "description": "Design and drafting services for home additions"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Construction Plans",
+            "description": "Detailed construction documents and building plans"
+          }
+        }
+      ]
+    },
+    "founder": {
+      "@type": "Person",
+      "name": "A.R. Bergman"
+    },
+    "foundingDate": "2008"
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
+}
+

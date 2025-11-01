@@ -1,5 +1,29 @@
 import { ProcessHeader, ProcessTimeline, ProcessBenefits, ProcessCTA } from "@/components/process";
 
+export const metadata = {
+  title: "Our Process",
+  description: "Learn about A.R.Bergman Drafting's step-by-step process for architectural drafting projects. From initial consultation to final construction documents and permit approval in Tacoma, WA.",
+  keywords: [
+    "architectural drafting process",
+    "drafting workflow",
+    "building permit process",
+    "construction documents process",
+    "drafting consultation process",
+    "Tacoma permit process"
+  ],
+  openGraph: {
+    title: "Our Process | A.R.Bergman Drafting",
+    description: "Learn about our step-by-step process for architectural drafting projects from consultation to permit approval.",
+    url: "https://www.arbergman.com/process",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Our Process | A.R.Bergman Drafting",
+    description: "Learn about our step-by-step drafting process.",
+  },
+};
+
 export default function OurProcessPage() {
   return (
     <div className="bg-gray-900 min-h-screen py-20">

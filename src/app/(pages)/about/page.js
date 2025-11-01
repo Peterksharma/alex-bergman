@@ -2,6 +2,30 @@ import AboutTrustCards from "@/components/about/AboutTrustCards";
 import Staff from "@/components/about/people/Staff";
 import MissionCards from "@/components/about/MissionCards";
 
+export const metadata = {
+  title: "About Us",
+  description: "Learn about A.R.Bergman Drafting, founded in 2008 in Olympia, Washington. We're committed to producing high-quality building plans at affordable rates for residential and commercial projects in Tacoma and the Pacific Northwest.",
+  keywords: [
+    "about A.R.Bergman Drafting",
+    "architectural drafting company",
+    "Tacoma drafting services",
+    "Olympia Washington drafting",
+    "building plans company",
+    "architectural design firm"
+  ],
+  openGraph: {
+    title: "About A.R.Bergman Drafting | Professional Drafting Services",
+    description: "Founded in 2008, A.R.Bergman Drafting is committed to producing high-quality building plans at affordable rates in Tacoma, WA.",
+    url: "https://www.arbergman.com/about",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "About A.R.Bergman Drafting",
+    description: "Founded in 2008, A.R.Bergman Drafting is committed to producing high-quality building plans at affordable rates.",
+  },
+};
+
 export default function About() {
   return (
     <div className="bg-gray-900">

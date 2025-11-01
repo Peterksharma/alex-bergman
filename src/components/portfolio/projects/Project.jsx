@@ -258,9 +258,9 @@ export default function Project({ project }) {
           <div className="lg:col-span-1">
             <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-2xl sticky top-8">
               <CardHeader className="border-b border-gray-600">
-                <CardTitle className="text-3xl text-white text-center">
+                <h2 className="text-3xl text-white text-center font-semibold leading-none">
                   Project Details
-                </CardTitle>
+                </h2>
               </CardHeader>
 
               <CardContent className="p-6 space-y-6">

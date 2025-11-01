@@ -6,8 +6,8 @@ import Link from "next/link";
 export default function Hero() {
     let heroText = {
         main: 'A.R.Bergman Drafting LLC',
-        tagline: 'Professional Architectural Drafting Services',
-        sub: 'Fast, friendly, and affordable construction documents and consultations for the Pacific Northwest'
+        tagline: 'Professional Architectural Drafting Services in Tacoma, WA',
+        sub: 'Expert architectural drafting, custom home design, and construction plans for Tacoma and the Pacific Northwest. Fast, friendly, and affordable drafting services with 15+ years of experience.'
     }
 
     return (
@@ -15,7 +15,7 @@ export default function Hero() {
             {/* Background Image */}
             <Image
                 src='/assets/hero-bg.jpg'
-                alt='Professional architectural drafting services'
+                alt='A.R.Bergman Drafting - Professional architectural drafting and custom home design services in Tacoma, Washington'
                 fill
                 className="object-cover"
                 priority

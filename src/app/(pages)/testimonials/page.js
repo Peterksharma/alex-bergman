@@ -1,4 +1,5 @@
 import { TestimonialsHeader, TestimonialsGrid, TestimonialsCTA, TrustIndicators } from "@/components/testimonials";
+import AggregateRatingSchema from "@/components/seo/AggregateRatingSchema";
 
 export const metadata = {
   title: "Testimonials",
@@ -26,6 +27,7 @@ export const metadata = {
 export default function TestimonialsPage() {
   return (
     <div className="bg-gray-900 min-h-screen py-20">
+      <AggregateRatingSchema />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <TestimonialsHeader />
         <TestimonialsGrid />

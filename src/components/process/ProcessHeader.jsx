@@ -6,7 +6,7 @@ export default function ProcessHeader() {
       </h1>
       <div className="h-1 w-24 bg-blue-400 mx-auto rounded-full mb-6"></div>
       <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
-        From initial consultation to final construction support, we guide you through every step of the architectural drafting process with professionalism and expertise.
+        From initial consultation to final construction support, we guide you through every step of the architectural drafting process in Tacoma, WA. Our proven workflow ensures your custom home design, remodel, or addition receives professional drafting services, accurate construction documents, and smooth permit approval.
       </p>
     </div>
   );

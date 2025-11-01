@@ -40,8 +40,8 @@ export default function About() {
               <span className="text-blue-400">Drafting and Design</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
-              Founded in 2008 in Olympia, Washington, we're committed to producing
-              high-quality building plans at affordable rates.
+              Founded in 2008 in Olympia, Washington, A.R.Bergman Drafting is committed to producing
+              high-quality architectural drafting and building plans at affordable rates. Serving Tacoma, WA and the Pacific Northwest, we specialize in custom home design, remodels, additions, garages, ADUs, and commercial projects with over 15 years of professional drafting experience.
             </p>
             <div className="pt-2 sm:pt-4">
               <div className="h-1 w-16 sm:w-24 bg-blue-400 mx-auto rounded-full"></div>

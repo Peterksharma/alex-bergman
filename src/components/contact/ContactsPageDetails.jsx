@@ -8,9 +8,9 @@ export default function ContactDetails() {
     <div className="w-full lg:w-1/2 lg:px-0">
       <Card className="bg-gradient-to-br from-gray-600 to-gray-700 shadow-xl border-0">
         <CardHeader className="pb-4 px-4 sm:px-6">
-          <CardTitle className="text-center text-2xl sm:text-3xl text-white font-bold tracking-tight">
+          <h2 className="text-center text-2xl sm:text-3xl text-white font-bold tracking-tight leading-none">
             Get In Touch
-          </CardTitle>
+          </h2>
           <p className="text-center text-gray-300 text-xs sm:text-sm mt-2">
             We'd love to hear from you
           </p>

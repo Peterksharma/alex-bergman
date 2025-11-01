@@ -17,10 +17,10 @@ export default function AboutTrustCards() {
               className="h-full bg-gradient-to-br from-gray-600 to-gray-700 border-0 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
               <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-3 text-white text-xl font-bold">
+                <h3 className="flex items-center gap-3 text-white text-xl font-bold">
                   <span className="text-blue-400 text-2xl">{cardData.icon}</span>
                   <span>{cardData.title}</span>
-                </CardTitle>
+                </h3>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-200 leading-relaxed">{cardData.content}</p>

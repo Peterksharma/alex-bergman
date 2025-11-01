@@ -10,7 +10,7 @@ export default function PortfolioCard({ project }) {
         <div className="relative w-full h-[280px] overflow-hidden">
           <Image
             src={`/assets/portfolio/${project.folder}/1.jpg`}
-            alt={`${project.name} - Preview`}
+            alt={`${project.name} architectural drafting project by A.R.Bergman Drafting in Tacoma, WA`}
             fill
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-1"
           />

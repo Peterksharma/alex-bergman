@@ -11,9 +11,9 @@ export default function MissionCards() {
                         <div className="flex justify-center mb-3 sm:mb-4">
                             <FaRegHeart className="h-12 w-12 sm:h-16 sm:w-16 text-red-400 hover:text-pink-500 transition-all duration-300 ease-in-out hover:scale-110" />
                         </div>
-                        <CardTitle className="text-center text-2xl sm:text-3xl text-white font-bold tracking-tight">
+                        <h2 className="text-center text-2xl sm:text-3xl text-white font-bold tracking-tight leading-none">
                             Our Mission
-                        </CardTitle>
+                        </h2>
                     </CardHeader>
 
                     <CardContent className="px-6 sm:px-8 pb-6 sm:pb-8 text-center">

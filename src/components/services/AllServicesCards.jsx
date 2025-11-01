@@ -16,7 +16,7 @@ export default function ServicesCards() {
           </h1>
           <div className="h-1 w-24 bg-blue-400 mx-auto rounded-full mb-6"></div>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
-            Professional architectural drafting services tailored to your needs. From custom home designs to remodels and additions, we provide comprehensive solutions for residential projects.
+            Professional architectural drafting services tailored to your needs in Tacoma, WA. From custom home designs to remodels, additions, garages, and ADUs, we provide comprehensive drafting solutions for residential and commercial projects throughout the Pacific Northwest.
           </p>
         </div>
 
@@ -31,7 +31,7 @@ export default function ServicesCards() {
               <div className="relative h-64 overflow-hidden">
                 <Image
                   src={service.image}
-                  alt={service.name}
+                  alt={`${service.name} architectural drafting service - ${service.category} project in Tacoma, WA`}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -40,9 +40,9 @@ export default function ServicesCards() {
 
                 {/* Service Name Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-2xl font-bold text-white mb-2">
+                  <h2 className="text-2xl font-bold text-white mb-2">
                     {service.name}
-                  </h3>
+                  </h2>
                   <span className="inline-block px-3 py-1 bg-blue-600/80 backdrop-blur-sm text-white text-sm font-medium rounded-full">
                     {service.category}
                   </span>
@@ -95,7 +95,7 @@ export default function ServicesCards() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Fast Turnaround</h3>
               <p className="text-gray-300">
-                Quick, efficient service without compromising on quality or attention to detail.
+                Quick, efficient architectural drafting service without compromising on quality or attention to detail for your Tacoma construction projects.
               </p>
             </div>
 
@@ -107,7 +107,7 @@ export default function ServicesCards() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Affordable Rates</h3>
               <p className="text-gray-300">
-                Professional architectural services at prices that work with your budget.
+                Professional architectural drafting and design services at competitive prices that work with your budget for residential and commercial projects.
               </p>
             </div>
 
@@ -119,7 +119,7 @@ export default function ServicesCards() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">15+ Years Experience</h3>
               <p className="text-gray-300">
-                Proven expertise with hundreds of successful projects across the Pacific Northwest.
+                Proven expertise in architectural drafting with hundreds of successful custom home, remodel, and commercial projects across Tacoma and the Pacific Northwest.
               </p>
             </div>
           </div>

@@ -36,7 +36,7 @@ export default function SingleService({ service }) {
                         <div className="relative w-full h-[600px] rounded-xl overflow-hidden shadow-2xl border-2 border-gray-700">
                             <Image
                                 src={service.image}
-                                alt={service.name}
+                                alt={`${service.name} architectural drafting service example - ${service.category} project by A.R.Bergman Drafting in Tacoma, WA`}
                                 fill
                                 className="object-cover"
                                 priority
@@ -48,9 +48,9 @@ export default function SingleService({ service }) {
                     <div className="lg:col-span-1">
                         <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-2xl h-full sticky top-8">
                             <CardHeader className="border-b border-gray-600">
-                                <CardTitle className="text-2xl text-white text-center">
+                                <h2 className="text-2xl text-white text-center font-semibold leading-none">
                                     Service Overview
-                                </CardTitle>
+                                </h2>
                             </CardHeader>
 
                             <CardContent className="pt-6 space-y-6">
@@ -94,7 +94,7 @@ export default function SingleService({ service }) {
                             <CardHeader className="border-b border-gray-600">
                                 <div className="flex items-center gap-3">
                                     <FaListOl className="text-blue-400 text-2xl" />
-                                    <CardTitle className="text-2xl text-white">Our Process</CardTitle>
+                                    <h2 className="text-2xl text-white font-semibold leading-none">Our Process</h2>
                                 </div>
                             </CardHeader>
                             <CardContent className="pt-6">
@@ -111,7 +111,7 @@ export default function SingleService({ service }) {
                             <CardHeader className="border-b border-gray-600">
                                 <div className="flex items-center gap-3">
                                     <FaCheckCircle className="text-blue-400 text-2xl" />
-                                    <CardTitle className="text-2xl text-white">Key Benefits</CardTitle>
+                                    <h2 className="text-2xl text-white font-semibold leading-none">Key Benefits</h2>
                                 </div>
                             </CardHeader>
                             <CardContent className="pt-6">

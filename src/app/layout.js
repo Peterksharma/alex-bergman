@@ -103,6 +103,16 @@ export const metadata = {
     canonical: "https://www.arbergman.com",
   },
   category: "Architecture & Construction",
+  icons: {
+    icon: [
+      { url: "/icon-logo.svg", type: "image/svg+xml" },
+      { url: "/assets/logo.png", type: "image/png", sizes: "any" },
+    ],
+    apple: [
+      { url: "/assets/logo.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/manifest.json",
 };
 
 export const viewport = {

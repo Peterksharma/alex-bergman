@@ -6,7 +6,7 @@ export default function TestimonialsHeader() {
       </h1>
       <div className="h-1 w-24 bg-blue-400 mx-auto rounded-full mb-6"></div>
       <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
-        Don't just take our word for it. Hear what our satisfied clients have to say about their experience working with A.R.Bergman Drafting.
+        Don't just take our word for it. Hear what our satisfied clients in Tacoma and throughout the Pacific Northwest have to say about their experience working with A.R.Bergman Drafting for their architectural drafting, custom home design, and construction plan needs.
       </p>
     </div>
   );

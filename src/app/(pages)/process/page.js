@@ -77,10 +77,10 @@ export default function OurProcessPage() {
                     <div className="space-y-12">
                         {processSteps.map((step, index) => (
                             <div key={step.id} className={`relative ${index % 2 === 0 ? 'lg:pr-1/2' : 'lg:pl-1/2'}`}>
-                                <Card className={`bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 ${index % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8'
+                                <Card className={`relative bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 ${index % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8'
                                     }`}>
                                     {/* Step Number Badge */}
-                                    <div className="absolute -top-4 -left-4 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg z-10">
+                                    <div className={`absolute -top-4 -left-4 ${index % 2 === 0 ? 'lg:-left-4' : 'lg:-right-4'} bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg z-10`}>
                                         {step.id}
                                     </div>
 
@@ -123,27 +123,27 @@ export default function OurProcessPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-xl text-center">
-                            <CardContent className="pt-8 pb-8">
-                                <div className="text-4xl font-bold text-blue-400 mb-2">Clear Communication</div>
-                                <p className="text-gray-300">
+                            <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8 px-4 sm:px-6">
+                                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-400 mb-2">Clear Communication</div>
+                                <p className="text-gray-300 text-sm sm:text-base">
                                     We keep you informed at every stage, ensuring you understand the process and feel confident in your decisions.
                                 </p>
                             </CardContent>
                         </Card>
 
                         <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-xl text-center">
-                            <CardContent className="pt-8 pb-8">
-                                <div className="text-4xl font-bold text-blue-400 mb-2">Attention to Detail</div>
-                                <p className="text-gray-300">
+                            <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8 px-4 sm:px-6">
+                                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-400 mb-2">Attention to Detail</div>
+                                <p className="text-gray-300 text-sm sm:text-base">
                                     Every measurement, specification, and detail is carefully documented to ensure accuracy and compliance.
                                 </p>
                             </CardContent>
                         </Card>
 
                         <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-xl text-center">
-                            <CardContent className="pt-8 pb-8">
-                                <div className="text-4xl font-bold text-blue-400 mb-2">Proven Results</div>
-                                <p className="text-gray-300">
+                            <CardContent className="pt-6 sm:pt-8 pb-6 sm:pb-8 px-4 sm:px-6">
+                                <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-400 mb-2">Proven Results</div>
+                                <p className="text-gray-300 text-sm sm:text-base">
                                     With 15+ years of experience and 500+ completed projects, our process delivers consistent, quality results.
                                 </p>
                             </CardContent>

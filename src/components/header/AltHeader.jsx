@@ -20,14 +20,12 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesExpanded, setIsServicesExpanded] = useState(false);
 
-  // Split links into two groups
   const midpoint = Math.ceil(links.length / 2);
   const leftLinks = links.slice(0, midpoint);
   const rightLinks = links.slice(midpoint);
 
   const renderNavigationItem = (item, index, isMobile = false) => {
     if (item.type === "NavigationMenu") {
-      // On mobile, render Services as expandable item, not NavigationMenu
       if (isMobile) {
         return (
           <div key={index} className="w-full">
@@ -46,7 +44,6 @@ export default function Header() {
               )}
             </button>
             
-            {/* Services sub-items */}
             {isServicesExpanded && (
               <div className="mt-2 ml-4 flex flex-col gap-1">
                 {services.map((service) => (
@@ -72,7 +69,6 @@ export default function Header() {
         );
       }
 
-      // Desktop: Use NavigationMenu as before
       return (
         <NavigationMenu key={index}>
           <NavigationMenuList>
@@ -119,7 +115,6 @@ export default function Header() {
       );
     }
 
-    // Render regular button
     return (
       <Button 
         key={index} 
@@ -142,15 +137,12 @@ export default function Header() {
     <>
       <header className="h-[100px] md:h-[150px] sticky top-0 z-50 bg-gradient-to-b from-gray-800 to-gray-900 border-b-3 border-gray-700 relative">
         <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-4 md:gap-8 h-full px-4 md:px-8">
-          {/* Desktop Left Links - Hidden on mobile */}
-          <div className="hidden lg:flex gap-2 text-gray-100 justify-end items-center">
+          <div className="hidden xl:flex gap-2 text-gray-100 justify-end items-center">
             {leftLinks.map((link, index) => renderNavigationItem(link, index))}
           </div>
           
-          {/* Spacer for mobile to balance hamburger button */}
-          <div className="lg:hidden"></div>
+          <div className="xl:hidden"></div>
 
-          {/* Logo - Centered on all screens */}
           <Link href="/" className="flex flex-col items-center">
             <Image 
               src="/assets/logo.png" 
@@ -164,22 +156,19 @@ export default function Header() {
             </span>
           </Link>
 
-          {/* Desktop Right Links - Hidden on mobile */}
-          <div className="hidden lg:flex gap-2 text-gray-100 justify-start items-center">
+          <div className="hidden xl:flex gap-2 text-gray-100 justify-start items-center">
             {rightLinks.map((link, index) => renderNavigationItem(link, index))}
           </div>
           
-          {/* Spacer for desktop grid balance */}
-          <div className="hidden lg:block"></div>
+          <div className="hidden xl:block"></div>
         </div>
 
-        {/* Mobile Menu Button - Positioned in far right corner */}
         <button
           onClick={() => {
             setIsMobileMenuOpen(!isMobileMenuOpen);
-            setIsServicesExpanded(false); // Reset services expansion when menu closes
+            setIsServicesExpanded(false);
           }}
-          className="lg:hidden absolute top-1/2 right-4 md:right-8 -translate-y-1/2 text-gray-100 hover:text-gray-300 transition-colors p-2"
+          className="xl:hidden absolute top-1/2 right-4 md:right-8 -translate-y-1/2 text-gray-100 hover:text-gray-300 transition-colors p-2"
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
@@ -190,20 +179,17 @@ export default function Header() {
         </button>
       </header>
 
-      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <>
-          {/* Backdrop */}
           <div 
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            className="fixed inset-0 bg-black/50 z-40 xl:hidden"
             onClick={() => {
               setIsMobileMenuOpen(false);
               setIsServicesExpanded(false);
             }}
           />
           
-          {/* Slide-out Menu - 50% width from right */}
-          <div className="fixed top-[100px] md:top-[150px] right-0 bottom-0 w-1/2 bg-gray-900 border-t border-l border-gray-700 z-40 lg:hidden overflow-y-auto">
+          <div className="fixed top-[100px] md:top-[150px] right-0 bottom-0 w-1/2 bg-gray-900 border-t border-l border-gray-700 z-40 xl:hidden overflow-y-auto">
             <div className="flex flex-col p-4 gap-2">
               {links.map((link, index) => (
                 <div key={index}>

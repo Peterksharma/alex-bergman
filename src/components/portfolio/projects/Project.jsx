@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
@@ -18,8 +18,83 @@ export default function Project({ project }) {
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentThumbnails, setCurrentThumbnails] = useState(0);
+  const [countOfThumbnailsShowing, setCountOfThumbnailsShowing] = useState(5);
+  const thumbnailContainerRef = useRef(null);
+  const resizeObserverRef = useRef(null);
 
-  const countOfThumbnailsShowing = 5;
+  // Calculate how many thumbnails can fit based on screen width
+  useEffect(() => {
+    const calculateThumbnailCount = () => {
+      if (!thumbnailContainerRef.current) return;
+
+      const containerWidth = thumbnailContainerRef.current.offsetWidth;
+      
+      // Approximate thumbnail sizes including padding and gaps
+      // Mobile: 100px + 8px padding (p-1 * 2) + 6px gap = ~114px
+      // Small: 120px + 16px padding (p-2 * 2) + 8px gap = ~144px
+      // Medium+: 150px + 16px padding (p-2 * 2) + 8px gap = ~174px
+      
+      let thumbnailWidth;
+      if (containerWidth < 640) {
+        // Mobile
+        thumbnailWidth = 114; // 100px + 8px padding + 6px gap
+      } else if (containerWidth < 768) {
+        // Small
+        thumbnailWidth = 144; // 120px + 16px padding + 8px gap
+      } else {
+        // Medium and up
+        thumbnailWidth = 174; // 150px + 16px padding + 8px gap
+      }
+
+      // Calculate how many thumbnails can fit (subtract a bit for safety margin)
+      const availableWidth = containerWidth - 20; // small margin
+      const count = Math.floor(availableWidth / thumbnailWidth);
+      
+      // Ensure at least 2 thumbnails are shown, and at most the total image count
+      const newCount = Math.max(2, Math.min(count, project.imageCount));
+      setCountOfThumbnailsShowing(newCount);
+    };
+
+    // Use setTimeout to ensure the container is rendered
+    const timeoutId = setTimeout(() => {
+      calculateThumbnailCount();
+      
+      // Also use ResizeObserver for more accurate measurements
+      if (thumbnailContainerRef.current && window.ResizeObserver) {
+        // Disconnect existing observer if any
+        if (resizeObserverRef.current) {
+          resizeObserverRef.current.disconnect();
+        }
+        resizeObserverRef.current = new ResizeObserver(() => {
+          calculateThumbnailCount();
+        });
+        resizeObserverRef.current.observe(thumbnailContainerRef.current);
+      }
+    }, 0);
+    
+    const handleResize = () => {
+      calculateThumbnailCount();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener('resize', handleResize);
+      if (resizeObserverRef.current) {
+        resizeObserverRef.current.disconnect();
+        resizeObserverRef.current = null;
+      }
+    };
+  }, [project.imageCount]);
+
+  // Adjust currentThumbnails when count changes to prevent out-of-bounds
+  useEffect(() => {
+    const maxStart = Math.max(0, project.imageCount - countOfThumbnailsShowing);
+    if (currentThumbnails > maxStart) {
+      setCurrentThumbnails(Math.max(0, maxStart));
+    }
+  }, [countOfThumbnailsShowing, project.imageCount, currentThumbnails]);
 
   const renderTags = () => {
     return tags.map((tag, index) => (
@@ -65,21 +140,25 @@ export default function Project({ project }) {
       return (
         <div
           key={actualIndex}
-          className={`cursor-pointer transition-all duration-300 flex-shrink-0 rounded-lg overflow-hidden ${currentImageIndex === actualIndex
-              ? "ring-4 ring-blue-500 scale-105 shadow-xl"
-              : "hover:ring-2 hover:ring-gray-400 hover:scale-105"
-            }`}
+          className="flex-shrink-0 p-1 sm:p-2"
           onClick={() => {
             setCurrentImageIndex(actualIndex);
           }}
         >
-          <div className="relative w-[150px] h-[100px]">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className="object-cover"
-            />
+          <div
+            className={`cursor-pointer transition-all duration-300 rounded-lg overflow-hidden ${currentImageIndex === actualIndex
+                ? "ring-2 sm:ring-4 ring-blue-500 scale-105 shadow-xl"
+                : "hover:ring-1 sm:hover:ring-2 hover:ring-gray-400 hover:scale-105"
+              }`}
+          >
+            <div className="relative w-[100px] h-[66px] sm:w-[120px] sm:h-[80px] md:w-[150px] md:h-[100px]">
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       );
@@ -102,11 +181,11 @@ export default function Project({ project }) {
     <div className="bg-gray-900 min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight px-4">
             {project.name}
           </h1>
-          <div className="h-1 w-24 bg-blue-400 mx-auto rounded-full"></div>
+          <div className="h-1 w-16 sm:w-24 bg-blue-400 mx-auto rounded-full"></div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -147,27 +226,30 @@ export default function Project({ project }) {
             </div>
 
             {/* Thumbnails */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <Button
                 onClick={seePreviousThumbnails}
                 variant="outline"
-                className="h-[100px] px-4 bg-gray-800 border-gray-700 hover:bg-gray-700 text-white"
+                className="h-[80px] sm:h-[100px] px-2 sm:px-4 bg-gray-800 border-gray-700 hover:bg-gray-700 text-white flex-shrink-0"
                 aria-label="Previous thumbnails"
               >
-                <FaAngleLeft className="text-xl" />
+                <FaAngleLeft className="text-lg sm:text-xl" />
               </Button>
 
-              <div className="flex gap-4 flex-1 overflow-hidden">
+              <div 
+                ref={thumbnailContainerRef}
+                className="flex gap-1.5 sm:gap-2 flex-1 overflow-x-auto py-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              >
                 {renderThumbnails()}
               </div>
 
               <Button
                 onClick={seeNextThumbnails}
                 variant="outline"
-                className="h-[100px] px-4 bg-gray-800 border-gray-700 hover:bg-gray-700 text-white"
+                className="h-[80px] sm:h-[100px] px-2 sm:px-4 bg-gray-800 border-gray-700 hover:bg-gray-700 text-white flex-shrink-0"
                 aria-label="Next thumbnails"
               >
-                <FaAngleRight className="text-xl" />
+                <FaAngleRight className="text-lg sm:text-xl" />
               </Button>
             </div>
           </div>

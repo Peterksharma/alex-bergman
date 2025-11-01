@@ -3,30 +3,31 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function Staff() {
     return (
-        <div className="py-24 bg-gray-900">
+        <div className="py-12 sm:py-16 md:py-24 bg-gray-900">
             <div className="max-w-7xl mx-auto px-4">
-                <div className="relative flex items-center justify-center">
-                    {/* Portrait - positioned absolutely to overlap */}
-                    <div className="absolute left-0 z-10">
+                {/* Mobile Layout: Stacked */}
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-center lg:relative">
+                    {/* Portrait - centered on mobile, absolutely positioned on desktop */}
+                    <div className="flex justify-center mb-6 lg:absolute lg:left-0 lg:z-10 lg:mb-0">
                         <ClippedPortrait />
                     </div>
 
                     {/* Content Card */}
-                    <Card className="ml-[350px] bg-gradient-to-br from-gray-600 to-gray-700 border-0 shadow-2xl">
-                        <CardContent className="pl-48 pr-12 py-12">
+                    <Card className="bg-gradient-to-br from-gray-600 to-gray-700 border-0 shadow-2xl lg:ml-[350px]">
+                        <CardContent className="px-6 sm:px-8 md:px-12 py-8 sm:py-10 md:py-12 lg:pl-48 lg:pr-12">
                             {/* Header */}
-                            <div className="text-center mb-8">
-                                <h2 className="text-4xl font-bold mb-2">
+                            <div className="text-center mb-6 sm:mb-8">
+                                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
                                     <span className="text-blue-400">Meet</span>{" "}
                                     <span className="text-white">Alex Bergman</span>
                                 </h2>
-                                <p className="text-gray-300 text-lg font-semibold">
+                                <p className="text-gray-300 text-base sm:text-lg font-semibold">
                                     Owner and Founder of A.R.Bergman Drafting and Design
                                 </p>
                             </div>
 
                             {/* Bio Content */}
-                            <div className="text-gray-200 text-base leading-relaxed space-y-4 max-w-2xl">
+                            <div className="text-gray-200 text-sm sm:text-base leading-relaxed space-y-3 sm:space-y-4 max-w-2xl mx-auto lg:mx-0">
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras blandit ligula vel sem fermentum, vel fringilla urna mattis. Vestibulum lobortis non augue sed faucibus. Donec eu neque id massa rutrum iaculis vitae eu elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nullam faucibus ante quis ante placerat finibus. Sed ultrices hendrerit elementum. Nullam egestas vulputate ante eget ornare. Fusce dapibus nec nisi a rutrum. Nulla ac eros ex. Donec ac sollicitudin nulla. Integer pretium felis vel orci commodo, luctus facilisis risus suscipit. Suspendisse quis cursus purus, eget porta eros.
                                 </p>

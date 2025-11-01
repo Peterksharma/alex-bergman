@@ -202,8 +202,8 @@ export default function Header() {
             }}
           />
           
-          {/* Slide-out Menu - 1/3 width from right */}
-          <div className="fixed top-[100px] md:top-[150px] right-0 bottom-0 w-1/3 bg-gray-900 border-t border-l border-gray-700 z-40 lg:hidden overflow-y-auto">
+          {/* Slide-out Menu - 50% width from right */}
+          <div className="fixed top-[100px] md:top-[150px] right-0 bottom-0 w-1/2 bg-gray-900 border-t border-l border-gray-700 z-40 lg:hidden overflow-y-auto">
             <div className="flex flex-col p-4 gap-2">
               {links.map((link, index) => (
                 <div key={index}>

@@ -8,8 +8,8 @@ export const contactData = {
     icon: <FaPhone/>
   },
   address: {
-    line1: '123 2nd Street',
-    line2: 'Tacoma, WA 55555',
+    line1: '3720 6th Ave',
+    line2: 'Tacoma, WA 98406',
     icon: <FaLocationDot/>
   },
   email:{

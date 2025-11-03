@@ -129,7 +129,7 @@ export default function SingleService({ service }) {
                         Ready to Start Your {service.name} Project?
                     </h2>
                     <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-                        Contact us today for a free consultation and let's discuss how we can bring your vision to life.
+                        Contact us today for a consultation and let's discuss how we can bring your vision to life.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Button

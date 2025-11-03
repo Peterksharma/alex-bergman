@@ -12,7 +12,7 @@ export default function TestimonialsCTA() {
         href="/contact"
         className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 hover:scale-105 shadow-lg text-lg"
       >
-        Get Your Free Consultation
+        Schedule Your Consultation
       </a>
     </div>
   );

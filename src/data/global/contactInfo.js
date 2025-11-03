@@ -4,7 +4,7 @@ import {FaLocationDot } from "react-icons/fa6";
 
 export const contactData = {
   phone: {
-    number:'(360)555-5555',
+    number:'(888)818-7526',
     icon: <FaPhone/>
   },
   address: {

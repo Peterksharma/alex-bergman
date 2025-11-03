@@ -1,0 +1,28 @@
+{
+  "name": "A.R.Bergman Drafting | Professional Architectural Drafting Services",
+  "short_name": "A.R.Bergman Drafting",
+  "description": "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1f2937",
+  "theme_color": "#1f2937",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/logo.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["architecture", "construction", "design"],
+  "lang": "en-US",
+  "dir": "ltr"
+}
+

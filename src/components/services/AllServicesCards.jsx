@@ -131,14 +131,14 @@ export default function ServicesCards() {
             Not Sure Which Service You Need?
           </h2>
           <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-            We're here to help! Contact us for a free consultation and we'll discuss the best solution for your project.
+            We're here to help! Contact us for a consultation and we'll discuss the best solution for your project.
           </p>
           <Button
             asChild
             className="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
           >
             <Link href="/contact" className="flex items-center gap-3">
-              Schedule Free Consultation
+              Schedule A Consultation
               <FaArrowRight />
             </Link>
           </Button>

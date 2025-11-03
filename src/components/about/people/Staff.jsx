@@ -22,17 +22,20 @@ export default function Staff() {
                                     <span className="text-white">Alex Bergman</span>
                                 </h2>
                                 <p className="text-gray-300 text-base sm:text-lg font-semibold">
-                                    Owner and Founder of A.R.Bergman Drafting and Design
+                                    Owner and Founder of A.R.Bergman Drafting and Design LLC
                                 </p>
                             </div>
 
                             {/* Bio Content */}
                             <div className="text-gray-200 text-sm sm:text-base leading-relaxed space-y-3 sm:space-y-4 max-w-2xl mx-auto lg:mx-0">
                                 <p>
-                                    Alex Bergman brings over 15 years of experience in architectural drafting and design to every project. With a passion for creating functional, beautiful spaces that meet both aesthetic and practical needs, Alex founded A.R.Bergman Drafting in 2008 to serve homeowners and builders throughout Tacoma and the Pacific Northwest.
+                                    A.R.Bergman Drafting and Design LLC has been owned and operated by Alexander Bergman since 2008. The business began while Alex completed his education in the Architectural Drafting Program at South Puget Sound Community College.
                                 </p>
                                 <p>
-                                    Specializing in custom home design, remodels, additions, and commercial drafting services, Alex works closely with clients to transform their visions into detailed construction documents. Whether it's a small garage addition or a complete home rebuild, every project receives the same attention to detail, code compliance, and professional drafting standards. With hundreds of successful projects completed, Alex understands the importance of clear communication, timely delivery, and cost-effective solutions for architectural drafting needs.
+                                    While continually operating his business, Alex gained additional experience (8 years combined) working as the in-house Draftsperson for a construction company, later for a custom home designer, and for an Architectural firm, whom he is still working with today.
+                                </p>
+                                <p>
+                                    A.R.Bergman Drafting and Design LLC has completed hundreds of successful projects all over Western Washington since then and hopes to continue to serve the community with fast, friendly, and affordable construction documents and charitable pro bono work.
                                 </p>
                             </div>
                         </CardContent>

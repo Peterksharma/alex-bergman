@@ -5,7 +5,7 @@ export const processSteps = [
         id: 1,
         icon: <FaHandshake className="text-5xl text-blue-400" />,
         title: "Initial Consultation",
-        description: "We begin with a free consultation to understand your vision, needs, and project goals. This is where we discuss your ideas, budget, timeline, and any specific requirements you have.",
+        description: "Initial consultation to understand vision, needs, and project goals. Discuss ideas, answer questions, determine possible budget and timeline, discuss specific requirements. Minimal consultation fee rebates upon acceptance of a full drafting service.",
         duration: "30-60 minutes",
         deliverable: "Project overview and initial assessment"
     },
@@ -13,7 +13,7 @@ export const processSteps = [
         id: 2,
         icon: <FaClipboardList className="text-5xl text-blue-400" />,
         title: "Site Assessment & Measurements",
-        description: "For remodels and additions, we visit your property to take accurate measurements, assess the existing structure, and identify any potential challenges or opportunities.",
+        description: "Site visit and measurement to create accurate as built drawing. Assess existing structure, identify unique project conditions. Identify potential challenges or opportunities.",
         duration: "1-2 hours on-site",
         deliverable: "Site documentation and photos"
     },
@@ -21,23 +21,23 @@ export const processSteps = [
         id: 3,
         icon: <FaPencilRuler className="text-5xl text-blue-400" />,
         title: "Design Development",
-        description: "We create initial design concepts based on our consultation and site assessment. You'll receive preliminary drawings that bring your vision to life, with opportunities for revisions and refinements.",
-        duration: "1-2 weeks",
-        deliverable: "Preliminary design drawings"
+        description: "Create accurate as built plan. Create initial design concepts. Provide preliminary drawings. Develop plan through revisions and refinements.",
+        duration: "2-3 weeks",
+        deliverable: "Preliminary design drawings for project planning and bids"
     },
     {
         id: 4,
         icon: <FaFileAlt className="text-5xl text-blue-400" />,
         title: "Construction Documents",
-        description: "Once the design is approved, we develop detailed construction documents including floor plans, elevations, sections, and all technical specifications needed for permitting and construction.",
-        duration: "2-4 weeks",
+        description: "Develop detailed construction documents for review by permitting jurisdiction and use by contractor. Include floor plans, framing plans, elevations, sections, technical specifications, project specific notes. Prepare documents for permitting and construction.",
+        duration: "1-2 weeks",
         deliverable: "Complete construction document set"
     },
     {
         id: 5,
         icon: <FaCheckCircle className="text-5xl text-blue-400" />,
         title: "Permit Application Support",
-        description: "We prepare all necessary documents for your permit application and can assist with the submission process, ensuring everything meets local building codes and regulations.",
+        description: "Permitting service available upon request - additional fees apply. Prepare all necessary permit documents. Assist with submission process. Ensure compliance with local building codes and regulations.",
         duration: "Varies by jurisdiction",
         deliverable: "Permit-ready document package"
     },
@@ -45,7 +45,7 @@ export const processSteps = [
         id: 6,
         icon: <FaRocket className="text-5xl text-blue-400" />,
         title: "Project Support",
-        description: "Even after documents are complete, we're here to answer questions from your contractor, provide clarifications, and ensure your project proceeds smoothly from start to finish.",
+        description: "Answer contractor questions. Provide revisions needed for initial permit approval. Provide clarifications. Provide field revisions - additional fees apply.",
         duration: "Throughout construction",
         deliverable: "Ongoing consultation and support"
     }

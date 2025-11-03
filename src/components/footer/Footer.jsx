@@ -56,7 +56,7 @@ export default function Footer() {
                 {/* Social Media Icons */}
                 <div className="flex justify-center gap-4 sm:gap-6 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-800">
                     <a
-                        href="https://facebook.com"
+                        href="https://www.facebook.com/arbergmanhome/"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Facebook"
@@ -64,7 +64,7 @@ export default function Footer() {
                         <FaSquareFacebook className={iconStyle} />
                     </a>
                     <a
-                        href="https://instagram.com"
+                        href="https://www.instagram.com/arbergman_drafting/"
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Instagram"

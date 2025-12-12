@@ -19,6 +19,7 @@ function NavigationMenu({
         "group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
         className
       )}
+      suppressHydrationWarning
       {...props}>
       {children}
       {viewport && <NavigationMenuViewport />}
@@ -63,6 +64,7 @@ function NavigationMenuTrigger({
     <NavigationMenuPrimitive.Trigger
       data-slot="navigation-menu-trigger"
       className={cn(navigationMenuTriggerStyle(), "group", className)}
+      suppressHydrationWarning
       {...props}>
       {children}{" "}
       <ChevronDownIcon

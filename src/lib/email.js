@@ -23,7 +23,7 @@ export async function sendContactEmail(data) {
   }
 
   // Get recipient email from environment or use default
-  const recipientEmail = process.env.CONTACT_EMAIL || 'peterksharma@gmail.com';
+  const recipientEmail = process.env.CONTACT_EMAIL;
 
   try {
     // Send email using Resend

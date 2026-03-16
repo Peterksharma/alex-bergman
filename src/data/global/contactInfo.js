@@ -13,7 +13,7 @@ export const contactData = {
     icon: <FaLocationDot/>
   },
   email:{
-    address: 'A.R.Bergman@gmail.com',
+    address: 'A.R.Bergman101@gmail.com',
     icon: <MdEmail/>
   }
 }

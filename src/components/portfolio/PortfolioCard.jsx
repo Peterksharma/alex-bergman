@@ -12,6 +12,7 @@ export default function PortfolioCard({ project }) {
             src={`/assets/portfolio/${project.folder}/1.jpg`}
             alt={`${project.name} architectural drafting project by A.R.Bergman Drafting in Tacoma, WA`}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-110 group-hover:rotate-1"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

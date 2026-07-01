@@ -17,6 +17,7 @@ export default function Hero() {
                 src='/assets/hero-bg.jpg'
                 alt='A.R.Bergman Drafting - Professional architectural drafting and custom home design services in Tacoma, Washington'
                 fill
+                sizes="100vw"
                 className="object-cover"
                 priority
             />

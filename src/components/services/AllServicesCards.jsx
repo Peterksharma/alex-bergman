@@ -33,6 +33,7 @@ export default function ServicesCards() {
                   src={service.image}
                   alt={`${service.name} architectural drafting service - ${service.category} project in Tacoma, WA`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 {/* Gradient Overlay */}

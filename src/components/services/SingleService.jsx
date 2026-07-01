@@ -38,6 +38,7 @@ export default function SingleService({ service }) {
                                 src={service.image}
                                 alt={`${service.name} architectural drafting service example - ${service.category} project by A.R.Bergman Drafting in Tacoma, WA`}
                                 fill
+                                sizes="(max-width: 1024px) 100vw, 66vw"
                                 className="object-cover"
                                 priority
                             />

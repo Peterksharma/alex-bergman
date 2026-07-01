@@ -156,6 +156,7 @@ export default function Project({ project }) {
                 src={image.src}
                 alt={image.alt}
                 fill
+                sizes="150px"
                 className="object-cover"
               />
             </div>
@@ -198,6 +199,7 @@ export default function Project({ project }) {
                   src={projectImages[currentImageIndex].src}
                   alt={projectImages[currentImageIndex].alt}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 66vw"
                   className="object-cover"
                   priority
                 />

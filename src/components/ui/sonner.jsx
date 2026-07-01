@@ -28,7 +28,8 @@ const Toaster = ({
       }}
       toastOptions={{
         classNames: {
-          success: '!bg-green-100 h-[100px] !text-white'
+          // White text needs a dark green surface to clear WCAG AA contrast (green-700 on white ~ 5.1:1)
+          success: '!bg-green-700 !text-white !border-green-600'
         }
       }}
       style={

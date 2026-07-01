@@ -44,9 +44,9 @@ export default function FAQ() {
 
                 {/* CTA Section */}
                 <div className="text-center mt-8 sm:mt-10 lg:mt-12 p-6 sm:p-7 lg:p-8 bg-gradient-to-r from-blue-600/10 to-blue-700/10 rounded-xl border border-blue-500/20">
-                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">
+                    <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">
                         Still have questions?
-                    </h3>
+                    </h2>
                     <p className="text-gray-300 mb-4 sm:mb-5 lg:mb-6 text-sm sm:text-base">
                         We're here to help! Reach out to us for personalized answers.
                     </p>

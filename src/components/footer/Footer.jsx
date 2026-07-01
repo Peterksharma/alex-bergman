@@ -80,7 +80,7 @@ export default function Footer() {
                     <p className="text-gray-300 mb-2 text-sm sm:text-base">
                         &copy; {new Date().getFullYear()} ARBergman Drafting LLC. All rights reserved.
                     </p>
-                    <p className="text-gray-500 text-xs sm:text-sm">
+                    <p className="text-gray-400 text-xs sm:text-sm">
                         Site created by{" "}
                         <a
                             href="https://petersharma.dev"

@@ -138,12 +138,15 @@ export default function Project({ project }) {
       const actualIndex = startIndex + index;
 
       return (
-        <div
+        <button
           key={actualIndex}
+          type="button"
           className="flex-shrink-0 p-1 sm:p-2"
           onClick={() => {
             setCurrentImageIndex(actualIndex);
           }}
+          aria-label={`View image ${actualIndex + 1} of ${projectImages.length}`}
+          aria-current={currentImageIndex === actualIndex ? "true" : undefined}
         >
           <div
             className={`cursor-pointer transition-all duration-300 rounded-lg overflow-hidden ${currentImageIndex === actualIndex
@@ -161,7 +164,7 @@ export default function Project({ project }) {
               />
             </div>
           </div>
-        </div>
+        </button>
       );
     });
   }
@@ -193,7 +196,15 @@ export default function Project({ project }) {
           {/* Image Gallery Section - 2/3 width */}
           <div className="lg:col-span-2 space-y-6">
             {/* Main Image */}
-            <div className="relative group">
+            <div
+              className="relative group"
+              role="group"
+              aria-label={`${project.name} image gallery`}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowLeft") goToPreviousImage();
+                if (e.key === "ArrowRight") goToNextImage();
+              }}
+            >
               <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl shadow-2xl border-2 border-gray-700">
                 <Image
                   src={projectImages[currentImageIndex].src}
@@ -207,14 +218,14 @@ export default function Project({ project }) {
                 {/* Navigation Arrows on Image */}
                 <button
                   onClick={goToPreviousImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-300 backdrop-blur-sm"
                   aria-label="Previous image"
                 >
                   <FaAngleLeft className="text-2xl" />
                 </button>
                 <button
                   onClick={goToNextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-3 rounded-full opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-300 backdrop-blur-sm"
                   aria-label="Next image"
                 >
                   <FaAngleRight className="text-2xl" />
@@ -268,7 +279,7 @@ export default function Project({ project }) {
               <CardContent className="p-6 space-y-6">
                 {/* Tags */}
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">
+                  <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide mb-3">
                     Categories
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -278,7 +289,7 @@ export default function Project({ project }) {
 
                 {/* Description */}
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">
+                  <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide mb-3">
                     About This Project
                   </h3>
                   <div className="bg-gray-900/50 rounded-lg p-6 text-gray-200 leading-relaxed backdrop-blur-sm border border-gray-700">

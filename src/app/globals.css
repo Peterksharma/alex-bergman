@@ -120,3 +120,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+/*
+ * Honor the user's OS-level reduced-motion preference (WCAG 2.3.3).
+ * Collapses all CSS transitions/animations (hover scales, accordion
+ * slides, spinners) to near-instant without changing final layout.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

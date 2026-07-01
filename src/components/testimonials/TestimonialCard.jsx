@@ -38,7 +38,7 @@ export default function TestimonialCard({ testimonial }) {
           &quot;{testimonial.text}&quot;
         </p>
 
-        <p className="text-gray-500 text-sm">
+        <p className="text-gray-300 text-sm">
           {testimonial.date}
         </p>
       </CardContent>

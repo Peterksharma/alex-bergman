@@ -28,7 +28,7 @@ export default function PortfolioCard({ project }) {
           <CardTitle className='text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors'>
             {project.name}
           </CardTitle>
-          <CardDescription className="text-gray-400 text-sm">
+          <CardDescription className="text-gray-300 text-sm">
             Click to view project details
           </CardDescription>
         </div>

@@ -8,5 +8,4 @@ export const siteConfig = {
   description: "Professional architectural drafting services in Tacoma, WA",
 };
 
-export const getSiteUrl = () => siteConfig.url;
 

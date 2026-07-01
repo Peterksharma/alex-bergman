@@ -9,9 +9,6 @@ import { Toaster } from "@/components/ui/sonner";
 import StructuredData from "@/components/seo/StructuredData";
 import { siteConfig } from "@/config/site";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

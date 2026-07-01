@@ -9,7 +9,7 @@ export default function Home() {
       <div className='py-8 bg-gray-900'>
         <TrustCards />
       </div>
-      <ServicesCards /> 
+      <ServicesCards headingAs="h2" />
     </div>
   );
 }

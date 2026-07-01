@@ -1,5 +1,12 @@
+import { notFound } from "next/navigation";
 import { services } from "@/components/services/data/servicesData";
 import SingleService from "@/components/services/SingleService";
+
+export function generateStaticParams() {
+  return services.map((service) => ({
+    id: service.url.replace("/services/", ""),
+  }));
+}
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -17,6 +24,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${service.name} Services`,
     description: description,
+    alternates: { canonical: `/services/${id}` },
     keywords: [
       service.name.toLowerCase(),
       "architectural drafting",
@@ -40,21 +48,12 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ServicePage({ params }) {
-    const { id } = await params;
+  const { id } = await params;
+  const service = services.find(s => s.url === `/services/${id}`);
 
-    if (!id) {
-        return <div>Loading the project...</div>
-    }
+  if (!service) {
+    notFound();
+  }
 
-    const service = services.find(s => s.url === `/services/${id}`)
-
-    if (!service) {
-        return <div>No service found.</div>
-    }
-
-    return (
-        <div>
-            <SingleService service={service} />
-        </div>
-    )
+  return <SingleService service={service} />;
 }

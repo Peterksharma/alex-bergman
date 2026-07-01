@@ -5,6 +5,7 @@ export default function StructuredData() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": `${siteConfig.url}/#localbusiness`,
     "name": "A.R.Bergman Drafting",
     "image": `${siteConfig.url}/assets/logo.png`,
     "description": "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
@@ -18,8 +19,8 @@ export default function StructuredData() {
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "addressLocality": "Tacoma",
-      "addressRegion": "WA"
+      "latitude": 47.2566,
+      "longitude": -122.4841
     },
     "url": siteConfig.url,
     "telephone": contactData.phone.number,
@@ -45,9 +46,10 @@ export default function StructuredData() {
       "@type": "GeoCircle",
       "geoMidpoint": {
         "@type": "GeoCoordinates",
-        "addressLocality": "Tacoma",
-        "addressRegion": "WA"
-      }
+        "latitude": 47.2566,
+        "longitude": -122.4841
+      },
+      "geoRadius": "80000"
     },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",

@@ -1,5 +1,10 @@
+import { notFound } from "next/navigation";
 import { projects } from "@/components/portfolio/projects/data/projectData";
 import Project from "@/components/portfolio/projects/Project";
+
+export function generateStaticParams() {
+  return projects.map((project) => ({ slug: project.slug }));
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -15,6 +20,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${project.name} | Portfolio`,
     description: project.description.substring(0, 160),
+    alternates: { canonical: `/portfolio/${slug}` },
     openGraph: {
       title: `${project.name} | A.R.Bergman Drafting Portfolio`,
       description: project.description.substring(0, 160),
@@ -29,26 +35,13 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function ProjectPage({params}) {
-    const { slug } = await params;
+export default async function ProjectPage({ params }) {
+  const { slug } = await params;
+  const project = projects.find(p => p.slug === slug);
 
-    
-    if(!slug){
-        return <div>Loading the project...</div>
-    }
-    
-    const project = projects.find(p => p.slug === slug)
+  if (!project) {
+    notFound();
+  }
 
-    if (!project) {
-        return <div>No project found.</div>
-    }
-
-
-    return(
-        <div>
-            <div>
-            <Project project={project}/>
-            </div>
-        </div>
-    )
+  return <Project project={project} />;
 }

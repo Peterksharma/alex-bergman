@@ -1,12 +1,14 @@
 import { testimonials } from "@/components/testimonials/data/testimonialsData";
+import { siteConfig } from "@/config/site";
 
 export default function AggregateRatingSchema() {
   // Calculate average rating (all are 5, but this makes it dynamic)
   const averageRating = testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length;
-  
+
   const reviewSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": `${siteConfig.url}/#localbusiness`,
     "name": "A.R.Bergman Drafting",
     "aggregateRating": {
       "@type": "AggregateRating",
@@ -28,7 +30,8 @@ export default function AggregateRatingSchema() {
         "worstRating": "1"
       },
       "reviewBody": testimonial.text,
-      "datePublished": testimonial.date
+      // Normalize year-only dates ("2024") to full ISO 8601 for validators
+      "datePublished": /^\d{4}$/.test(testimonial.date) ? `${testimonial.date}-01-01` : testimonial.date
     }))
   };
 

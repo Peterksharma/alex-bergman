@@ -28,7 +28,7 @@ const righteous = Righteous({
 const lexend = Lexend({
   weight: ["400","900"],
   subsets: ["latin"],
-  variable: "--font-righteous",
+  variable: "--font-lexend",
 });
 
 export const metadata = {
@@ -67,10 +67,10 @@ export const metadata = {
     description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
     images: [
       {
-        url: `${siteConfig.url}/assets/logo.png`,
+        url: `${siteConfig.url}/assets/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "A.R.Bergman Drafting Logo",
+        alt: "A.R.Bergman Drafting — Professional Architectural Drafting Services",
       },
     ],
   },
@@ -78,7 +78,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "A.R.Bergman Drafting | Professional Architectural Drafting Services",
     description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
-    images: [`${siteConfig.url}/assets/logo.png`],
+    images: [`${siteConfig.url}/assets/og-image.jpg`],
   },
   robots: {
     index: true,
@@ -98,7 +98,7 @@ export const metadata = {
     // bing: "your-bing-verification-code",
   },
   alternates: {
-    canonical: siteConfig.url,
+    canonical: "/",
   },
   category: "Architecture & Construction",
   icons: {

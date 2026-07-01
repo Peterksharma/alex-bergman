@@ -3,6 +3,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Services",
+  alternates: { canonical: "/services" },
   description: "Comprehensive architectural drafting services including custom home design, remodels, additions, garages, ADUs, commercial buildings, and construction plans. Serving Tacoma, WA and the Pacific Northwest.",
   keywords: [
     "architectural drafting services",

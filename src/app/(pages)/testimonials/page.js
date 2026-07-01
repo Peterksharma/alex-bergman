@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Testimonials",
+  alternates: { canonical: "/testimonials" },
   description: "Read client testimonials and reviews for A.R.Bergman Drafting. See why homeowners and builders trust us for their architectural drafting and design needs in Tacoma, WA.",
   keywords: [
     "A.R.Bergman Drafting reviews",

@@ -5,15 +5,17 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 
-export default function ServicesCards() {
+// headingAs: "h1" on /services (page title), "h2" on the home page,
+// which already has its own h1 in the hero — a page must have exactly one h1.
+export default function ServicesCards({ headingAs: Heading = "h1" }) {
   return (
     <div className="bg-gray-900 min-h-screen py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
+          <Heading className="text-5xl font-bold text-white mb-4 tracking-tight">
             Our <span className="text-blue-400">Services</span>
-          </h1>
+          </Heading>
           <div className="h-1 w-24 bg-blue-400 mx-auto rounded-full mb-6"></div>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
             Professional architectural drafting services tailored to your needs in Tacoma, WA. From custom home designs to remodels, additions, garages, and ADUs, we provide comprehensive drafting solutions for residential and commercial projects throughout the Pacific Northwest.

@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "Contact Us",
+  alternates: { canonical: "/contact" },
   description: "Get in touch with A.R.Bergman Drafting for your architectural drafting needs. Located at 3720 6th Ave, Tacoma, WA 98406. Contact us for custom home designs, remodels, additions, and construction plans.",
   keywords: [
     "contact A.R.Bergman Drafting",

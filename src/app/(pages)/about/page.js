@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata = {
   title: "About Us",
+  alternates: { canonical: "/about" },
   description: "Learn about A.R.Bergman Drafting, founded in 2008 in Olympia, Washington. We're committed to producing high-quality building plans at affordable rates for residential and commercial projects in Tacoma and the Pacific Northwest.",
   keywords: [
     "about A.R.Bergman Drafting",

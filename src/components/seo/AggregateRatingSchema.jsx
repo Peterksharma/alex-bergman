@@ -1,4 +1,4 @@
-import { testimonials } from "@/components/testimonials/data/testimonialsData";
+import { testimonials } from "@/data/testimonialsData";
 import { siteConfig } from "@/config/site";
 
 export default function AggregateRatingSchema() {

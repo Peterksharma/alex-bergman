@@ -1,4 +1,4 @@
-import { processSteps } from "./data/processStepsData";
+import { processSteps } from "@/data/processStepsData";
 import ProcessStepCard from "./ProcessStepCard";
 
 export default function ProcessTimeline() {

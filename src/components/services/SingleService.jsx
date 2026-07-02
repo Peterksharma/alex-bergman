@@ -1,8 +1,11 @@
-import { Card, CardHeader, CardContent, CardTitle } from "../ui/card";
+import { CardHeader, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { FaClock, FaCheckCircle, FaListOl } from "react-icons/fa";
+import SectionHeader from "@/components/common/SectionHeader";
+import CTASection from "@/components/common/CTASection";
+import SurfaceCard from "@/components/common/SurfaceCard";
 
 export default function SingleService({ service }) {
     const process = service.process?.map((item, index) => (
@@ -18,16 +21,7 @@ export default function SingleService({ service }) {
     return (
         <div className="bg-gray-900 min-h-screen py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Header Section */}
-                <div className="text-center mb-16">
-                    <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
-                        {service.name}
-                    </h1>
-                    <div className="h-1 w-24 bg-blue-400 mx-auto rounded-full mb-6"></div>
-                    <p className="text-gray-300 text-xl max-w-4xl mx-auto leading-relaxed">
-                        {service.description}
-                    </p>
-                </div>
+                <SectionHeader title={service.name} subtitle={service.description} />
 
                 {/* Main Content */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
@@ -47,7 +41,7 @@ export default function SingleService({ service }) {
 
                     {/* Quick Info Card - 1/3 width */}
                     <div className="lg:col-span-1">
-                        <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-2xl h-full sticky top-8">
+                        <SurfaceCard className="shadow-2xl h-full sticky top-8">
                             <CardHeader className="border-b border-gray-600">
                                 <h2 className="text-2xl text-white text-center font-semibold leading-none">
                                     Service Overview
@@ -59,7 +53,7 @@ export default function SingleService({ service }) {
                                 {timeline && (
                                     <div>
                                         <div className="flex items-center gap-3 mb-3">
-                                            <FaClock className="text-blue-400 text-xl" />
+                                            <FaClock className="text-blue-400 text-xl" aria-hidden="true" />
                                             <h3 className="text-lg font-bold text-white">Timeline</h3>
                                         </div>
                                         <p className="text-gray-300 pl-8">{timeline}</p>
@@ -69,7 +63,7 @@ export default function SingleService({ service }) {
                                 {/* Category */}
                                 <div>
                                     <div className="flex items-center gap-3 mb-3">
-                                        <FaCheckCircle className="text-blue-400 text-xl" />
+                                        <FaCheckCircle className="text-blue-400 text-xl" aria-hidden="true" />
                                         <h3 className="text-lg font-bold text-white">Category</h3>
                                     </div>
                                     <p className="text-gray-300 pl-8">{service.category}</p>
@@ -78,12 +72,12 @@ export default function SingleService({ service }) {
                                 {/* CTA Button */}
                                 <Button
                                     asChild
-                                    className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all duration-300 hover:scale-105 shadow-lg mt-6"
+                                    className="w-full h-12 font-semibold transition-all duration-300 hover:scale-105 shadow-lg mt-6"
                                 >
                                     <Link href="/contact">Get Started</Link>
                                 </Button>
                             </CardContent>
-                        </Card>
+                        </SurfaceCard>
                     </div>
                 </div>
 
@@ -91,10 +85,10 @@ export default function SingleService({ service }) {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* Process Section */}
                     {process && process.length > 0 && (
-                        <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-xl">
+                        <SurfaceCard>
                             <CardHeader className="border-b border-gray-600">
                                 <div className="flex items-center gap-3">
-                                    <FaListOl className="text-blue-400 text-2xl" />
+                                    <FaListOl className="text-blue-400 text-2xl" aria-hidden="true" />
                                     <h2 className="text-2xl text-white font-semibold leading-none">Our Process</h2>
                                 </div>
                             </CardHeader>
@@ -103,15 +97,15 @@ export default function SingleService({ service }) {
                                     {process}
                                 </ol>
                             </CardContent>
-                        </Card>
+                        </SurfaceCard>
                     )}
 
                     {/* Benefits Section */}
                     {benefits && benefits.length > 0 && (
-                        <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-xl">
+                        <SurfaceCard>
                             <CardHeader className="border-b border-gray-600">
                                 <div className="flex items-center gap-3">
-                                    <FaCheckCircle className="text-blue-400 text-2xl" />
+                                    <FaCheckCircle className="text-blue-400 text-2xl" aria-hidden="true" />
                                     <h2 className="text-2xl text-white font-semibold leading-none">Key Benefits</h2>
                                 </div>
                             </CardHeader>
@@ -120,34 +114,18 @@ export default function SingleService({ service }) {
                                     {benefits}
                                 </ul>
                             </CardContent>
-                        </Card>
+                        </SurfaceCard>
                     )}
                 </div>
 
-                {/* CTA Section */}
-                <div className="text-center mt-16 p-12 bg-gradient-to-r from-blue-600/10 to-blue-700/10 rounded-xl border border-blue-500/20">
-                    <h2 className="text-3xl font-bold text-white mb-4">
-                        Ready to Start Your {service.name} Project?
-                    </h2>
-                    <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
-                        Contact us today for a consultation and let's discuss how we can bring your vision to life.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button
-                            asChild
-                            className="h-12 px-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg"
-                        >
-                            <Link href="/contact">Schedule Consultation</Link>
-                        </Button>
-                        <Button
-                            asChild
-                            variant="outline"
-                            className="h-12 px-8 bg-white/10 backdrop-blur-sm border-2 border-white hover:bg-white hover:text-gray-900 text-white font-semibold text-lg transition-all duration-300 hover:scale-105"
-                        >
-                            <Link href="/portfolio">View Our Work</Link>
-                        </Button>
-                    </div>
-                </div>
+                <CTASection
+                    heading={`Ready to Start Your ${service.name} Project?`}
+                    text="Contact us today for a consultation and let's discuss how we can bring your vision to life."
+                    actions={[
+                        { label: "Schedule Consultation", href: "/contact" },
+                        { label: "View Our Work", href: "/portfolio", variant: "ctaOutline" },
+                    ]}
+                />
             </div>
         </div>
     );

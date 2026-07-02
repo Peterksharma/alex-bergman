@@ -6,7 +6,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { trustCardData } from "@/components/home/trust/data/trustCardData";
+import { trustCardData } from "@/data/trustCardData";
 import Link from "next/link";
 
 export default function HomeTrustCards() {

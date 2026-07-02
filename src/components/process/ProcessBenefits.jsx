@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { processBenefits } from "./data/processBenefitsData";
+import { processBenefits } from "@/data/processBenefitsData";
 
 export default function ProcessBenefits() {
   return (

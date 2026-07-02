@@ -4,7 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { aboutTrustCardData } from "@/components/about/data/aboutData";
+import { aboutTrustCardData } from "@/data/aboutData";
 
 export default function AboutTrustCards() {
   return (

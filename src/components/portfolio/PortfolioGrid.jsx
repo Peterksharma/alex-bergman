@@ -1,4 +1,4 @@
-import { projects } from "@/components/portfolio/projects/data/projectData";
+import { projects } from "@/data/projectData";
 import PortfolioCard from "./PortfolioCard";
 
 export default function PortfolioGrid() {

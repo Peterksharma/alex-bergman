@@ -1,4 +1,6 @@
-import { PortfolioHeader, PortfolioGrid, PortfolioCTA } from "@/components/portfolio";
+import SectionHeader from "@/components/common/SectionHeader";
+import CTASection from "@/components/common/CTASection";
+import PortfolioGrid from "@/components/portfolio/PortfolioGrid";
 import { siteConfig } from "@/config/site";
 
 export const metadata = {
@@ -30,9 +32,15 @@ export default function Portfolio() {
   return (
     <div className="bg-gray-900 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <PortfolioHeader />
+        <SectionHeader
+          title={<>Our <span className="text-blue-400">Portfolio</span></>}
+          subtitle="Explore our portfolio of completed architectural drafting projects in Tacoma and the Pacific Northwest. From custom homes and remodels to garages, additions, and commercial projects. Click on any card to see detailed information and project images showcasing our professional drafting expertise."
+        />
         <PortfolioGrid />
-        <PortfolioCTA />
+        <CTASection
+          boxed={false}
+          actions={[{ label: "Start Your Project", href: "/contact", withArrow: true }]}
+        />
       </div>
     </div>
   );

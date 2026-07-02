@@ -1,4 +1,4 @@
-import { faqData } from "@/components/faq/data/faqData";
+import { faqData } from "@/data/faqData";
 
 export default function FAQSchema() {
   const faqSchema = {

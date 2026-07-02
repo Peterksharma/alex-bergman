@@ -1,17 +1,21 @@
-import ContactForm from "@/components/contact/ContactForm"
-import ContactPageDetails from "@/components/contact/ContactsPageDetails"
+import ContactForm from "@/components/contact/ContactForm";
+import ContactDetails from "@/components/common/ContactDetails";
+import SectionHeader from "@/components/common/SectionHeader";
+import { contactData } from "@/data/global/contactInfo";
 import { siteConfig } from "@/config/site";
+
+const fullAddress = `${contactData.address.line1}, ${contactData.address.line2}`;
 
 export const metadata = {
   title: "Contact Us",
   alternates: { canonical: "/contact" },
-  description: "Get in touch with A.R.Bergman Drafting for your architectural drafting needs. Located at 3720 6th Ave, Tacoma, WA 98406. Contact us for custom home designs, remodels, additions, and construction plans.",
+  description: `Get in touch with A.R.Bergman Drafting for your architectural drafting needs. Located at ${fullAddress}. Contact us for custom home designs, remodels, additions, and construction plans.`,
   keywords: [
     "contact A.R.Bergman Drafting",
     "Tacoma drafting contact",
     "architectural drafting consultation",
     "drafting services Tacoma",
-    "3720 6th Ave Tacoma",
+    `${contactData.address.street} Tacoma`,
     "free consultation drafting"
   ],
   openGraph: {
@@ -28,22 +32,19 @@ export const metadata = {
 };
 
 export default function Contact() {
-
-    return (
-        <div className="pt-8 pb-8 bg-gray-900">
-            <div className="max-w-7xl mx-auto px-4 mb-8">
-                <div className="text-center mb-6">
-                    <h1 className="text-2xl md:text-4xl text-center text-gray-100 font-bold mb-4">Contact Us</h1>
-                    <div className="h-1 w-24 bg-blue-400 mx-auto rounded-full mb-4"></div>
-                    <p className="text-gray-300 text-lg max-w-3xl mx-auto leading-relaxed">
-                        Ready to start your architectural drafting project? Located in Tacoma, WA at 3720 6th Ave, we serve clients throughout the Pacific Northwest. Get in touch for a free consultation about your custom home design, remodel, addition, or commercial project. Our experienced team is here to help bring your vision to life with professional drafting services.
-                    </p>
-                </div>
-            </div>
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-6 px-4">
-                <ContactForm />
-                <ContactPageDetails />
-            </div>
-        </div>
-    )
+  return (
+    <div className="pt-8 pb-8 bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 mb-8">
+        <SectionHeader
+          className="mb-6"
+          title="Contact Us"
+          subtitle={`Ready to start your architectural drafting project? Located in Tacoma, WA at ${contactData.address.street}, we serve clients throughout the Pacific Northwest. Get in touch for a free consultation about your custom home design, remodel, addition, or commercial project. Our experienced team is here to help bring your vision to life with professional drafting services.`}
+        />
+      </div>
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-6 px-4">
+        <ContactForm />
+        <ContactDetails variant="card" />
+      </div>
+    </div>
+  );
 }

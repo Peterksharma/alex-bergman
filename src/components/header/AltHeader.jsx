@@ -2,7 +2,7 @@
 
 import { Button } from "../ui/button";
 import { links } from "../../data/global/links";
-import { services } from "../services/data/servicesData";
+import { services } from "@/data/servicesData";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";

@@ -11,10 +11,10 @@ export default function StructuredData() {
     "description": "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "3720 6th Ave",
-      "addressLocality": "Tacoma",
-      "addressRegion": "WA",
-      "postalCode": "98406",
+      "streetAddress": contactData.address.street,
+      "addressLocality": contactData.address.city,
+      "addressRegion": contactData.address.state,
+      "postalCode": contactData.address.zip,
       "addressCountry": "US"
     },
     "geo": {

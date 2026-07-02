@@ -1,5 +1,5 @@
-import { services } from "@/components/services/data/servicesData";
-import { projects } from "@/components/portfolio/projects/data/projectData";
+import { services } from "@/data/servicesData";
+import { projects } from "@/data/projectData";
 import { siteConfig } from "@/config/site";
 
 export default function sitemap() {

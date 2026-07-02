@@ -1,3 +1,4 @@
+import Chapter from "@/components/common/Chapter";
 import SectionHeader from "@/components/common/SectionHeader";
 import CTASection from "@/components/common/CTASection";
 import StatGrid from "@/components/common/StatGrid";
@@ -32,21 +33,30 @@ export const metadata = {
 
 export default function TestimonialsPage() {
   return (
-    <div className="bg-gray-900 min-h-screen py-20">
+    <>
       <AggregateRatingSchema />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          title={<>Client <span className="text-blue-400">Testimonials</span></>}
-          subtitle="Don't just take our word for it. Hear what our satisfied clients in Tacoma and throughout the Pacific Northwest have to say about their experience working with A.R.Bergman Drafting for their architectural drafting, custom home design, and construction plan needs."
-        />
-        <TestimonialsGrid />
-        <CTASection
-          heading="Ready to Start Your Project?"
-          text="Join our growing list of satisfied clients. Let us help bring your vision to life with professional drafting services."
-          actions={[{ label: "Schedule Your Consultation", href: "/contact" }]}
-        />
-        <StatGrid items={trustIndicators} className="mt-16" />
-      </div>
-    </div>
+      <Chapter tone="paper" grid className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            eyebrow="Field reports · Verified clients"
+            title={<>Client <span className="text-tone-accent">Testimonials</span></>}
+            subtitle="Don't just take our word for it. Hear what our satisfied clients in Tacoma and throughout the Pacific Northwest have to say about their experience working with A.R.Bergman Drafting for their architectural drafting, custom home design, and construction plan needs."
+          />
+          <TestimonialsGrid />
+        </div>
+      </Chapter>
+
+      <Chapter tone="ink" grid className="py-16 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <CTASection
+            className="mt-0"
+            heading="Ready to Start Your Project?"
+            text="Join our growing list of satisfied clients. Let us help bring your vision to life with professional drafting services."
+            actions={[{ label: "Schedule Your Consultation", href: "/contact" }]}
+          />
+          <StatGrid items={trustIndicators} className="mt-16" />
+        </div>
+      </Chapter>
+    </>
   );
 }

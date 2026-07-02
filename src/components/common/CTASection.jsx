@@ -41,12 +41,14 @@ export default function CTASection({ heading, text, actions = [], boxed = true, 
   return (
     <div
       className={cn(
-        "text-center mt-16 p-8 sm:p-12 bg-gradient-to-r from-blue-600/10 to-blue-700/10 rounded-xl border border-blue-500/20",
+        "text-center mt-16 p-8 sm:p-12 bg-tone-surface/60 rounded-xl border border-tone-line/30",
         className
       )}
     >
-      {heading && <h2 className="text-3xl font-bold text-white mb-4">{heading}</h2>}
-      {text && <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">{text}</p>}
+      {heading && (
+        <h2 className="font-display text-3xl font-bold text-tone-heading mb-4">{heading}</h2>
+      )}
+      {text && <p className="text-tone-body text-lg mb-8 max-w-2xl mx-auto">{text}</p>}
       {buttons}
     </div>
   );

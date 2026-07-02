@@ -1,14 +1,21 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { CardContent, CardHeader } from "@/components/ui/card";
+import SurfaceCard from "@/components/common/SurfaceCard";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
 
+/*
+ * TestimonialCard — a filed report slip: quote mark and star row up
+ * top, the client's words in body type, dated in the mono annotation
+ * voice.
+ */
 export default function TestimonialCard({ testimonial }) {
   const renderStars = (rating) => {
     return (
-      <div className="flex gap-1">
+      <div className="flex gap-1" aria-label={`${rating} out of 5 stars`}>
         {[...Array(5)].map((_, index) => (
           <FaStar
             key={index}
-            className={`${index < rating ? "text-yellow-400" : "text-gray-600"} text-lg`}
+            className={`${index < rating ? "text-amber-400" : "text-tone-line/30"} text-lg`}
+            aria-hidden="true"
           />
         ))}
       </div>
@@ -16,33 +23,32 @@ export default function TestimonialCard({ testimonial }) {
   };
 
   return (
-    <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+    <SurfaceCard hover>
       <CardHeader className="pb-4">
         <div className="flex justify-between items-start mb-4">
-          <FaQuoteLeft className="text-blue-400 text-3xl opacity-50" />
+          <FaQuoteLeft className="text-tone-accent text-3xl opacity-50" aria-hidden="true" />
           {renderStars(testimonial.rating)}
         </div>
 
         <div>
-          <h3 className="text-xl font-bold text-white mb-1">
+          <h3 className="font-display text-xl font-bold text-tone-heading mb-1">
             {testimonial.name}
           </h3>
-          <p className="text-blue-400 font-medium text-sm">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-tone-accent">
             {testimonial.project}
           </p>
         </div>
       </CardHeader>
 
       <CardContent>
-        <p className="text-gray-300 leading-relaxed mb-4">
+        <p className="text-tone-body leading-relaxed mb-4">
           &quot;{testimonial.text}&quot;
         </p>
 
-        <p className="text-gray-300 text-sm">
+        <p className="font-mono text-[11px] uppercase tracking-wider text-tone-muted">
           {testimonial.date}
         </p>
       </CardContent>
-    </Card>
+    </SurfaceCard>
   );
 }
-

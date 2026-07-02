@@ -1,6 +1,7 @@
 "use client";
 
-import { Card, CardHeader, CardTitle } from "../ui/card";
+import { CardHeader } from "../ui/card";
+import SurfaceCard from "@/components/common/SurfaceCard";
 import { Button } from "../ui/button";
 import { submitContactForm } from "@/app/actions/sendContactForm";
 import { useActionState } from "react";
@@ -12,7 +13,6 @@ export default function ContactForm() {
 
   useEffect(() => {
     if (state?.success) {
-      console.log("message sent");
       toast.success("Message has been sent");
     } else if (state?.success === false) {
       toast.error("Error sending message");
@@ -60,11 +60,11 @@ export default function ContactForm() {
         >
           <label
             htmlFor={fieldId}
-            className="text-gray-200 font-medium w-full sm:w-[140px] flex-shrink-0 text-sm"
+            className="text-tone-heading font-medium w-full sm:w-[140px] flex-shrink-0 text-sm"
           >
             {formField.label}
             {formField.require && (
-              <span className="text-blue-300 ml-1" aria-hidden="true">*</span>
+              <span className="text-tone-accent ml-1" aria-hidden="true">*</span>
             )}
           </label>
           {formField.type === "textarea" ? (
@@ -73,7 +73,7 @@ export default function ContactForm() {
               name={formField.name}
               required={formField.require}
               placeholder={formField.placeholder}
-              className='w-full h-[200px] sm:h-[280px] bg-white border border-gray-300 rounded-md p-3 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none'
+              className='w-full h-[200px] sm:h-[280px] bg-white border border-tone-line/40 rounded-md p-3 text-ink placeholder:text-tone-muted focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all resize-none'
             />
           ) : (
             <input
@@ -82,7 +82,7 @@ export default function ContactForm() {
               name={formField.name}
               required={formField.require}
               placeholder={formField.placeholder}
-              className="w-full h-11 bg-white border border-gray-300 rounded-md px-4 text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full h-11 bg-white border border-tone-line/40 rounded-md px-4 text-ink placeholder:text-tone-muted focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
             />
           )}
         </div>
@@ -92,12 +92,12 @@ export default function ContactForm() {
 
   return (
     <div className='w-full lg:w-1/2 lg:px-0'>
-      <Card className="bg-gradient-to-br from-gray-600 to-gray-700 shadow-xl border-0">
+      <SurfaceCard>
         <CardHeader className="pb-4 sm:pb-6 px-4 sm:px-6">
-          <h2 className="text-center text-2xl sm:text-3xl text-white font-bold tracking-tight leading-none">
+          <h2 className="font-display text-center text-2xl sm:text-3xl text-tone-heading font-bold tracking-tight leading-none">
             Have an idea? Let's talk!
           </h2>
-          <p className="text-center text-gray-300 text-xs sm:text-sm mt-2">
+          <p className="text-center text-tone-muted text-xs sm:text-sm mt-2">
             Fill out the form below and we'll get back to you soon. Required fields are marked with an asterisk (*).
           </p>
         </CardHeader>
@@ -106,7 +106,7 @@ export default function ContactForm() {
           {/* aria-live region so screen readers announce submission failures */}
           <div role="alert" aria-live="assertive">
             {state?.success === false && (
-              <p className="text-red-300 text-sm text-center mb-4 font-medium">
+              <p className="text-destructive text-sm text-center mb-4 font-medium">
                 {state.error || "Something went wrong. Please try again."}
               </p>
             )}
@@ -114,13 +114,14 @@ export default function ContactForm() {
           <div className="flex justify-center mt-6 sm:mt-8">
             <Button
               type="submit"
-              className="w-full max-w-md h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-colors shadow-lg hover:shadow-xl"
+              variant="cta"
+              className="w-full max-w-md h-12 rounded-md transition-colors hover:shadow-xl"
             >
               Send Message
             </Button>
           </div>
         </form>
-      </Card>
+      </SurfaceCard>
     </div>
   );
 }

@@ -3,7 +3,9 @@
 import Image from "next/image";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader } from "@/components/ui/card";
+import SurfaceCard from "@/components/common/SurfaceCard";
+import SectionHeader from "@/components/common/SectionHeader";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const tags = [{ tagName: "Residential" }, { tagName: "Remodel" }];
@@ -100,7 +102,7 @@ export default function Project({ project }) {
     return tags.map((tag, index) => (
       <div
         key={index}
-        className="rounded-full bg-blue-600/20 border border-blue-500/50 px-6 py-2 text-blue-400 font-medium text-sm backdrop-blur-sm"
+        className="rounded-full border border-amber-400/60 bg-ink/40 px-5 py-1.5 text-amber-300 font-mono text-[11px] uppercase tracking-wider backdrop-blur-sm"
       >
         {tag.tagName}
       </div>
@@ -150,8 +152,8 @@ export default function Project({ project }) {
         >
           <div
             className={`cursor-pointer transition-all duration-300 rounded-lg overflow-hidden ${currentImageIndex === actualIndex
-                ? "ring-2 sm:ring-4 ring-blue-500 scale-105 shadow-xl"
-                : "hover:ring-1 sm:hover:ring-2 hover:ring-gray-400 hover:scale-105"
+                ? "ring-2 sm:ring-4 ring-amber-500 scale-105 shadow-xl"
+                : "hover:ring-1 sm:hover:ring-2 hover:ring-line/60 hover:scale-105"
               }`}
           >
             <div className="relative w-[100px] h-[66px] sm:w-[120px] sm:h-[80px] md:w-[150px] md:h-[100px]">
@@ -182,15 +184,14 @@ export default function Project({ project }) {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen py-12">
+    <div className="bg-ink bp-grid min-h-screen py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 sm:mb-4 tracking-tight px-4">
-            {project.name}
-          </h1>
-          <div className="h-1 w-16 sm:w-24 bg-blue-400 mx-auto rounded-full"></div>
-        </div>
+        <SectionHeader
+          eyebrow="Field set · Project record"
+          title={project.name}
+          className="mb-8 sm:mb-12"
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Image Gallery Section - 2/3 width */}
@@ -205,7 +206,7 @@ export default function Project({ project }) {
                 if (e.key === "ArrowRight") goToNextImage();
               }}
             >
-              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl shadow-2xl border-2 border-gray-700">
+              <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl shadow-2xl border border-tone-line/30">
                 <Image
                   src={projectImages[currentImageIndex].src}
                   alt={projectImages[currentImageIndex].alt}
@@ -243,7 +244,7 @@ export default function Project({ project }) {
               <Button
                 onClick={seePreviousThumbnails}
                 variant="outline"
-                className="h-[80px] sm:h-[100px] px-2 sm:px-4 bg-gray-800 border-gray-700 hover:bg-gray-700 text-white flex-shrink-0"
+                className="h-[80px] sm:h-[100px] px-2 sm:px-4 bg-ink-2 border-tone-line/30 hover:bg-line/10 text-tone-heading flex-shrink-0"
                 aria-label="Previous thumbnails"
               >
                 <FaAngleLeft className="text-lg sm:text-xl" />
@@ -259,7 +260,7 @@ export default function Project({ project }) {
               <Button
                 onClick={seeNextThumbnails}
                 variant="outline"
-                className="h-[80px] sm:h-[100px] px-2 sm:px-4 bg-gray-800 border-gray-700 hover:bg-gray-700 text-white flex-shrink-0"
+                className="h-[80px] sm:h-[100px] px-2 sm:px-4 bg-ink-2 border-tone-line/30 hover:bg-line/10 text-tone-heading flex-shrink-0"
                 aria-label="Next thumbnails"
               >
                 <FaAngleRight className="text-lg sm:text-xl" />
@@ -269,9 +270,9 @@ export default function Project({ project }) {
 
           {/* Project Details Section - 1/3 width */}
           <div className="lg:col-span-1">
-            <Card className="bg-gradient-to-br from-gray-700 to-gray-800 border-0 shadow-2xl sticky top-8">
-              <CardHeader className="border-b border-gray-600">
-                <h2 className="text-3xl text-white text-center font-semibold leading-none">
+            <SurfaceCard className="shadow-2xl sticky top-8">
+              <CardHeader className="border-b border-tone-line/25">
+                <h2 className="font-display text-3xl text-tone-heading text-center font-semibold leading-none">
                   Project Details
                 </h2>
               </CardHeader>
@@ -279,7 +280,7 @@ export default function Project({ project }) {
               <CardContent className="p-6 space-y-6">
                 {/* Tags */}
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide mb-3">
+                  <h3 className="font-mono text-[11px] font-medium text-tone-muted uppercase tracking-widest mb-3">
                     Categories
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -289,10 +290,10 @@ export default function Project({ project }) {
 
                 {/* Description */}
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wide mb-3">
+                  <h3 className="font-mono text-[11px] font-medium text-tone-muted uppercase tracking-widest mb-3">
                     About This Project
                   </h3>
-                  <div className="bg-gray-900/50 rounded-lg p-6 text-gray-200 leading-relaxed backdrop-blur-sm border border-gray-700">
+                  <div className="bg-ink/60 rounded-lg p-6 text-tone-body leading-relaxed backdrop-blur-sm border border-tone-line/20">
                     {project.description || "This project showcases our expertise in architectural drafting and design. Each detail was carefully planned and executed to meet the client's vision and needs."}
                   </div>
                 </div>
@@ -300,12 +301,13 @@ export default function Project({ project }) {
                 {/* CTA Button */}
                 <Button
                   asChild
-                  className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all duration-300 hover:scale-105 shadow-lg"
+                  variant="cta"
+                  className="w-full h-12 transition-all duration-300 hover:scale-105"
                 >
                   <a href="/contact">Start Your Project</a>
                 </Button>
               </CardContent>
-            </Card>
+            </SurfaceCard>
           </div>
         </div>
       </div>

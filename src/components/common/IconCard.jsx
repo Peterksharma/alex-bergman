@@ -20,12 +20,12 @@ export default function IconCard({ icon, title, body, cta }) {
       <CardHeader className={cn("pb-4 flex-shrink-0", !icon && "text-center")}>
         <h3
           className={cn(
-            "text-white font-bold",
+            "font-display text-tone-heading font-bold",
             icon ? "flex items-center gap-3 text-xl" : "text-2xl tracking-tight"
           )}
         >
           {icon && (
-            <span className="text-blue-400 text-2xl" aria-hidden="true">
+            <span className="text-tone-accent text-2xl" aria-hidden="true">
               {icon}
             </span>
           )}
@@ -34,7 +34,7 @@ export default function IconCard({ icon, title, body, cta }) {
       </CardHeader>
 
       <CardContent className={cn("flex-1", !icon && "text-center px-6")}>
-        <p className="text-gray-200 leading-relaxed">{body}</p>
+        <p className="text-tone-body leading-relaxed">{body}</p>
       </CardContent>
 
       {cta && (

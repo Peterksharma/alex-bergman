@@ -1,16 +1,16 @@
 import Hero from "@/components/home/hero/Hero";
 import TrustCards from "@/components/home/trust/TrustCards";
 import ServicesCards from "@/components/services/AllServicesCards";
+import Chapter from "@/components/common/Chapter";
 
 export default function Home() {
   return (
     <div>
-      <Hero/>
-      <div className='py-8 bg-gray-900'>
+      <Hero />
+      <Chapter tone="paper" className="py-8">
         <TrustCards />
-      </div>
+      </Chapter>
       <ServicesCards headingAs="h2" />
-
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import Chapter from "@/components/common/Chapter";
 import SectionHeader from "@/components/common/SectionHeader";
 import CTASection from "@/components/common/CTASection";
 import PortfolioGrid from "@/components/portfolio/PortfolioGrid";
@@ -30,10 +31,11 @@ export const metadata = {
 
 export default function Portfolio() {
   return (
-    <div className="bg-gray-900 py-20">
+    <Chapter tone="paper" grid className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
-          title={<>Our <span className="text-blue-400">Portfolio</span></>}
+          eyebrow="Sheet A-5 · Selected work"
+          title={<>Our <span className="text-tone-accent">Portfolio</span></>}
           subtitle="Explore our portfolio of completed architectural drafting projects in Tacoma and the Pacific Northwest. From custom homes and remodels to garages, additions, and commercial projects. Click on any card to see detailed information and project images showcasing our professional drafting expertise."
         />
         <PortfolioGrid />
@@ -42,6 +44,6 @@ export default function Portfolio() {
           actions={[{ label: "Start Your Project", href: "/contact", withArrow: true }]}
         />
       </div>
-    </div>
+    </Chapter>
   );
 }

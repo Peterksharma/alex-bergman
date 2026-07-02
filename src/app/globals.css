@@ -1,26 +1,39 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/*
+ * ════════════════════════════════════════════════════════════════
+ * "Drafted" design language — the site of a drafting company should
+ * look like it was drawn. Two section tones alternate down every
+ * page like chapters:
+ *
+ *   ink   — dark blueprint sheet (#101a26) with soft blue linework
+ *   paper — warm drawing paper with faint graphite gridlines
+ *
+ * A section opts into a tone via data-tone="ink|paper" (see
+ * components/common/Chapter.jsx). The --tone-* variables re-resolve
+ * under each attribute, and the @theme inline mapping below turns
+ * them into real utilities (text-tone-heading, bg-tone-surface,
+ * border-tone-line/25 …), so shared components carry ONE class per
+ * role and render correctly on both tones with no props threaded.
+ * ════════════════════════════════════════════════════════════════
+ */
+
+@theme {
+  /* Blueprint palette. The single accent is Tailwind amber. */
+  --color-ink: #101a26; /* section background, dark sheets */
+  --color-ink-2: #16222f; /* card surface on ink */
+  --color-line: #7da5d2; /* blueprint linework on ink */
+  --color-paper: #f7f6f2; /* section background, light sheets */
+  --color-paper-2: #efede6; /* card surface on paper */
+}
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
+  --font-sans: var(--font-public-sans);
+  --font-mono: var(--font-plex-mono);
+  --font-display: var(--font-bricolage);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -41,84 +54,197 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Tone tokens — resolve per data-tone at the element that uses them */
+  --color-tone-bg: var(--tone-bg);
+  --color-tone-heading: var(--tone-heading);
+  --color-tone-body: var(--tone-body);
+  --color-tone-muted: var(--tone-muted);
+  --color-tone-line: var(--tone-line);
+  --color-tone-surface: var(--tone-surface);
+  --color-tone-accent: var(--tone-accent);
+}
+
+/* Rare structural exceptions can style against the paper tone directly */
+@custom-variant paper (&:where([data-tone="paper"], [data-tone="paper"] *));
+
+:root,
+[data-tone="ink"] {
+  --tone-bg: var(--color-ink);
+  --tone-heading: #f5f7fa;
+  --tone-body: #c3cfdd;
+  --tone-muted: #8fa3b8;
+  --tone-line: var(--color-line);
+  --tone-surface: var(--color-ink-2);
+  --tone-accent: #fbbf24; /* amber-400 — reads bright on ink */
+}
+
+[data-tone="paper"] {
+  --tone-bg: var(--color-paper);
+  --tone-heading: #1b2937;
+  --tone-body: #3d4c5c;
+  --tone-muted: #5b6b7c;
+  --tone-line: #33506e;
+  --tone-surface: var(--color-paper-2);
+  --tone-accent: #b45309; /* amber-700 — amber-400 fails contrast on paper */
 }
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  /* Brand blue (Tailwind blue-600) — the actual CTA color used sitewide */
-  --primary: oklch(0.546 0.245 262.881);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /*
+   * shadcn tokens, retuned for the Drafted palette. :root doubles as
+   * the ink tone, so unwrapped chrome (header, footer, toasts,
+   * dropdowns) is ink by default.
+   */
+  --background: var(--color-ink);
+  --foreground: var(--tone-body);
+  --card: var(--tone-surface);
+  --card-foreground: var(--tone-body);
+  --popover: var(--color-ink-2);
+  --popover-foreground: #f5f7fa;
+  /* Amber-500 CTAs with ink text (~9:1); amber + white fails AA */
+  --primary: oklch(0.769 0.188 70.08);
+  --primary-foreground: var(--color-ink);
+  --secondary: color-mix(in oklab, var(--tone-line) 14%, transparent);
+  --secondary-foreground: var(--tone-heading);
+  --muted: color-mix(in oklab, var(--tone-line) 10%, transparent);
+  --muted-foreground: var(--tone-muted);
+  --accent: color-mix(in oklab, var(--tone-line) 14%, transparent);
+  --accent-foreground: var(--tone-heading);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: color-mix(in oklab, var(--tone-line) 25%, transparent);
+  --input: color-mix(in oklab, var(--tone-line) 40%, transparent);
+  --ring: oklch(0.769 0.188 70.08);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* One focus voice sitewide: the drafting pencil */
+  :focus-visible {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+  }
+}
+
+/*
+ * Blueprint grid textures. Two layered line weights — a fine 24px
+ * mesh under a heavier 120px module — like gridded vellum.
+ */
+@utility bp-grid {
+  background-image: linear-gradient(
+      color-mix(in oklab, var(--color-line) 6%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-line) 6%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      color-mix(in oklab, var(--color-line) 13%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-line) 13%, transparent) 1px,
+      transparent 1px
+    );
+  background-size:
+    24px 24px,
+    24px 24px,
+    120px 120px,
+    120px 120px;
+}
+
+/* Same blueprint-blue linework as bp-grid — one grid color sitewide.
+   Alphas are higher because light-blue lines need more presence on
+   paper than on ink (real vellum: blue gridlines on off-white). */
+@utility bp-grid-paper {
+  background-image: linear-gradient(
+      color-mix(in oklab, var(--color-line) 20%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-line) 20%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      color-mix(in oklab, var(--color-line) 34%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-line) 34%, transparent) 1px,
+      transparent 1px
+    );
+  background-size:
+    24px 24px,
+    24px 24px,
+    120px 120px,
+    120px 120px;
+}
+
+/*
+ * Dimension-line eyebrow: text flanked by thin rules, like a
+ * dimension callout on a drawing sheet.
+ */
+@utility dimline {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  &::before,
+  &::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: color-mix(in oklab, var(--tone-line) 35%, transparent);
+  }
+}
+
+/*
+ * Self-drawing strokes. Apply .draw to an SVG path/line that has
+ * pathLength="1"; the stroke draws itself on load.
+ */
+@keyframes drawline {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/*
+ * Motion states live INSIDE the no-preference query: reduced-motion
+ * users must never receive a hidden initial frame (invisible stroke
+ * during the animation delay, opacity-0 content before JS runs) —
+ * they simply get everything already drawn and visible.
+ *
+ * Reveal.jsx (components/common) adds .in on intersection.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .draw {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: drawline 1.1s ease-out 0.4s forwards;
+  }
+  .reveal {
+    opacity: 0;
+    translate: 0 22px;
+    transition:
+      opacity 0.7s ease,
+      translate 0.7s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    translate: 0 0;
   }
 }
 

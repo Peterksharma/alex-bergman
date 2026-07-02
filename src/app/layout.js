@@ -1,6 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import { Righteous } from "next/font/google";
-import { Lexend } from "next/font/google";
+import { Bricolage_Grotesque, Public_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/header/AltHeader";
@@ -9,26 +7,26 @@ import { Toaster } from "@/components/ui/sonner";
 import StructuredData from "@/components/seo/StructuredData";
 import { siteConfig } from "@/config/site";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/*
+ * Three-role type system ("Drafted" design language):
+ *   display — Bricolage Grotesque: headlines, big stats, card titles
+ *   body    — Public Sans: everything readable
+ *   mono    — IBM Plex Mono: the annotation voice (eyebrows, labels, dims)
+ */
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
+  variable: "--font-bricolage",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const publicSans = Public_Sans({
   subsets: ["latin"],
+  variable: "--font-public-sans",
 });
 
-const righteous = Righteous({
-  weight: "400",
+const plexMono = IBM_Plex_Mono({
+  weight: ["400", "500"],
   subsets: ["latin"],
-  variable: "--font-righteous",
-});
-
-const lexend = Lexend({
-  weight: ["400","900"],
-  subsets: ["latin"],
-  variable: "--font-lexend",
+  variable: "--font-plex-mono",
 });
 
 export const metadata = {
@@ -117,21 +115,18 @@ export const viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#1f2937" },
-    { media: "(prefers-color-scheme: dark)", color: "#111827" },
-  ],
+  themeColor: "#101a26",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${righteous.variable} ${lexend.variable} antialiased`}
+        className={`${bricolage.variable} ${publicSans.variable} ${plexMono.variable} antialiased`}
       >
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-blue-600 focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-amber-500 focus:px-4 focus:py-2 focus:font-semibold focus:text-ink"
         >
           Skip to main content
         </a>

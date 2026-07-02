@@ -15,7 +15,10 @@ export default function SingleService({ service }) {
     ));
 
     const benefits = service.benefits?.map((item, index) => (
-        <li key={index} className="mb-3 text-tone-body">{item}</li>
+        <li key={index} className="mb-3 text-tone-body flex items-start gap-3">
+            <span className="text-tone-accent font-mono mt-0.5" aria-hidden="true">✓</span>
+            <span>{item}</span>
+        </li>
     ));
 
     const timeline = service.timeline;
@@ -49,7 +52,7 @@ export default function SingleService({ service }) {
 
                         {/* Quick Info Card - 1/3 width */}
                         <div className="lg:col-span-1">
-                            <SurfaceCard className="shadow-2xl h-full sticky top-8">
+                            <SurfaceCard className="shadow-2xl sticky top-8">
                                 <CardHeader className="border-b border-tone-line/25">
                                     <h2 className="font-display text-2xl text-tone-heading text-center font-semibold leading-none">
                                         Service Overview
@@ -85,6 +88,11 @@ export default function SingleService({ service }) {
                                     >
                                         <Link href="/contact">Get Started</Link>
                                     </Button>
+
+                                    {/* title-block footer line */}
+                                    <p className="font-mono text-[10px] uppercase tracking-widest text-tone-muted text-center pt-1">
+                                        Sheet A-2 · {service.category} · Scale NTS
+                                    </p>
                                 </CardContent>
                             </SurfaceCard>
                         </div>

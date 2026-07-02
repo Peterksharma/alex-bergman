@@ -1,7 +1,6 @@
 import { services } from "@/data/servicesData";
 import Image from "next/image";
 import { CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 import Chapter from "@/components/common/Chapter";
@@ -87,16 +86,15 @@ export default function ServicesCards({ headingAs = "h1" }) {
                     </div>
                   )}
 
-                  {/* Learn More Button */}
-                  <Button
-                    asChild
-                    className="w-full font-semibold transition-all duration-300 group-hover:shadow-lg"
+                  {/* Learn More — quiet accent link; the chapter's filled
+                      amber belongs to the consultation CTA below */}
+                  <Link
+                    href={service.url}
+                    className="inline-flex items-center gap-2 font-semibold text-tone-accent hover:underline underline-offset-4"
                   >
-                    <Link href={service.url} className="flex items-center justify-center gap-2">
-                      Learn More
-                      <FaArrowRight className="text-sm group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                    </Link>
-                  </Button>
+                    Learn More
+                    <FaArrowRight className="text-sm group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </Link>
                 </CardContent>
               </SurfaceCard>
             ))}

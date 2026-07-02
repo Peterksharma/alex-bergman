@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { FaArrowRight } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 import SurfaceCard from "./SurfaceCard";
 
@@ -38,10 +38,19 @@ export default function IconCard({ icon, title, body, cta }) {
       </CardContent>
 
       {cta && (
-        <CardFooter className="justify-center flex-shrink-0 pt-6 pb-6">
-          <Button asChild className="w-full h-11 font-semibold rounded-md shadow-lg">
-            <Link href={cta.href}>{cta.label}</Link>
-          </Button>
+        <CardFooter className="justify-center flex-shrink-0 pt-2 pb-6">
+          {/* quiet accent link — filled amber is reserved for the page's
+              real conversion CTAs */}
+          <Link
+            href={cta.href}
+            className="group/link inline-flex items-center gap-2 font-semibold text-tone-accent hover:underline underline-offset-4"
+          >
+            {cta.label}
+            <FaArrowRight
+              className="text-xs transition-transform group-hover/link:translate-x-1"
+              aria-hidden="true"
+            />
+          </Link>
         </CardFooter>
       )}
     </SurfaceCard>

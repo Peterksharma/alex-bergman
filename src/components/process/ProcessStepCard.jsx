@@ -4,10 +4,14 @@ import SurfaceCard from "@/components/common/SurfaceCard";
 const annoLabel = "font-mono text-[11px] uppercase tracking-widest text-tone-accent mb-1";
 
 export default function ProcessStepCard({ step, index }) {
+  const isLeft = index % 2 === 0;
   return (
-    <div key={step.id} className={`relative ${index % 2 === 0 ? 'lg:pr-1/2' : 'lg:pl-1/2'}`}>
-      <SurfaceCard hover className={`relative ${index % 2 === 0 ? 'lg:mr-8' : 'lg:ml-8'}`}>
-        <div className={`absolute -top-4 -left-4 ${index % 2 === 0 ? 'lg:-left-4' : 'lg:-right-4'} bg-amber-500 text-ink w-12 h-12 rounded-full flex items-center justify-center font-mono font-bold text-xl shadow-lg z-10`}>
+    /* Cards alternate sides of the dashed centerline on desktop;
+       the step number sits toward the spine so the sequence reads
+       straight down the middle of the sheet. */
+    <div key={step.id} className={`relative lg:w-1/2 ${isLeft ? "lg:pr-10" : "lg:ml-auto lg:pl-10"}`}>
+      <SurfaceCard hover className="relative">
+        <div className={`absolute -top-4 -left-4 ${isLeft ? "lg:left-auto lg:-right-4" : "lg:-left-4"} bg-amber-500 text-ink w-12 h-12 rounded-full flex items-center justify-center font-mono font-bold text-xl shadow-lg z-10`}>
           {step.id}
         </div>
 

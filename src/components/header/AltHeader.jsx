@@ -5,7 +5,7 @@ import { links } from "../../data/global/links";
 import { services } from "@/data/servicesData";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { HiMenu, HiX, HiChevronDown, HiChevronUp } from "react-icons/hi";
 import {
   NavigationMenu,
@@ -19,6 +19,8 @@ import {
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesExpanded, setIsServicesExpanded] = useState(false);
+  const drawerRef = useRef(null);
+  const menuButtonRef = useRef(null);
 
   // Escape must close the mobile drawer; the backdrop alone is mouse-only (WCAG 2.1.2)
   useEffect(() => {
@@ -27,10 +29,17 @@ export default function Header() {
       if (e.key === "Escape") {
         setIsMobileMenuOpen(false);
         setIsServicesExpanded(false);
+        menuButtonRef.current?.focus();
       }
     };
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
+  }, [isMobileMenuOpen]);
+
+  // Move focus into the drawer when it opens so keyboard/screen-reader
+  // users land on the menu they just requested
+  useEffect(() => {
+    if (isMobileMenuOpen) drawerRef.current?.focus();
   }, [isMobileMenuOpen]);
 
   const midpoint = Math.ceil(links.length / 2);
@@ -185,6 +194,7 @@ export default function Header() {
         </div>
 
         <button
+          ref={menuButtonRef}
           onClick={() => {
             setIsMobileMenuOpen(!isMobileMenuOpen);
             setIsServicesExpanded(false);
@@ -212,7 +222,12 @@ export default function Header() {
             }}
           />
 
-          <div id="mobile-menu" className="fixed top-[100px] md:top-[150px] right-0 bottom-0 w-1/2 bg-ink-2 border-t border-l border-tone-line/25 z-40 xl:hidden overflow-y-auto animate-in slide-in-from-right duration-200">
+          <div
+            id="mobile-menu"
+            ref={drawerRef}
+            tabIndex={-1}
+            className="fixed top-[100px] md:top-[150px] right-0 bottom-0 w-4/5 max-w-sm bg-ink-2 border-t border-l border-tone-line/25 z-40 xl:hidden overflow-y-auto animate-in slide-in-from-right duration-200 outline-none"
+          >
             <div className="flex flex-col p-4 gap-2">
               {links.map((link, index) => (
                 <div key={index}>

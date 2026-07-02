@@ -1,4 +1,5 @@
 import { Bricolage_Grotesque, Public_Sans, IBM_Plex_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 import Header from "@/components/header/AltHeader";
@@ -136,6 +137,11 @@ export default function RootLayout({ children }) {
         <Toaster />
         <Footer />
       </body>
+      {/* Loads gtag only when a measurement ID is configured, so local
+          dev and preview builds without the env var send no hits */}
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
     </html>
   );
 }

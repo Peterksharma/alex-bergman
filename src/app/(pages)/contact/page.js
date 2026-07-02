@@ -3,6 +3,7 @@ import ContactDetails from "@/components/common/ContactDetails";
 import Chapter from "@/components/common/Chapter";
 import SectionHeader from "@/components/common/SectionHeader";
 import { contactData } from "@/data/global/contactInfo";
+import { serviceAreaCities } from "@/data/global/serviceAreas";
 import { siteConfig } from "@/config/site";
 
 const fullAddress = `${contactData.address.line1}, ${contactData.address.line2}`;
@@ -50,6 +51,16 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-6 px-4">
           <ContactForm />
           <ContactDetails variant="card" />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 mt-8 flex flex-wrap justify-center gap-2">
+          {serviceAreaCities.map((city) => (
+            <span
+              key={city}
+              className="font-mono text-[11px] uppercase tracking-wider border border-tone-line/30 text-tone-muted px-3.5 py-1.5 rounded-full"
+            >
+              {city}, WA
+            </span>
+          ))}
         </div>
       </Chapter>
     </>

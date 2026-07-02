@@ -33,7 +33,7 @@ const plexMono = IBM_Plex_Mono({
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "A.R.Bergman Drafting | Professional Architectural Drafting Services",
+    default: "Architectural Drafting Services in Tacoma, WA | A.R.Bergman Drafting",
     template: "%s | A.R.Bergman Drafting"
   },
   description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans. Trusted drafting services for your building projects.",
@@ -62,7 +62,7 @@ export const metadata = {
     locale: "en_US",
     url: siteConfig.url,
     siteName: "A.R.Bergman Drafting",
-    title: "A.R.Bergman Drafting | Professional Architectural Drafting Services",
+    title: "Architectural Drafting Services in Tacoma, WA | A.R.Bergman Drafting",
     description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
     images: [
       {
@@ -75,7 +75,7 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "A.R.Bergman Drafting | Professional Architectural Drafting Services",
+    title: "Architectural Drafting Services in Tacoma, WA | A.R.Bergman Drafting",
     description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
     images: [`${siteConfig.url}/assets/og-image.jpg`],
   },
@@ -119,6 +119,15 @@ export const viewport = {
   themeColor: "#101a26",
 };
 
+/*
+ * GA4 measurement ID. Public by design (it ships in the HTML), so the
+ * production ID lives here as the default; NEXT_PUBLIC_GA_ID overrides
+ * it, and non-production builds send nothing.
+ */
+const gaId =
+  process.env.NEXT_PUBLIC_GA_ID ??
+  (process.env.NODE_ENV === "production" ? "G-38FQF6QFXK" : undefined);
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -137,11 +146,7 @@ export default function RootLayout({ children }) {
         <Toaster />
         <Footer />
       </body>
-      {/* Loads gtag only when a measurement ID is configured, so local
-          dev and preview builds without the env var send no hits */}
-      {process.env.NEXT_PUBLIC_GA_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
-      )}
+      {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>
   );
 }

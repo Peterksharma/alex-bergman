@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { services } from "@/data/servicesData";
 import SingleService from "@/components/services/SingleService";
+import ServiceSchema from "@/components/seo/ServiceSchema";
 
 export function generateStaticParams() {
   return services.map((service) => ({
@@ -55,5 +56,10 @@ export default async function ServicePage({ params }) {
     notFound();
   }
 
-  return <SingleService service={service} />;
+  return (
+    <>
+      <ServiceSchema service={service} />
+      <SingleService service={service} />
+    </>
+  );
 }

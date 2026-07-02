@@ -1,4 +1,5 @@
 import { contactData } from "@/data/global/contactInfo";
+import { serviceAreaCities, serviceAreaRegion } from "@/data/global/serviceAreas";
 import { siteConfig } from "@/config/site";
 
 export default function StructuredData() {
@@ -38,10 +39,14 @@ export default function StructuredData() {
       "opens": "08:00",
       "closes": "17:00"
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "Tacoma"
-    },
+    "sameAs": [
+      "https://www.facebook.com/arbergmanhome/",
+      "https://www.instagram.com/arbergman_drafting/"
+    ],
+    "areaServed": [
+      ...serviceAreaCities.map((city) => ({ "@type": "City", "name": city })),
+      { "@type": "AdministrativeArea", "name": serviceAreaRegion }
+    ],
     "serviceArea": {
       "@type": "GeoCircle",
       "geoMidpoint": {
@@ -91,7 +96,7 @@ export default function StructuredData() {
     },
     "founder": {
       "@type": "Person",
-      "name": "A.R. Bergman"
+      "name": "Alexander Bergman"
     },
     "foundingDate": "2008"
   };

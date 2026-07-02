@@ -83,5 +83,20 @@ export const faqData = [
     id: 17,
     question: "Are you a contracting firm?",
     answer: "We do not provide construction services, but we have an extensive network of highly reputable builders that we can refer to you so that you can get a competitive bid for your project."
+  },
+  {
+    id: 18,
+    question: "Can I build an ADU in Tacoma?",
+    answer: "Yes — Tacoma allows both attached ADUs and detached ADUs (DADUs) on most residential lots, and recent Washington State legislation has made accessory dwelling units easier to permit than ever. We design and draft permit-ready ADU plans for Tacoma and surrounding jurisdictions: we verify feasibility for your specific lot, develop the design with you, and produce the complete construction documents your permit application requires."
+  },
+  {
+    id: 19,
+    question: "Do you provide as-built drawings?",
+    answer: "Yes. As-built plans are the foundation of nearly every remodel, addition, and ADU project we take on. We visit your property, measure the entire structure — floor areas, heights, door and window placement, cabinetry and fixtures — and produce an accurate as-built drawing of your existing conditions. As-builts can also be ordered on their own if you need documentation of your home for permitting, insurance, or planning purposes."
+  },
+  {
+    id: 20,
+    question: "What areas do you serve?",
+    answer: "We are based in Tacoma, WA and serve homeowners, builders, and designers throughout Western Washington — including Seattle, Olympia, Puyallup, Gig Harbor, Lakewood, and University Place. After the initial site visit and measurement, most of the drafting process can be handled remotely, so distance is rarely an obstacle within the Puget Sound region."
   }
 ];

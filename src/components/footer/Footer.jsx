@@ -41,7 +41,7 @@ export default function Footer() {
                     <div>
                         <Eyebrow rules={false} className="mb-4 sm:mb-6">A.R.Bergman Drafting</Eyebrow>
                         <p className="text-tone-body leading-relaxed text-sm sm:text-base">
-                            Professional architectural drafting services for residential projects serving the Pacific Northwest. From custom home designs to remodels, additions, and ADUs, we provide detailed construction documents, permit packages, and expert consultations.
+                            Professional architectural drafting services for residential projects across Tacoma, Seattle, and the greater Puget Sound. From custom home designs to remodels, additions, and ADUs, we provide detailed construction documents, permit packages, and expert consultations.
                         </p>
                     </div>
 

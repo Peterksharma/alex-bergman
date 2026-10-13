@@ -158,7 +158,14 @@ export default function ContactFormClient({ projectTypes }) {
     } else if (field.kind === "select") {
       control = (
         <div className="relative">
+          {/*
+            React applies a <select>'s defaultValue only on mount (unlike
+            inputs, whose value attribute it keeps in sync), so the
+            select is keyed on the preserved value to remount it after a
+            failed submit.
+          */}
           <select
+            key={shared.defaultValue}
             {...shared}
             className={cn(
               controlClass,

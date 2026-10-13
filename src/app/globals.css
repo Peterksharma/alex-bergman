@@ -118,7 +118,12 @@
   --muted-foreground: var(--tone-muted);
   --accent: color-mix(in oklab, var(--tone-line) 14%, transparent);
   --accent-foreground: var(--tone-heading);
-  --destructive: oklch(0.577 0.245 27.325);
+  /*
+   * red-700. The shadcn default (red-600, #e7000b) is only 4.07:1 on
+   * the paper-2 card where the contact form's error text renders;
+   * red-700 clears 5.5:1 there and 5.9:1 on paper.
+   */
+  --destructive: oklch(0.505 0.213 27.518);
   --border: color-mix(in oklab, var(--tone-line) 25%, transparent);
   --input: color-mix(in oklab, var(--tone-line) 40%, transparent);
   --ring: oklch(0.769 0.188 70.08);

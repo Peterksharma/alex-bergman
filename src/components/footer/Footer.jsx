@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { links } from "@/data/global/links";
 import ContactDetails from "@/components/common/ContactDetails";
 import Eyebrow from "@/components/common/Eyebrow";
@@ -13,14 +14,15 @@ export default function Footer() {
     const iconStyle = "w-7 h-7 sm:w-8 sm:h-8 hover:text-tone-accent transition-colors duration-300";
 
     const renderLinks = (links) => {
+        // next/link: client-side navigation + prefetch instead of a full reload
         return links.map((link, index) => (
-            <a
+            <Link
                 key={index}
                 href={link.link}
                 className="block py-2 text-sm sm:text-base hover:text-tone-accent transition-colors duration-200"
             >
                 {link.name}
-            </a>
+            </Link>
         ));
     };
 
@@ -32,7 +34,7 @@ export default function Footer() {
                     {/* Quick Links Section */}
                     <div>
                         <Eyebrow rules={false} className="mb-4 sm:mb-6">Quick Links</Eyebrow>
-                        <nav className="flex flex-col">
+                        <nav aria-label="Footer" className="flex flex-col">
                             {renderLinks(links)}
                         </nav>
                     </div>

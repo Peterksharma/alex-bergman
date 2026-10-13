@@ -15,7 +15,7 @@ export default function AdminShell({ eyebrow, title, actions, email, children })
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-tone-line/25 pb-4 mb-8 font-mono text-[11px] uppercase tracking-widest text-tone-muted">
           <nav className="flex items-center gap-4">
-            <Link href="/admin" className="hover:text-tone-heading">Admin · Projects</Link>
+            <Link href="/manage" className="hover:text-tone-heading">Manage · Projects</Link>
             <Link href="/portfolio" className="hover:text-tone-heading" target="_blank" rel="noreferrer">View site ↗</Link>
           </nav>
           <form action={logout} className="flex items-center gap-3">

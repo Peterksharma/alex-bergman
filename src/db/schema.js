@@ -16,7 +16,7 @@ import {
  *   - `sortOrder` is the manual display order on /portfolio; lower first.
  *     Ties are broken by `id` so the order is total and deterministic.
  *   - `published = false` hides a project from every public surface
- *     (grid, detail page, sitemap) but keeps it editable in /admin.
+ *     (grid, detail page, sitemap) but keeps it editable in /manage.
  *   - `tags` is a Postgres text[]; an empty array is the "no tags" value,
  *     never NULL, so callers can map over it without a guard.
  *   - `updatedAt` is maintained by the writers in queries.js (not a trigger)

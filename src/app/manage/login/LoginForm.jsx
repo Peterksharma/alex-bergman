@@ -10,7 +10,7 @@ export default function LoginForm({ next }) {
 
   return (
     <form action={action} className="space-y-5" noValidate>
-      <input type="hidden" name="next" value={next ?? "/admin"} />
+      <input type="hidden" name="next" value={next ?? "/manage"} />
       <Field label="Email" htmlFor="email">
         <input
           id="email"

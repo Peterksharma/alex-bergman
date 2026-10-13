@@ -18,6 +18,6 @@ export async function getSession() {
 
 export async function requireAdmin() {
   const session = await getSession();
-  if (!session) redirect("/admin/login");
+  if (!session) redirect("/manage/login");
   return session;
 }

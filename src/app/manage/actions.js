@@ -85,7 +85,7 @@ export async function createProjectAction(_prev, formData) {
   if (result.error) return { error: result.error };
   const id = await createProject(result.data);
   revalidatePublic(result.data.slug);
-  redirect(`/admin/projects/${id}?created=1`);
+  redirect(`/manage/projects/${id}?created=1`);
 }
 
 /** Update a project's fields (useActionState signature). */
@@ -107,7 +107,7 @@ export async function togglePublishedAction(formData) {
   const published = formData.get("published") === "true";
   await setProjectPublished(id, published);
   revalidatePublic();
-  revalidatePath("/admin");
+  revalidatePath("/manage");
 }
 
 export async function moveProjectAction(formData) {
@@ -116,7 +116,7 @@ export async function moveProjectAction(formData) {
   const direction = formData.get("direction") === "up" ? -1 : 1;
   await moveProject(id, direction);
   revalidatePublic();
-  revalidatePath("/admin");
+  revalidatePath("/manage");
 }
 
 /** Delete a project, its rows (cascade) and its bucket objects. */
@@ -126,8 +126,8 @@ export async function deleteProjectAction(formData) {
   const keys = await deleteProject(id);
   await Promise.allSettled(keys.map((k) => deleteObject(k)));
   revalidatePublic();
-  revalidatePath("/admin");
-  redirect("/admin?deleted=1");
+  revalidatePath("/manage");
+  redirect("/manage?deleted=1");
 }
 
 /* ───────────────────────── image actions ───────────────────────── */
@@ -178,7 +178,7 @@ export async function uploadImagesAction(_prev, formData) {
   }
 
   revalidatePublic(slug);
-  revalidatePath(`/admin/projects/${projectId}`);
+  revalidatePath(`/manage/projects/${projectId}`);
   if (failures.length) {
     return { error: `Uploaded ${uploaded}; failed: ${failures.join("; ")}`, uploaded };
   }
@@ -192,7 +192,7 @@ export async function updateImageAltAction(formData) {
   const alt = String(formData.get("alt") ?? "").trim().slice(0, 300);
   await updateImageAlt(imageId, alt);
   revalidatePublic(String(formData.get("slug") ?? ""));
-  revalidatePath(`/admin/projects/${projectId}`);
+  revalidatePath(`/manage/projects/${projectId}`);
 }
 
 export async function moveImageAction(formData) {
@@ -202,7 +202,7 @@ export async function moveImageAction(formData) {
   const direction = formData.get("direction") === "up" ? -1 : 1;
   await moveProjectImage(imageId, direction);
   revalidatePublic(String(formData.get("slug") ?? ""));
-  revalidatePath(`/admin/projects/${projectId}`);
+  revalidatePath(`/manage/projects/${projectId}`);
 }
 
 export async function setCoverAction(formData) {
@@ -211,7 +211,7 @@ export async function setCoverAction(formData) {
   const projectId = parseId(formData.get("projectId"));
   await setCoverImage(imageId);
   revalidatePublic(String(formData.get("slug") ?? ""));
-  revalidatePath(`/admin/projects/${projectId}`);
+  revalidatePath(`/manage/projects/${projectId}`);
 }
 
 /** Remove the row first, then the object; a stray object is harmless, a stray row is a broken image. */
@@ -228,5 +228,5 @@ export async function deleteImageAction(formData) {
     }
   }
   revalidatePublic(String(formData.get("slug") ?? ""));
-  revalidatePath(`/admin/projects/${projectId}`);
+  revalidatePath(`/manage/projects/${projectId}`);
 }

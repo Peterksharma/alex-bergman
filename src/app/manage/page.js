@@ -27,7 +27,7 @@ export default async function AdminProjectsPage({ searchParams }) {
       title="Projects"
       actions={
         <Button asChild variant="cta">
-          <Link href="/admin/projects/new">New project</Link>
+          <Link href="/manage/projects/new">New project</Link>
         </Button>
       }
     >
@@ -56,7 +56,7 @@ export default async function AdminProjectsPage({ searchParams }) {
                   <p className="font-mono text-[10px] uppercase tracking-widest text-tone-muted">
                     PROJ-{String(i + 1).padStart(2, "0")} · {p.imageCount} photo{p.imageCount === 1 ? "" : "s"} · /{p.slug}
                   </p>
-                  <Link href={`/admin/projects/${p.id}`} className="font-display text-lg font-bold text-tone-heading hover:text-tone-accent truncate block">
+                  <Link href={`/manage/projects/${p.id}`} className="font-display text-lg font-bold text-tone-heading hover:text-tone-accent truncate block">
                     {p.name}
                   </Link>
                   {!p.published && (
@@ -80,7 +80,7 @@ export default async function AdminProjectsPage({ searchParams }) {
                     </button>
                   </form>
                   <Button asChild variant="outline" size="sm">
-                    <Link href={`/admin/projects/${p.id}`}>Edit</Link>
+                    <Link href={`/manage/projects/${p.id}`}>Edit</Link>
                   </Button>
                 </div>
               </SurfaceCard>

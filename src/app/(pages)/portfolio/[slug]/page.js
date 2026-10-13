@@ -8,7 +8,7 @@ import { getProjectBySlug, listPublishedSlugs } from "@/db/queries";
 /*
  * ISR: each project page is rendered from the database at most once an
  * hour, or immediately after an admin write (revalidatePath). Slugs not
- * known at build time (projects created later in /admin) are rendered on
+ * known at build time (projects created later in /manage) are rendered on
  * first request thanks to dynamicParams.
  */
 export const revalidate = 3600;

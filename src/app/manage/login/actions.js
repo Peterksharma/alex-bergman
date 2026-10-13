@@ -16,8 +16,8 @@ const DUMMY_HASH = bcrypt.hashSync("not-the-password", 12);
  * used to bounce a freshly logged-in admin to another origin.
  */
 function safeNext(value) {
-  if (typeof value !== "string") return "/admin";
-  if (!value.startsWith("/admin") || value.startsWith("//")) return "/admin";
+  if (typeof value !== "string") return "/manage";
+  if (!value.startsWith("/manage") || value.startsWith("//")) return "/manage";
   return value;
 }
 
@@ -60,5 +60,5 @@ export async function login(_prevState, formData) {
 export async function logout() {
   const store = await cookies();
   store.set(SESSION_COOKIE, "", { ...sessionCookieOptions(), maxAge: 0 });
-  redirect("/admin/login");
+  redirect("/manage/login");
 }

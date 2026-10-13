@@ -86,7 +86,13 @@
   --tone-muted: #5b6b7c;
   --tone-line: #33506e;
   --tone-surface: var(--color-paper-2);
-  --tone-accent: #b45309; /* amber-700 — amber-400 fails contrast on paper */
+  /*
+   * amber-800. Small mono labels and inline links use this token on
+   * the paper-2 card surface (#efede6), where amber-700 reaches only
+   * 4.29:1; amber-800 gives 6.05:1 (6.56:1 on paper itself), clearing
+   * WCAG 1.4.3 for text of any size.
+   */
+  --tone-accent: #92400e;
 }
 
 :root {
@@ -124,6 +130,17 @@
   }
   html {
     scroll-behavior: smooth;
+    /*
+     * The header is sticky (100px, 150px from md). Without this, a
+     * focused element or #anchor can scroll up underneath it and be
+     * hidden from a keyboard user (WCAG 2.4.11 Focus Not Obscured).
+     */
+    scroll-padding-top: 100px;
+  }
+  @media (width >= 48rem) {
+    html {
+      scroll-padding-top: 150px;
+    }
   }
   body {
     @apply bg-background text-foreground;

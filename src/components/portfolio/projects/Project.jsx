@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardHeader } from "@/components/ui/card";
 import SurfaceCard from "@/components/common/SurfaceCard";
@@ -10,14 +10,11 @@ import SectionHeader from "@/components/common/SectionHeader";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 export default function Project({ project }) {
+  // Built on the server: [{ src, alt, width, height }] in gallery order.
+  const projectImages = project.images ?? [];
+  const imageCount = projectImages.length;
   // Category tags come from the project record; none is a valid state.
   const tags = project.tags ?? [];
-  const projectImages = useMemo(() => {
-    return Array.from({ length: project.imageCount }, (_, i) => ({
-      src: `/assets/portfolio/${project.folder}/${i + 1}.jpg`,
-      alt: `${project.name} - Image ${i + 1}`,
-    }));
-  }, [project.folder, project.imageCount, project.name]);
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentThumbnails, setCurrentThumbnails] = useState(0);
@@ -54,7 +51,7 @@ export default function Project({ project }) {
       const count = Math.floor(availableWidth / thumbnailWidth);
       
       // Ensure at least 2 thumbnails are shown, and at most the total image count
-      const newCount = Math.max(2, Math.min(count, project.imageCount));
+      const newCount = Math.max(2, Math.min(count, imageCount));
       setCountOfThumbnailsShowing(newCount);
     };
 
@@ -89,15 +86,15 @@ export default function Project({ project }) {
         resizeObserverRef.current = null;
       }
     };
-  }, [project.imageCount]);
+  }, [imageCount]);
 
   // Adjust currentThumbnails when count changes to prevent out-of-bounds
   useEffect(() => {
-    const maxStart = Math.max(0, project.imageCount - countOfThumbnailsShowing);
+    const maxStart = Math.max(0, imageCount - countOfThumbnailsShowing);
     if (currentThumbnails > maxStart) {
       setCurrentThumbnails(Math.max(0, maxStart));
     }
-  }, [countOfThumbnailsShowing, project.imageCount, currentThumbnails]);
+  }, [countOfThumbnailsShowing, imageCount, currentThumbnails]);
 
   const renderTags = () => {
     return tags.map((tag) => (
@@ -113,7 +110,7 @@ export default function Project({ project }) {
   const seeNextThumbnails = () => {
     const nextStart = currentThumbnails + countOfThumbnailsShowing;
 
-    if (nextStart >= project.imageCount) {
+    if (nextStart >= imageCount) {
       setCurrentThumbnails(0);
     } else {
       setCurrentThumbnails(nextStart);
@@ -125,7 +122,7 @@ export default function Project({ project }) {
 
     if (prevStart < 0) {
       const lastStart =
-        Math.floor((project.imageCount - 1) / countOfThumbnailsShowing) *
+        Math.floor((imageCount - 1) / countOfThumbnailsShowing) *
         countOfThumbnailsShowing;
       setCurrentThumbnails(lastStart);
     } else {
@@ -225,14 +222,20 @@ export default function Project({ project }) {
                 Showing image {currentImageIndex + 1} of {projectImages.length}
               </p>
               <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl shadow-2xl border border-tone-line/30">
-                <Image
-                  src={projectImages[currentImageIndex].src}
-                  alt={projectImages[currentImageIndex].alt}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 66vw"
-                  className="object-cover"
-                  priority
-                />
+                {projectImages[currentImageIndex] ? (
+                  <Image
+                    src={projectImages[currentImageIndex].src}
+                    alt={projectImages[currentImageIndex].alt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 66vw"
+                    className="object-cover"
+                    priority
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center font-mono text-[11px] uppercase tracking-widest text-tone-muted">
+                    No images yet
+                  </div>
+                )}
 
                 {/* Navigation Arrows on Image */}
                 <button

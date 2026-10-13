@@ -1,17 +1,27 @@
 import { notFound } from "next/navigation";
-import { projects } from "@/data/projectData";
 import Project from "@/components/portfolio/projects/Project";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import ImageGallerySchema from "@/components/seo/ImageGallerySchema";
 import { truncateAtWord } from "@/lib/seo";
+import { getProjectBySlug, listPublishedSlugs } from "@/db/queries";
 
-export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+/*
+ * ISR: each project page is rendered from the database at most once an
+ * hour, or immediately after an admin write (revalidatePath). Slugs not
+ * known at build time (projects created later in /admin) are rendered on
+ * first request thanks to dynamicParams.
+ */
+export const revalidate = 3600;
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const slugs = await listPublishedSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const project = projects.find(p => p.slug === slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -21,7 +31,7 @@ export async function generateMetadata({ params }) {
   }
 
   // Word-boundary cut: substring(0, 160) used to end snippets mid-word.
-  const description = truncateAtWord(project.description, 155);
+  const description = truncateAtWord(project.summary || project.description, 155);
 
   return {
     title: `${project.name} | Portfolio`,
@@ -30,7 +40,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: `${project.name} | A.R.Bergman Drafting Portfolio`,
       description,
-      images: project.folder ? [`/assets/portfolio/${project.folder}/1.jpg`] : [],
+      images: project.cover ? [project.cover.src] : [],
       type: "website",
     },
     twitter: {
@@ -43,7 +53,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ProjectPage({ params }) {
   const { slug } = await params;
-  const project = projects.find(p => p.slug === slug);
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     notFound();

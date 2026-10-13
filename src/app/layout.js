@@ -1,5 +1,7 @@
 import { Bricolage_Grotesque, Public_Sans, IBM_Plex_Mono } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 import Header from "@/components/header/AltHeader";
@@ -149,6 +151,16 @@ export default function RootLayout({ children }) {
         <main id="main">{children}</main>
         <Toaster />
         <Footer />
+        {/*
+         * Vercel Web Analytics and Speed Insights. These components only
+         * inject the collector scripts; both products must ALSO be
+         * switched on in the Vercel project dashboard (Project ->
+         * Analytics -> Enable, Project -> Speed Insights -> Enable) or
+         * the scripts 404 and nothing is recorded. They are no-ops in
+         * local development.
+         */}
+        <Analytics />
+        <SpeedInsights />
       </body>
       {gaId && <GoogleAnalytics gaId={gaId} />}
     </html>

@@ -14,7 +14,7 @@ export default function Hero() {
     return (
         <div className="relative min-h-[700px] bg-ink">
             {/* Background: poster image, then the video loop fades in over it */}
-            <HeroVideo alt="A.R.Bergman Drafting - Professional architectural drafting and custom home design services in Tacoma, Washington" />
+            <HeroVideo alt="" />
 
             {/* Ink wash + blueprint grid over the photo */}
             <div className="absolute inset-0 bg-ink/80 z-[5]" aria-hidden="true"></div>

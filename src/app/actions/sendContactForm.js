@@ -1,9 +1,21 @@
 'use server'
 
 import { sendContactEmail } from '@/lib/email'
-import { normalizeContactInput, validateContactInput } from '@/lib/contactSchema'
+import {
+  isSuspectedBot,
+  normalizeContactInput,
+  validateContactInput,
+} from '@/lib/contactSchema'
 
 const GENERIC_FIELD_ERROR = 'Please correct the highlighted fields.'
+
+/**
+ * What a bot sees. Indistinguishable from a real success so the
+ * operator learns nothing about which defense caught them.
+ */
+function fakeSuccess(values) {
+  return { success: true, projectType: values.projectType }
+}
 
 /**
  * Server action behind the contact form.
@@ -23,6 +35,13 @@ export async function submitContactForm(previousState, formData) {
   }
 
   const values = normalizeContactInput(formData)
+
+  /* Honeypot + timing: decided before validation so a bot cannot even
+     learn the field rules. Silently dropped with a convincing reply. */
+  if (isSuspectedBot(formData)) {
+    console.warn('contact form: dropped suspected bot submission')
+    return fakeSuccess(values)
+  }
 
   const fieldErrors = validateContactInput(values)
   if (Object.keys(fieldErrors).length > 0) {

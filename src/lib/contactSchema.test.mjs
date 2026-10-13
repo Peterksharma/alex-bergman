@@ -10,6 +10,8 @@ import {
   PROJECT_TYPES,
   OTHER_PROJECT_TYPE,
   LIMITS,
+  TIMING,
+  isSuspectedBot,
   normalizeContactInput,
   validateContactInput,
   countPhoneDigits,
@@ -126,6 +128,42 @@ describe('validateContactInput', () => {
     assert.deepEqual(Object.keys(errors).sort(), [
       'address', 'email', 'message', 'name', 'phone', 'projectType',
     ])
+  })
+})
+
+describe('isSuspectedBot', () => {
+  const NOW = 1_800_000_000_000
+  const human = { company: '', t: String(NOW - 30_000) } // rendered 30 s ago
+
+  test('passes a human-paced submission with an empty honeypot', () => {
+    assert.equal(isSuspectedBot(human, NOW), false)
+  })
+
+  test('flags a filled honeypot', () => {
+    assert.equal(isSuspectedBot({ ...human, company: 'Acme Bots' }, NOW), true)
+    assert.equal(isSuspectedBot({ ...human, company: '   x' }, NOW), true)
+  })
+
+  test('flags a submission faster than the minimum', () => {
+    assert.equal(isSuspectedBot({ ...human, t: String(NOW - TIMING.minElapsedMs + 1) }, NOW), true)
+    assert.equal(isSuspectedBot({ ...human, t: String(NOW - TIMING.minElapsedMs) }, NOW), false)
+  })
+
+  test('flags a submission older than the maximum', () => {
+    assert.equal(isSuspectedBot({ ...human, t: String(NOW - TIMING.maxElapsedMs - 1) }, NOW), true)
+    assert.equal(isSuspectedBot({ ...human, t: String(NOW - TIMING.maxElapsedMs) }, NOW), false)
+  })
+
+  test('flags a missing, empty, or non-numeric timestamp', () => {
+    assert.equal(isSuspectedBot({ company: '' }, NOW), true)
+    assert.equal(isSuspectedBot({ company: '', t: '' }, NOW), true)
+    assert.equal(isSuspectedBot({ company: '', t: 'yesterday' }, NOW), true)
+    assert.equal(isSuspectedBot({ company: '', t: '-5' }, NOW), true)
+  })
+
+  test('reads from a FormData-like object', () => {
+    const fd = new Map([['company', ''], ['t', String(NOW - 10_000)]])
+    assert.equal(isSuspectedBot(fd, NOW), false)
   })
 })
 

@@ -50,6 +50,48 @@ export const CONTACT_FIELDS = Object.freeze([
 ])
 
 /**
+ * Submit-timing window. A human needs at least a few seconds to fill six
+ * fields; a form rendered more than two hours ago is stale (or a replay).
+ */
+export const TIMING = Object.freeze({
+  minElapsedMs: 3_000,
+  maxElapsedMs: 2 * 60 * 60 * 1_000,
+})
+
+/** Name of the honeypot field: a plausible label that humans never see. */
+export const HONEYPOT_FIELD = 'company'
+
+/** Name of the hidden field holding the form's render time (epoch ms). */
+export const TIMING_FIELD = 't'
+
+/**
+ * Decide whether a submission is probably automated, from two cheap
+ * signals that cost a human nothing:
+ *
+ *   1. Honeypot: the hidden `company` input is filled in. Browsers never
+ *      show it; bots fill every field they find.
+ *   2. Timing: `t` is the epoch-ms the form rendered. Submissions faster
+ *      than TIMING.minElapsedMs, older than TIMING.maxElapsedMs, missing,
+ *      or not a finite number (JS never ran) are treated as automated.
+ *
+ * Precondition:  `raw` is an object or FormData-like; `now` is epoch ms.
+ * Postcondition: returns true iff at least one signal fires. Pure: the
+ *                clock is an argument so tests are deterministic.
+ */
+export function isSuspectedBot(raw, now = Date.now()) {
+  const read = (key) =>
+    typeof raw?.get === 'function' ? raw.get(key) : raw?.[key]
+
+  if (asTrimmedString(read(HONEYPOT_FIELD)) !== '') return true
+
+  const renderedAt = Number(asTrimmedString(read(TIMING_FIELD)))
+  if (!Number.isFinite(renderedAt) || renderedAt <= 0) return true
+
+  const elapsed = now - renderedAt
+  return elapsed < TIMING.minElapsedMs || elapsed > TIMING.maxElapsedMs
+}
+
+/**
  * A deliberately modest email pattern: one "@", no whitespace, and a
  * dot somewhere in the domain part. Full RFC 5322 validation is both
  * impractical and pointless here — Resend's reply-to and the human

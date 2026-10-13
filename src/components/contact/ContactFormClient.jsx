@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { toast } from "sonner";
 import { CardHeader } from "../ui/card";
@@ -87,10 +87,22 @@ export default function ContactFormClient({ projectTypes }) {
   const [state, formAction, isPending] = useActionState(submitContactForm, null);
   const formRef = useRef(null);
 
+  /*
+   * Spam defense, client half. `renderedAt` is the epoch-ms the form
+   * became interactive; the server rejects submissions that arrive
+   * implausibly soon after it (or implausibly long). It is set in an
+   * effect, never during render, so server and client markup agree.
+   */
+  const [renderedAt, setRenderedAt] = useState("");
+  useEffect(() => {
+    setRenderedAt(String(Date.now()));
+  }, []);
+
   useEffect(() => {
     if (state?.success) {
       toast.success("Message has been sent");
       formRef.current?.reset();
+      setRenderedAt(String(Date.now()));
       try {
         window.gtag?.("event", "generate_lead", { project_type: state.projectType });
       } catch {
@@ -208,6 +220,27 @@ export default function ContactFormClient({ projectTypes }) {
         </CardHeader>
         <form ref={formRef} action={formAction} className="px-4 sm:px-8 pb-6 sm:pb-8">
           {FIELDS.map(renderField)}
+
+          {/*
+            Honeypot. Off-screen rather than display:none, because bots
+            skip fields they can see are hidden. Humans never reach it:
+            it is out of the tab order and hidden from assistive tech.
+          */}
+          <div
+            aria-hidden="true"
+            className="absolute -left-[10000px] top-auto w-px h-px overflow-hidden"
+          >
+            <label htmlFor="contact-company">Company</label>
+            <input
+              id="contact-company"
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              defaultValue=""
+            />
+          </div>
+          <input type="hidden" name="t" value={renderedAt} readOnly />
 
           {/* aria-live region so screen readers announce submission failures */}
           <div role="alert" aria-live="assertive">

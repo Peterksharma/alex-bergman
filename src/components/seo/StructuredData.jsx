@@ -9,7 +9,7 @@ export default function StructuredData() {
     "@id": `${siteConfig.url}/#localbusiness`,
     "name": "A.R.Bergman Drafting",
     "image": `${siteConfig.url}/assets/logo.png`,
-    "description": "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
+    "description": "Permit-ready architectural drafting services in Tacoma and Seattle, WA: custom homes, remodels, additions, garages and ADUs for Western Washington.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": contactData.address.street,

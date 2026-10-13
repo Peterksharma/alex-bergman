@@ -30,25 +30,26 @@ const plexMono = IBM_Plex_Mono({
   variable: "--font-plex-mono",
 });
 
+/*
+ * Root title and description target the site's top Search Console query
+ * ("architectural drafting services", position 10, zero clicks) plus
+ * both cities, and end in a concrete offer. Title 54 chars, description
+ * 155; the OG/Twitter copy is the same description without the phone
+ * number, which social cards cannot dial.
+ */
+const rootTitle = "Architectural Drafting Services | Tacoma & Seattle, WA";
+const rootDescription =
+  "Permit-ready architectural drafting services in Tacoma and Seattle, WA: custom homes, remodels, additions and ADUs. Free consultation: call (888) 818-7526.";
+const socialDescription =
+  "Permit-ready architectural drafting services in Tacoma and Seattle, WA: custom homes, remodels, additions and ADUs. Free consultation.";
+
 export const metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Architectural Drafting Services in Tacoma, WA | A.R.Bergman Drafting",
+    default: rootTitle,
     template: "%s | A.R.Bergman Drafting"
   },
-  description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans. Trusted drafting services for your building projects.",
-  keywords: [
-    "architectural drafting",
-    "drafting services",
-    "custom home design",
-    "construction plans",
-    "home addition plans",
-    "remodel drafting",
-    "Tacoma drafting",
-    "Washington drafting services",
-    "architectural drawings",
-    "building permits"
-  ],
+  description: rootDescription,
   authors: [{ name: "Peter Sharma" }],
   creator: "Peter Sharma",
   publisher: "Aartisan",
@@ -61,22 +62,22 @@ export const metadata = {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
-    siteName: "A.R.Bergman Drafting",
-    title: "Architectural Drafting Services in Tacoma, WA | A.R.Bergman Drafting",
-    description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
+    siteName: siteConfig.name,
+    title: rootTitle,
+    description: socialDescription,
     images: [
       {
         url: `${siteConfig.url}/assets/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "A.R.Bergman Drafting — Professional Architectural Drafting Services",
+        alt: "A.R.Bergman Drafting — Architectural Drafting Services, Tacoma & Seattle",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Architectural Drafting Services in Tacoma, WA | A.R.Bergman Drafting",
-    description: "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
+    title: rootTitle,
+    description: socialDescription,
     images: [`${siteConfig.url}/assets/og-image.jpg`],
   },
   robots: {

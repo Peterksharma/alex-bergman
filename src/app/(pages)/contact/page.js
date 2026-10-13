@@ -8,28 +8,27 @@ import { siteConfig } from "@/config/site";
 
 const fullAddress = `${contactData.address.line1}, ${contactData.address.line2}`;
 
+// Phone formatted for reading: "(888) 818-7526" from "(888)818-7526".
+const phone = contactData.phone.number.replace(/^\((\d{3})\)/, "($1) ");
+
+// Leads with the offer and the number so the snippet is itself a call
+// to action; /contact has 606 impressions at 0.8% CTR.
+const description = `Call ${phone} or send a message for a free consultation on your drafting project. ${fullAddress}; serving Seattle and Western Washington.`;
+
 export const metadata = {
-  title: "Contact Us",
+  title: "Free Consultation: Contact Us",
   alternates: { canonical: "/contact" },
-  description: `Get in touch with A.R.Bergman Drafting for your architectural drafting needs. Located at ${fullAddress}. Contact us for custom home designs, remodels, additions, and construction plans.`,
-  keywords: [
-    "contact A.R.Bergman Drafting",
-    "Tacoma drafting contact",
-    "architectural drafting consultation",
-    "drafting services Tacoma",
-    `${contactData.address.street} Tacoma`,
-    "free consultation drafting"
-  ],
+  description,
   openGraph: {
-    title: "Contact A.R.Bergman Drafting | Get a Free Consultation",
-    description: "Contact A.R.Bergman Drafting for your architectural drafting needs. Located in Tacoma, WA. Get a free consultation for your project.",
+    title: "Free Consultation: Contact Us | A.R.Bergman Drafting",
+    description,
     url: `${siteConfig.url}/contact`,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Contact A.R.Bergman Drafting",
-    description: "Get in touch for your architectural drafting needs. Free consultation available.",
+    title: "Free Consultation: Contact Us | A.R.Bergman Drafting",
+    description,
   },
 };
 

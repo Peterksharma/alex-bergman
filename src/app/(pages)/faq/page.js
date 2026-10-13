@@ -6,14 +6,6 @@ export const metadata = {
   title: "Frequently Asked Questions",
   alternates: { canonical: "/faq" },
   description: "Common questions about A.R.Bergman Drafting services including architectural drafting, building permits, custom home design, remodels, and construction plans in Tacoma, WA.",
-  keywords: [
-    "drafting FAQ",
-    "architectural drafting questions",
-    "building permit questions",
-    "drafting services FAQ",
-    "custom home design FAQ",
-    "construction plans FAQ"
-  ],
   openGraph: {
     title: "FAQ | A.R.Bergman Drafting",
     description: "Get answers to frequently asked questions about architectural drafting services, building permits, and construction plans.",

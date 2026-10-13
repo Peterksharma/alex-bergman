@@ -20,7 +20,9 @@ export default function PortfolioCard({ project, index = 0 }) {
           {/* ink wash + mono view pill on hover */}
           <div className="absolute inset-0 bg-ink/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <span className="border border-amber-300 text-amber-300 font-mono text-[11px] uppercase tracking-widest rounded-full px-4 py-2">
+            {/* solid-enough ink backing: amber-300 over a 50% wash on a
+                bright photo can drop below 3:1, so the pill carries its own */}
+            <span className="border border-amber-300 text-amber-300 bg-ink/80 font-mono text-[11px] uppercase tracking-widest rounded-full px-4 py-2">
               View project →
             </span>
           </div>
@@ -34,7 +36,7 @@ export default function PortfolioCard({ project, index = 0 }) {
             {project.name}
           </CardTitle>
           <CardDescription className="text-tone-muted text-sm">
-            Click to view project details
+            {project.summary ?? "View project details"}
           </CardDescription>
         </div>
       </SurfaceCard>

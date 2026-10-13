@@ -9,8 +9,10 @@
  *    generateStaticParams, so the audit can never drift from the site.
  *    One deliberately-missing route exercises the 404 page.
  * 2. For each route, open it in headless Chromium at a desktop viewport,
- *    wait for the network to go idle (fonts, images, hydration), and run
- *    axe with the WCAG 2.0/2.1/2.2 A+AA rule tags.
+ *    wait for the network to go idle (fonts, images, hydration), scroll
+ *    the full height of the page so every scroll-triggered .reveal has
+ *    fired (axe cannot measure the contrast of opacity-0 content), and
+ *    run axe with the WCAG 2.0/2.1/2.2 A+AA rule tags.
  * 3. Additionally open "/" at a 390 px phone width, press the hamburger
  *    so the mobile drawer is in the DOM, and audit that state — a menu
  *    that only exists after interaction is invisible to a plain page scan.
@@ -50,6 +52,25 @@ const routes = [
   "/contact",
   "/this-does-not-exist",
 ];
+
+/**
+ * Scroll through the whole document one viewport at a time so every
+ * IntersectionObserver-driven reveal fires, then return to the top.
+ * Waits ~1s at the end for the 0.7s reveal transition to settle.
+ */
+async function revealAll(page) {
+  await page.evaluate(async () => {
+    const step = window.innerHeight;
+    const height = document.documentElement.scrollHeight;
+    for (let y = 0; y < height; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 120));
+    }
+    window.scrollTo(0, height);
+    await new Promise((r) => setTimeout(r, 1000));
+    window.scrollTo(0, 0);
+  });
+}
 
 /** Run axe on the page as it currently stands and return its violations. */
 async function audit(page) {
@@ -95,6 +116,7 @@ async function main() {
   const page = await desktop.newPage();
   for (const route of routes) {
     await page.goto(`${BASE_URL}${route}`, { waitUntil: "networkidle" });
+    await revealAll(page);
     rows.push(...toRows(route, await audit(page)));
     process.stderr.write(`audited ${route}\n`);
   }

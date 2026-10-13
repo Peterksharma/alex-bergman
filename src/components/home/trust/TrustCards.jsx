@@ -8,6 +8,7 @@ export default function HomeTrustCards() {
       {trustCardData.map((cardData) => (
         <IconCard
           key={cardData.description}
+          headingAs="h2"
           title={cardData.description}
           body={cardData.content}
           cta={{ label: cardData.button, href: cardData.url }}

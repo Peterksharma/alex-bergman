@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardHeader } from "@/components/ui/card";
@@ -8,9 +9,9 @@ import SurfaceCard from "@/components/common/SurfaceCard";
 import SectionHeader from "@/components/common/SectionHeader";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
-const tags = [{ tagName: "Residential" }, { tagName: "Remodel" }];
-
 export default function Project({ project }) {
+  // Category tags come from the project record; none is a valid state.
+  const tags = project.tags ?? [];
   const projectImages = useMemo(() => {
     return Array.from({ length: project.imageCount }, (_, i) => ({
       src: `/assets/portfolio/${project.folder}/${i + 1}.jpg`,
@@ -99,13 +100,13 @@ export default function Project({ project }) {
   }, [countOfThumbnailsShowing, project.imageCount, currentThumbnails]);
 
   const renderTags = () => {
-    return tags.map((tag, index) => (
-      <div
-        key={index}
+    return tags.map((tag) => (
+      <li
+        key={tag}
         className="rounded-full border border-amber-400/60 bg-ink/40 px-5 py-1.5 text-amber-300 font-mono text-[11px] uppercase tracking-wider backdrop-blur-sm"
       >
-        {tag.tagName}
-      </div>
+        {tag}
+      </li>
     ));
   };
 
@@ -197,15 +198,32 @@ export default function Project({ project }) {
           {/* Image Gallery Section - 2/3 width */}
           <div className="lg:col-span-2 space-y-6">
             {/* Main Image */}
+            {/*
+              The gallery is a focusable group (tabIndex 0) so keyboard
+              users can land on it and use ArrowLeft/ArrowRight; a
+              non-focusable element never receives keydown. The
+              focus-visible ring is the sitewide amber outline. The
+              live region below announces each change for screen readers.
+            */}
             <div
-              className="relative group"
+              className="relative group rounded-xl"
               role="group"
-              aria-label={`${project.name} image gallery`}
+              tabIndex={0}
+              aria-label={`${project.name} image gallery. Use the left and right arrow keys to change image.`}
               onKeyDown={(e) => {
-                if (e.key === "ArrowLeft") goToPreviousImage();
-                if (e.key === "ArrowRight") goToNextImage();
+                if (e.key === "ArrowLeft") {
+                  e.preventDefault();
+                  goToPreviousImage();
+                }
+                if (e.key === "ArrowRight") {
+                  e.preventDefault();
+                  goToNextImage();
+                }
               }}
             >
+              <p className="sr-only" aria-live="polite" aria-atomic="true">
+                Showing image {currentImageIndex + 1} of {projectImages.length}
+              </p>
               <div className="relative w-full aspect-[16/10] overflow-hidden rounded-xl shadow-2xl border border-tone-line/30">
                 <Image
                   src={projectImages[currentImageIndex].src}
@@ -232,8 +250,11 @@ export default function Project({ project }) {
                   <FaAngleRight className="text-2xl" />
                 </button>
 
-                {/* Image Counter */}
-                <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium">
+                {/* Image Counter — visual twin of the live region above */}
+                <div
+                  aria-hidden="true"
+                  className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium"
+                >
                   {currentImageIndex + 1} / {projectImages.length}
                 </div>
               </div>
@@ -278,15 +299,17 @@ export default function Project({ project }) {
               </CardHeader>
 
               <CardContent className="p-6 space-y-6">
-                {/* Tags */}
-                <div>
-                  <h3 className="font-mono text-[11px] font-medium text-tone-muted uppercase tracking-widest mb-3">
-                    Categories
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {renderTags()}
+                {/* Tags — omitted entirely when the record has none */}
+                {tags.length > 0 && (
+                  <div>
+                    <h3 className="font-mono text-[11px] font-medium text-tone-muted uppercase tracking-widest mb-3">
+                      Categories
+                    </h3>
+                    <ul className="flex flex-wrap gap-2 list-none p-0 m-0">
+                      {renderTags()}
+                    </ul>
                   </div>
-                </div>
+                )}
 
                 {/* Description */}
                 <div>
@@ -304,7 +327,7 @@ export default function Project({ project }) {
                   variant="cta"
                   className="w-full h-12 transition-all duration-300 hover:scale-105"
                 >
-                  <a href="/contact">Start Your Project</a>
+                  <Link href="/contact">Start Your Project</Link>
                 </Button>
               </CardContent>
             </SurfaceCard>

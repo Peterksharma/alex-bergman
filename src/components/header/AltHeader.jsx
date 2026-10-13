@@ -16,24 +16,73 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
+/** Selector for the elements a Tab press can land on inside the drawer. */
+const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesExpanded, setIsServicesExpanded] = useState(false);
   const drawerRef = useRef(null);
   const menuButtonRef = useRef(null);
 
-  // Escape must close the mobile drawer; the backdrop alone is mouse-only (WCAG 2.1.2)
+  /*
+   * Keyboard contract for the open drawer (WCAG 2.1.2 No Keyboard Trap,
+   * in the benign direction: focus must not wander behind the backdrop):
+   *
+   *   Escape — close and return focus to the menu button.
+   *   Tab    — cycle through the menu (close) button and the drawer's
+   *            focusable descendants, wrapping at both ends. The button
+   *            lives in the header above the backdrop, so it is part of
+   *            the ring rather than hidden behind it.
+   *
+   * The focusable list is recomputed per keypress because expanding
+   * "Services" adds links to the drawer.
+   */
   useEffect(() => {
     if (!isMobileMenuOpen) return;
-    const handleEscape = (e) => {
+
+    const closeMenu = () => {
+      setIsMobileMenuOpen(false);
+      setIsServicesExpanded(false);
+      menuButtonRef.current?.focus();
+    };
+
+    const focusRing = () => [
+      menuButtonRef.current,
+      ...(drawerRef.current?.querySelectorAll(FOCUSABLE) ?? []),
+    ].filter(Boolean);
+
+    const handleKeyDown = (e) => {
       if (e.key === "Escape") {
-        setIsMobileMenuOpen(false);
-        setIsServicesExpanded(false);
-        menuButtonRef.current?.focus();
+        closeMenu();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const ring = focusRing();
+      if (ring.length === 0) return;
+      const first = ring[0];
+      const last = ring[ring.length - 1];
+      const active = document.activeElement;
+
+      if (e.shiftKey) {
+        // Backwards off the first item (or from the drawer shell itself) wraps to the last
+        if (active === first || !ring.includes(active)) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (!ring.includes(active) && active !== drawerRef.current) {
+        // Focus is somewhere behind the backdrop: pull it into the drawer
+        e.preventDefault();
+        first.focus();
       }
     };
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMobileMenuOpen]);
 
   // Move focus into the drawer when it opens so keyboard/screen-reader
@@ -150,12 +199,12 @@ export default function Header() {
             : "text-base font-semibold text-tone-body hover:text-tone-heading"
         }
       >
-        <a
+        <Link
           href={item.link}
           onClick={() => isMobile && setIsMobileMenuOpen(false)}
         >
           {item.name}
-        </a>
+        </Link>
       </Button>
     );
   };
@@ -222,10 +271,11 @@ export default function Header() {
             }}
           />
 
-          <div
+          <nav
             id="mobile-menu"
             ref={drawerRef}
             tabIndex={-1}
+            aria-label="Site menu"
             className="fixed top-[100px] md:top-[150px] right-0 bottom-0 w-4/5 max-w-sm bg-ink-2 border-t border-l border-tone-line/25 z-40 xl:hidden overflow-y-auto animate-in slide-in-from-right duration-200 outline-none"
           >
             <div className="flex flex-col p-4 gap-2">
@@ -235,7 +285,7 @@ export default function Header() {
                 </div>
               ))}
             </div>
-          </div>
+          </nav>
         </>
       )}
     </>

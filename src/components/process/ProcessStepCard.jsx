@@ -1,4 +1,4 @@
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader } from "@/components/ui/card";
 import SurfaceCard from "@/components/common/SurfaceCard";
 
 const annoLabel = "font-mono text-[11px] uppercase tracking-widest text-tone-accent mb-1";
@@ -18,9 +18,11 @@ export default function ProcessStepCard({ step, index }) {
         <CardHeader>
           <div className="flex items-center gap-4 mb-4">
             <span className="text-tone-accent" aria-hidden="true">{step.icon}</span>
-            <CardTitle className="font-display text-2xl font-bold text-tone-heading">
+            {/* a real heading (not shadcn's div CardTitle) so each step
+                is a navigable h2 under the page's h1 */}
+            <h2 className="font-display text-2xl font-bold text-tone-heading leading-none">
               {step.title}
-            </CardTitle>
+            </h2>
           </div>
         </CardHeader>
 

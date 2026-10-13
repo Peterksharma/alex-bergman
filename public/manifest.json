@@ -4,8 +4,8 @@
   "description": "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1f2937",
-  "theme_color": "#1f2937",
+  "background_color": "#101a26",
+  "theme_color": "#101a26",
   "orientation": "portrait-primary",
   "icons": [
     {

@@ -12,13 +12,16 @@ import SurfaceCard from "./SurfaceCard";
  * Layout rule: with an icon the header is a left-aligned icon+title row;
  * without one the card is fully centered (the home-page style).
  *
- * Props: { icon?, title, body, cta?: { label, href } }
+ * Props: { icon?, title, body, cta?: { label, href }, headingAs? }
+ *   headingAs — heading tag for the title (default "h3"). Pass "h2" when
+ *               the cards sit directly under the page's h1 so the outline
+ *               never skips a level (WCAG 1.3.1).
  */
-export default function IconCard({ icon, title, body, cta }) {
+export default function IconCard({ icon, title, body, cta, headingAs: Heading = "h3" }) {
   return (
     <SurfaceCard hover className="h-full flex flex-col">
       <CardHeader className={cn("pb-4 flex-shrink-0", !icon && "text-center")}>
-        <h3
+        <Heading
           className={cn(
             "font-display text-tone-heading font-bold",
             icon ? "flex items-center gap-3 text-xl" : "text-2xl tracking-tight"
@@ -30,7 +33,7 @@ export default function IconCard({ icon, title, body, cta }) {
             </span>
           )}
           <span>{title}</span>
-        </h3>
+        </Heading>
       </CardHeader>
 
       <CardContent className={cn("flex-1", !icon && "text-center px-6")}>

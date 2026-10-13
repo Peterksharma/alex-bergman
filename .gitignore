@@ -43,3 +43,6 @@ next-env.d.ts
 # raw video sources
 *.mov
 *.MOV
+
+# Search Console exports
+*Performance-on-Search*.zip

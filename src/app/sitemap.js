@@ -1,8 +1,40 @@
 import { services } from "@/data/servicesData";
-import { projects } from "@/data/projectData";
 import { siteConfig } from "@/config/site";
+import { listPublishedProjects } from "@/db/queries";
 
-export default function sitemap() {
+/*
+ * The sitemap is regenerated hourly and on every admin write
+ * (revalidatePath('/sitemap.xml')), so new or unpublished projects reach
+ * crawlers without a deploy. Project <lastmod> is the row's updated_at,
+ * which the writers bump on any content or gallery change.
+ *
+ * If the database is unreachable the portfolio entries fall back to the
+ * legacy static list so the sitemap is never empty for the crawler.
+ */
+export const revalidate = 3600;
+
+async function portfolioEntries(baseUrl) {
+  try {
+    const projects = await listPublishedProjects();
+    return projects.map((project) => ({
+      url: `${baseUrl}${project.url}`,
+      lastModified: project.updatedAt,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }));
+  } catch (err) {
+    console.error("sitemap: database unavailable, using static project list", err);
+    const { projects } = await import("@/data/projectData");
+    return projects.map((project) => ({
+      url: `${baseUrl}${project.url}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }));
+  }
+}
+
+export default async function sitemap() {
   const baseUrl = siteConfig.url;
 
   // Static pages
@@ -65,14 +97,8 @@ export default function sitemap() {
     priority: 0.8,
   }));
 
-  // Dynamic portfolio pages
-  const portfolioPages = projects.map((project) => ({
-    url: `${baseUrl}${project.url}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
+  // Dynamic portfolio pages (from the database)
+  const portfolioPages = await portfolioEntries(baseUrl);
 
   return [...staticPages, ...servicePages, ...portfolioPages];
 }
-

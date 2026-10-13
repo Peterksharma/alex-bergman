@@ -3,6 +3,13 @@ import SectionHeader from "@/components/common/SectionHeader";
 import CTASection from "@/components/common/CTASection";
 import PortfolioGrid from "@/components/portfolio/PortfolioGrid";
 import { siteConfig } from "@/config/site";
+import { listPublishedProjects } from "@/db/queries";
+
+/*
+ * ISR: the grid is rendered from the database at most once an hour, and
+ * immediately after any admin write (revalidatePath('/portfolio')).
+ */
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Portfolio",
@@ -29,7 +36,9 @@ export const metadata = {
   },
 };
 
-export default function Portfolio() {
+export default async function Portfolio() {
+  const projects = await listPublishedProjects();
+
   return (
     <Chapter tone="paper" grid className="py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,7 +47,7 @@ export default function Portfolio() {
           title={<>Our <span className="text-tone-accent">Portfolio</span></>}
           subtitle="Explore our portfolio of completed architectural drafting projects in Tacoma and the Pacific Northwest. From custom homes and remodels to garages, additions, and commercial projects. Click on any card to see detailed information and project images showcasing our professional drafting expertise."
         />
-        <PortfolioGrid />
+        <PortfolioGrid projects={projects} />
         <CTASection
           boxed={false}
           actions={[{ label: "Start Your Project", href: "/contact", withArrow: true }]}

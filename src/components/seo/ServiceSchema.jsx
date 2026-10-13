@@ -1,4 +1,4 @@
-import { serviceAreaCities, serviceAreaRegion } from "@/data/global/serviceAreas";
+import { areaServed } from "@/data/global/serviceAreas";
 import { siteConfig } from "@/config/site";
 
 /**
@@ -18,10 +18,7 @@ export default function ServiceSchema({ service }) {
     "url": `${siteConfig.url}${service.url}`,
     "image": service.image ? `${siteConfig.url}${service.image}` : undefined,
     "provider": { "@id": `${siteConfig.url}/#localbusiness` },
-    "areaServed": [
-      ...serviceAreaCities.map((city) => ({ "@type": "City", "name": city })),
-      { "@type": "AdministrativeArea", "name": serviceAreaRegion },
-    ],
+    "areaServed": areaServed(),
   };
 
   return (

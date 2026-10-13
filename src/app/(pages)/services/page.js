@@ -1,29 +1,26 @@
 import ServiceCards from "@/components/services/AllServicesCards";
 import { siteConfig } from "@/config/site";
 
+// "architectural drafting services" is the site's top query (2,336
+// impressions at position 10, zero clicks); this page's title carries
+// the exact phrase and the description names both cities.
+const description =
+  "Architectural drafting services in Tacoma and Seattle, WA: permit-ready plans for remodels, additions, garages, ADUs and new homes. Free consultation.";
+
 export const metadata = {
-  title: "Services",
+  title: "Architectural Drafting Services",
   alternates: { canonical: "/services" },
-  description: "Comprehensive architectural drafting services including custom home design, remodels, additions, garages, ADUs, commercial buildings, and construction plans. Serving Tacoma, WA and the Pacific Northwest.",
-  keywords: [
-    "architectural drafting services",
-    "custom home design Tacoma",
-    "home remodeling plans",
-    "garage design services",
-    "ADU drafting Tacoma",
-    "commercial drafting services",
-    "construction documents"
-  ],
+  description,
   openGraph: {
-    title: "Services | A.R.Bergman Drafting",
-    description: "Professional architectural drafting services for custom homes, remodels, additions, garages, and commercial projects in Tacoma, WA.",
+    title: "Architectural Drafting Services | A.R.Bergman Drafting",
+    description,
     url: `${siteConfig.url}/services`,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "Services | A.R.Bergman Drafting",
-    description: "Professional architectural drafting services for all your building needs.",
+    title: "Architectural Drafting Services | A.R.Bergman Drafting",
+    description,
   },
 };
 

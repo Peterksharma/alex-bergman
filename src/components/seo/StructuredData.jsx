@@ -1,5 +1,5 @@
 import { contactData } from "@/data/global/contactInfo";
-import { serviceAreaCities, serviceAreaRegion } from "@/data/global/serviceAreas";
+import { areaServed } from "@/data/global/serviceAreas";
 import { siteConfig } from "@/config/site";
 
 export default function StructuredData() {
@@ -9,7 +9,7 @@ export default function StructuredData() {
     "@id": `${siteConfig.url}/#localbusiness`,
     "name": "A.R.Bergman Drafting",
     "image": `${siteConfig.url}/assets/logo.png`,
-    "description": "Professional architectural drafting services in Tacoma, WA. Custom home designs, additions, remodels, and detailed construction plans.",
+    "description": "Permit-ready architectural drafting services in Tacoma and Seattle, WA: custom homes, remodels, additions, garages and ADUs for Western Washington.",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": contactData.address.street,
@@ -43,10 +43,7 @@ export default function StructuredData() {
       "https://www.facebook.com/arbergmanhome/",
       "https://www.instagram.com/arbergman_drafting/"
     ],
-    "areaServed": [
-      ...serviceAreaCities.map((city) => ({ "@type": "City", "name": city })),
-      { "@type": "AdministrativeArea", "name": serviceAreaRegion }
-    ],
+    "areaServed": areaServed(),
     "serviceArea": {
       "@type": "GeoCircle",
       "geoMidpoint": {

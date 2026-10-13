@@ -9,14 +9,6 @@ export const metadata = {
   title: "Our Process",
   alternates: { canonical: "/process" },
   description: "Learn about A.R.Bergman Drafting's step-by-step process for architectural drafting projects. From initial consultation to final construction documents and permit approval in Tacoma, WA.",
-  keywords: [
-    "architectural drafting process",
-    "drafting workflow",
-    "building permit process",
-    "construction documents process",
-    "drafting consultation process",
-    "Tacoma permit process"
-  ],
   openGraph: {
     title: "Our Process | A.R.Bergman Drafting",
     description: "Learn about our step-by-step process for architectural drafting projects from consultation to permit approval.",

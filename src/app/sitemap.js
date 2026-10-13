@@ -2,77 +2,45 @@ import { services } from "@/data/servicesData";
 import { projects } from "@/data/projectData";
 import { siteConfig } from "@/config/site";
 
+/**
+ * sitemap.xml — one entry per public route with an honest lastModified.
+ *
+ * The date is the content's last real change, not the build time: a
+ * sitemap that stamps every URL with "now" on every deploy tells Google
+ * nothing, and Google documents that it then ignores the field. Static
+ * routes carry the git last-commit date of their page file; services
+ * and projects carry the lastModified field on their data entry.
+ *
+ * changeFrequency and priority are deliberately omitted — Google ignores
+ * both, and Bing treats them as hints at best.
+ *
+ * Invariant: every URL below is absolute, on the canonical www host, and
+ * has no trailing slash, matching the per-page alternates.canonical.
+ */
+
+/** Static routes: path → ISO date of the page file's last commit. */
+const staticRoutes = [
+  ["", "2026-10-12"], // src/app/page.js (+ layout metadata, service-area copy)
+  ["/about", "2026-07-01"],
+  ["/portfolio", "2026-07-01"],
+  ["/services", "2026-10-12"],
+  ["/testimonials", "2026-07-01"],
+  ["/faq", "2026-07-01"],
+  ["/process", "2026-07-01"],
+  ["/contact", "2026-10-12"],
+];
+
 export default function sitemap() {
   const baseUrl = siteConfig.url;
 
-  // Static pages
-  const staticPages = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/portfolio`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/testimonials`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/faq`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/process`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+  const entry = (path, lastModified) => ({
+    url: `${baseUrl}${path}`,
+    lastModified,
+  });
+
+  return [
+    ...staticRoutes.map(([path, date]) => entry(path, date)),
+    ...services.map((service) => entry(service.url, service.lastModified)),
+    ...projects.map((project) => entry(project.url, project.lastModified)),
   ];
-
-  // Dynamic service pages
-  const servicePages = services.map((service) => ({
-    url: `${baseUrl}${service.url}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
-
-  // Dynamic portfolio pages
-  const portfolioPages = projects.map((project) => ({
-    url: `${baseUrl}${project.url}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
-
-  return [...staticPages, ...servicePages, ...portfolioPages];
 }
-

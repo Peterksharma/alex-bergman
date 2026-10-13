@@ -20,7 +20,9 @@ export const services = [
       'Enhanced living comfort',
     ],
     timeline: '4-8 weeks for design and documents',
-    url: '/services/remodels'
+    url: '/services/remodels',
+    seoDescription: 'Remodel drafting services in Tacoma and Seattle, WA. Permit-ready plans to open the floor plan, add bedrooms or update the layout. Free consultation.',
+    lastModified: '2026-07-01',
   },
   {
     id: '2',
@@ -44,7 +46,9 @@ export const services = [
       'Climate-controlled environment',
     ],
     timeline: '3-6 weeks for design and documents',
-    url: '/services/garages'
+    url: '/services/garages',
+    seoDescription: 'Garage and shop plans drafted in Tacoma and Seattle, WA. Permit-ready drawings for RV, boat and workshop garages in 3-6 weeks. Free consultation.',
+    lastModified: '2026-07-01',
   },
   {
     id: '3',
@@ -68,7 +72,9 @@ export const services = [
       'Added home value',
     ],
     timeline: '6-10 weeks for design and documentation',
-    url: '/services/additions'
+    url: '/services/additions',
+    seoDescription: 'Home addition drafting in Tacoma and Seattle, WA. Permit-ready plans that tie new wings, studios and gyms into your existing home. Free consultation.',
+    lastModified: '2026-07-01',
   },
   {
     id: '4',
@@ -92,7 +98,9 @@ export const services = [
       'Financing documentation',
     ],
     timeline: '2-4 weeks for initial concepts',
-    url: '/services/conceptual-design'
+    url: '/services/conceptual-design',
+    seoDescription: 'Conceptual design plans in Tacoma and Seattle, WA. For a low fee, get a basic plan set in 2-4 weeks to get bids, talk to permitting and secure financing.',
+    lastModified: '2026-07-01',
   },
   {
     id: '5',
@@ -116,7 +124,9 @@ export const services = [
       'Future-proof design considerations',
     ],
     timeline: '8-12 weeks for complete design package',
-    url: '/services/new-construction'
+    url: '/services/new-construction',
+    seoDescription: 'Custom home drafting in Tacoma and Seattle, WA. Permit-ready plans from your sketch, a stock plan or a blank page, in 8-12 weeks. Free consultation.',
+    lastModified: '2026-07-01',
   },
   {
     id: '6',
@@ -140,6 +150,8 @@ export const services = [
       'Separate private living space',
     ],
     timeline: '6-8 weeks for design and documentation',
-    url: '/services/adu'
+    url: '/services/adu',
+    seoDescription: 'ADU drafting services in Tacoma and Seattle, WA. Permit-ready attached and detached accessory dwelling unit plans that meet local codes. Free consultation.',
+    lastModified: '2026-07-01',
   }
 ];

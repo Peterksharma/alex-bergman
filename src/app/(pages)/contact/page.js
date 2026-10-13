@@ -13,7 +13,7 @@ const phone = contactData.phone.number.replace(/^\((\d{3})\)/, "($1) ");
 
 // Leads with the offer and the number so the snippet is itself a call
 // to action; /contact has 606 impressions at 0.8% CTR.
-const description = `Call ${phone} or send a message for a free consultation on your drafting project. ${fullAddress}; serving Seattle and Western Washington.`;
+const description = `Call ${phone} or message us for a free drafting consultation. ${fullAddress}; serving Seattle and Western Washington.`;
 
 export const metadata = {
   title: "Free Consultation: Contact Us",

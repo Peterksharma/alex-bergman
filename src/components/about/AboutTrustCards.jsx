@@ -10,6 +10,7 @@ export default function AboutTrustCards() {
           {aboutTrustCardData.map((cardData, index) => (
             <IconCard
               key={index}
+              headingAs="h2"
               icon={cardData.icon}
               title={cardData.title}
               body={cardData.content}

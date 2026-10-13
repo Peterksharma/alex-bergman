@@ -29,23 +29,28 @@ function AccordionTrigger({
   ...props
 }) {
   return (
-    <AccordionPrimitive.Header className="flex">
-      <AccordionPrimitive.Trigger
-        data-slot="accordion-trigger"
-        className={cn(
-          "focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>span:last-child]:rotate-45",
-          className
-        )}
-        {...props}>
-        {children}
-        {/* mono "+" rotates to "×" on open — the annotation voice */}
-        <span
-          aria-hidden="true"
-          className="font-mono text-xl leading-none text-tone-accent pointer-events-none shrink-0 transition-transform duration-200"
-        >
-          +
-        </span>
-      </AccordionPrimitive.Trigger>
+    /* Radix renders Header as an h3 by default; the FAQ page's only
+       heading above it is the h1, so render an h2 to keep levels
+       consecutive (WCAG 1.3.1). */
+    <AccordionPrimitive.Header asChild>
+      <h2 className="flex">
+        <AccordionPrimitive.Trigger
+          data-slot="accordion-trigger"
+          className={cn(
+            "focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>span:last-child]:rotate-45",
+            className
+          )}
+          {...props}>
+          {children}
+          {/* mono "+" rotates to "×" on open — the annotation voice */}
+          <span
+            aria-hidden="true"
+            className="font-mono text-xl leading-none text-tone-accent pointer-events-none shrink-0 transition-transform duration-200"
+          >
+            +
+          </span>
+        </AccordionPrimitive.Trigger>
+      </h2>
     </AccordionPrimitive.Header>
   );
 }

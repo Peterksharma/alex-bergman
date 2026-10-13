@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { toast } from "sonner";
 import { CardHeader } from "../ui/card";
 import SurfaceCard from "@/components/common/SurfaceCard";
@@ -10,6 +11,13 @@ import { submitContactForm } from "@/app/actions/sendContactForm";
 import { cn } from "@/lib/utils";
 
 /** Shared look of every text control: a white sheet with a drawn edge. */
+/**
+ * Turnstile site key, inlined at build time. When unset (local dev,
+ * or before the keys exist) the widget is not rendered and the server
+ * skips verification, so the form keeps working end to end.
+ */
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
 const controlClass =
   "w-full bg-white border border-tone-line/40 rounded-md text-ink placeholder:text-tone-muted " +
   "focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all " +
@@ -86,6 +94,12 @@ const FIELDS = [
 export default function ContactFormClient({ projectTypes }) {
   const [state, formAction, isPending] = useActionState(submitContactForm, null);
   const formRef = useRef(null);
+  const turnstileRef = useRef(null);
+
+  /* A Turnstile token is single-use: fetch a fresh one after any reply. */
+  useEffect(() => {
+    if (state) turnstileRef.current?.reset();
+  }, [state]);
 
   /*
    * Spam defense, client half. `renderedAt` is the epoch-ms the form
@@ -250,6 +264,20 @@ export default function ContactFormClient({ projectTypes }) {
               </p>
             )}
           </div>
+
+          {TURNSTILE_SITE_KEY && (
+            <div className="mt-6 flex flex-col items-center gap-2">
+              <Turnstile
+                ref={turnstileRef}
+                siteKey={TURNSTILE_SITE_KEY}
+                options={{ theme: "light", size: "flexible" }}
+                className="w-full max-w-md"
+              />
+              {fieldErrors.turnstile && (
+                <p className="text-sm text-destructive font-medium">{fieldErrors.turnstile}</p>
+              )}
+            </div>
+          )}
 
           <div className="flex justify-center mt-6 sm:mt-8">
             <Button

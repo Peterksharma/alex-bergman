@@ -1,6 +1,8 @@
 'use server'
 
+import { headers } from 'next/headers'
 import { sendContactEmail } from '@/lib/email'
+import { TURNSTILE_FIELD, clientIpFrom, verifyTurnstile } from '@/lib/turnstile'
 import {
   isSuspectedBot,
   normalizeContactInput,
@@ -46,6 +48,23 @@ export async function submitContactForm(previousState, formData) {
   const fieldErrors = validateContactInput(values)
   if (Object.keys(fieldErrors).length > 0) {
     return { success: false, error: GENERIC_FIELD_ERROR, fieldErrors, values }
+  }
+
+  /* Turnstile: checked after validation so a typo does not burn a
+     single-use token. Fails open only when no secret is configured. */
+  const headerList = await headers()
+  const turnstile = await verifyTurnstile(
+    formData.get(TURNSTILE_FIELD),
+    clientIpFrom(headerList)
+  )
+  if (!turnstile.ok) {
+    console.warn('contact form: Turnstile verification failed', turnstile.errorCodes)
+    return {
+      success: false,
+      error: GENERIC_FIELD_ERROR,
+      fieldErrors: { turnstile: 'Please complete the verification and try again.' },
+      values,
+    }
   }
 
   try {

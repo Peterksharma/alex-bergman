@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import { projects } from "@/data/projectData";
 import Project from "@/components/portfolio/projects/Project";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import ImageGallerySchema from "@/components/seo/ImageGallerySchema";
+import { truncateAtWord } from "@/lib/seo";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -17,20 +20,23 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  // Word-boundary cut: substring(0, 160) used to end snippets mid-word.
+  const description = truncateAtWord(project.description, 155);
+
   return {
     title: `${project.name} | Portfolio`,
-    description: project.description.substring(0, 160),
+    description,
     alternates: { canonical: `/portfolio/${slug}` },
     openGraph: {
       title: `${project.name} | A.R.Bergman Drafting Portfolio`,
-      description: project.description.substring(0, 160),
+      description,
       images: project.folder ? [`/assets/portfolio/${project.folder}/1.jpg`] : [],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
       title: `${project.name} | A.R.Bergman Drafting Portfolio`,
-      description: project.description.substring(0, 160),
+      description,
     },
   };
 }
@@ -43,5 +49,16 @@ export default async function ProjectPage({ params }) {
     notFound();
   }
 
-  return <Project project={project} />;
+  return (
+    <>
+      <BreadcrumbSchema
+        trail={[
+          { name: "Portfolio", path: "/portfolio" },
+          { name: project.name, path: project.url },
+        ]}
+      />
+      <ImageGallerySchema project={project} />
+      <Project project={project} />
+    </>
+  );
 }

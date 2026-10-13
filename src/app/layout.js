@@ -6,6 +6,7 @@ import Header from "@/components/header/AltHeader";
 import Footer from "@/components/footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import StructuredData from "@/components/seo/StructuredData";
+import WebSiteSchema from "@/components/seo/WebSiteSchema";
 import { siteConfig } from "@/config/site";
 
 /*
@@ -143,6 +144,7 @@ export default function RootLayout({ children }) {
         </a>
         <Header />
         <StructuredData />
+        <WebSiteSchema />
         <main id="main">{children}</main>
         <Toaster />
         <Footer />

@@ -126,12 +126,17 @@ export const viewport = {
 
 /*
  * GA4 measurement ID. Public by design (it ships in the HTML), so the
- * production ID lives here as the default; NEXT_PUBLIC_GA_ID overrides
- * it, and non-production builds send nothing.
+ * production ID lives here as the default and NEXT_PUBLIC_GA_ID overrides
+ * it. Only the production deployment reports: Vercel preview builds also
+ * run with NODE_ENV=production, so the gate is VERCEL_ENV when present
+ * (preview traffic must not pollute the client's analytics) and NODE_ENV
+ * elsewhere.
  */
-const gaId =
-  process.env.NEXT_PUBLIC_GA_ID ??
-  (process.env.NODE_ENV === "production" ? "G-38FQF6QFXK" : undefined);
+const isProductionDeployment =
+  (process.env.VERCEL_ENV ?? process.env.NODE_ENV) === "production";
+const gaId = isProductionDeployment
+  ? (process.env.NEXT_PUBLIC_GA_ID ?? "G-38FQF6QFXK")
+  : undefined;
 
 export default function RootLayout({ children }) {
   return (

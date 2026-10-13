@@ -1,26 +1,20 @@
 import { Button } from "../../ui/button";
 import { FaArrowRight } from "react-icons/fa";
-import Image from "next/image";
 import Link from "next/link";
 import Eyebrow from "@/components/common/Eyebrow";
+import HeroVideo from "./HeroVideo";
 
 /*
- * Hero — the site's cover sheet. The photo sits under an ink wash and
- * a faint blueprint grid (vellum over the site), and the headline
- * carries a self-drawing amber pencil stroke.
+ * Hero — the site's cover sheet. A silent drone loop of the waterfront
+ * ADU (poster-first, see HeroVideo) sits under an ink wash and a faint
+ * blueprint grid (vellum over the site), and the headline carries a
+ * self-drawing amber pencil stroke.
  */
 export default function Hero() {
     return (
         <div className="relative min-h-[700px] bg-ink">
-            {/* Background Image */}
-            <Image
-                src="/assets/hero-bg.jpg"
-                alt="A.R.Bergman Drafting - Professional architectural drafting and custom home design services in Tacoma, Washington"
-                fill
-                sizes="100vw"
-                className="object-cover"
-                priority
-            />
+            {/* Background: poster image, then the video loop fades in over it */}
+            <HeroVideo alt="A.R.Bergman Drafting - Professional architectural drafting and custom home design services in Tacoma, Washington" />
 
             {/* Ink wash + blueprint grid over the photo */}
             <div className="absolute inset-0 bg-ink/80 z-[5]" aria-hidden="true"></div>

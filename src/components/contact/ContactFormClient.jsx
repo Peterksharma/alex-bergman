@@ -9,6 +9,7 @@ import SurfaceCard from "@/components/common/SurfaceCard";
 import { Button } from "../ui/button";
 import { submitContactForm } from "@/app/actions/sendContactForm";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/analytics";
 
 /** Shared look of every text control: a white sheet with a drawn edge. */
 /**
@@ -117,11 +118,7 @@ export default function ContactFormClient({ projectTypes }) {
       toast.success("Message has been sent");
       formRef.current?.reset();
       setRenderedAt(String(Date.now()));
-      try {
-        window.gtag?.("event", "generate_lead", { project_type: state.projectType });
-      } catch {
-        /* analytics must never break the form */
-      }
+      trackEvent("generate_lead", { method: "contact_form", project_type: state.projectType });
     } else if (state?.success === false) {
       toast.error(state.error || "Error sending message");
     }

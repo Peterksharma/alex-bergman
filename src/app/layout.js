@@ -92,12 +92,13 @@ export const metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    // Add your verification codes when available
-    // google: "your-google-verification-code",
-    // yandex: "your-yandex-verification-code",
-    // bing: "your-bing-verification-code",
-  },
+  // Search Console HTML-tag verification. Emitted only when the env var
+  // is set, so preview and local builds carry no stray meta tag.
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+    verification: {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    },
+  }),
   alternates: {
     canonical: "/",
   },

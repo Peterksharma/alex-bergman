@@ -20,7 +20,8 @@ export const services = [
       'Enhanced living comfort',
     ],
     timeline: '4-8 weeks for design and documents',
-    url: '/services/remodels'
+    url: '/services/remodels',
+    lastModified: '2026-07-01',
   },
   {
     id: '2',
@@ -44,7 +45,8 @@ export const services = [
       'Climate-controlled environment',
     ],
     timeline: '3-6 weeks for design and documents',
-    url: '/services/garages'
+    url: '/services/garages',
+    lastModified: '2026-07-01',
   },
   {
     id: '3',
@@ -68,7 +70,8 @@ export const services = [
       'Added home value',
     ],
     timeline: '6-10 weeks for design and documentation',
-    url: '/services/additions'
+    url: '/services/additions',
+    lastModified: '2026-07-01',
   },
   {
     id: '4',
@@ -92,7 +95,8 @@ export const services = [
       'Financing documentation',
     ],
     timeline: '2-4 weeks for initial concepts',
-    url: '/services/conceptual-design'
+    url: '/services/conceptual-design',
+    lastModified: '2026-07-01',
   },
   {
     id: '5',
@@ -116,7 +120,8 @@ export const services = [
       'Future-proof design considerations',
     ],
     timeline: '8-12 weeks for complete design package',
-    url: '/services/new-construction'
+    url: '/services/new-construction',
+    lastModified: '2026-07-01',
   },
   {
     id: '6',
@@ -140,6 +145,7 @@ export const services = [
       'Separate private living space',
     ],
     timeline: '6-8 weeks for design and documentation',
-    url: '/services/adu'
+    url: '/services/adu',
+    lastModified: '2026-07-01',
   }
 ];

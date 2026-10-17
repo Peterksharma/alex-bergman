@@ -22,7 +22,7 @@ export default async function AdminProjectsPage({ searchParams }) {
 
   return (
     <AdminShell
-      email={session.email}
+      username={session.username}
       eyebrow={`Project index · ${projects.length} sheets`}
       title="Projects"
       actions={

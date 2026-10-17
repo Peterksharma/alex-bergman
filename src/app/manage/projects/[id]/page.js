@@ -30,7 +30,7 @@ export default async function EditProjectPage({ params, searchParams }) {
 
   return (
     <AdminShell
-      email={session.email}
+      username={session.username}
       eyebrow={`Sheet · /${project.slug} · ${project.published ? "published" : "draft"}`}
       title={project.name}
       actions={

@@ -4,7 +4,8 @@ import { SignJWT, jwtVerify } from "jose";
  * auth.js — the admin session.
  *
  * A session is a signed (HS256) JWT in an httpOnly cookie. There is one
- * admin (ADMIN_EMAIL), so the token carries only the subject and expiry;
+ * admin login (ADMIN_USERNAME, shared by whoever edits the site), so the
+ * token carries only the subject (the username) and expiry;
  * there is no user table to look up. Verification happens in proxy.js
  * (edge runtime) and in server actions, so this module must stay free of
  * Node-only imports: jose and the Web Crypto API work in both.
@@ -23,18 +24,18 @@ function secretKey() {
   return new TextEncoder().encode(secret);
 }
 
-/** Create a session token for `email`, expiring in SESSION_TTL_SECONDS. */
-export async function createSessionToken(email) {
+/** Create a session token for `username`, expiring in SESSION_TTL_SECONDS. */
+export async function createSessionToken(username) {
   return new SignJWT({ role: "admin" })
     .setProtectedHeader({ alg: "HS256" })
-    .setSubject(email)
+    .setSubject(username)
     .setIssuedAt()
     .setExpirationTime(`${SESSION_TTL_SECONDS}s`)
     .sign(secretKey());
 }
 
 /**
- * Verify a token. Returns `{ email }` for a valid, unexpired admin
+ * Verify a token. Returns `{ username }` for a valid, unexpired admin
  * session and `null` for anything else (bad signature, expired, missing).
  * Never throws: callers treat the result as a boolean gate.
  */
@@ -43,7 +44,7 @@ export async function verifySessionToken(token) {
   try {
     const { payload } = await jwtVerify(token, secretKey(), { algorithms: ["HS256"] });
     if (payload.role !== "admin" || typeof payload.sub !== "string") return null;
-    return { email: payload.sub };
+    return { username: payload.sub };
   } catch {
     return null;
   }

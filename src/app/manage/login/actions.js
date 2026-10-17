@@ -24,33 +24,40 @@ function safeNext(value) {
 /**
  * Login server action (useActionState signature).
  *
- * Compares the submitted email (case-insensitive) with ADMIN_EMAIL and the
- * password with ADMIN_PASSWORD_HASH via bcrypt. A dummy hash is compared
- * when the email is wrong, so the response time does not reveal whether
- * the email exists, and every failure waits a flat 1 s before answering.
- * One shared error message for both cases for the same reason.
+ * Compares the submitted username with ADMIN_USERNAME and the password
+ * with ADMIN_PASSWORD_HASH via bcrypt. Usernames are compared in
+ * canonical form (trimmed, inner whitespace collapsed, case-folded) so
+ * "alex bergman" and "Alex  Bergman" both match; the session subject is
+ * the configured spelling. A dummy hash is compared when the username is
+ * wrong, so the response time does not reveal whether it exists, and
+ * every failure waits a flat 1 s before answering. One shared error
+ * message for both cases for the same reason.
  */
+function canonicalUsername(value) {
+  return String(value ?? "").trim().replace(/\s+/g, " ").toLowerCase();
+}
+
 export async function login(_prevState, formData) {
-  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  const username = canonicalUsername(formData.get("username"));
   const password = String(formData.get("password") ?? "");
   const next = safeNext(formData.get("next"));
 
-  const adminEmail = (process.env.ADMIN_EMAIL ?? "").trim().toLowerCase();
+  const adminUsername = (process.env.ADMIN_USERNAME ?? "").trim();
   const adminHash = process.env.ADMIN_PASSWORD_HASH ?? "";
-  if (!adminEmail || !adminHash) {
+  if (!adminUsername || !adminHash) {
     return { error: "Admin login is not configured on this deployment." };
   }
 
   // Always run a bcrypt compare so timing is uniform.
-  const emailOk = email === adminEmail;
-  const passwordOk = await bcrypt.compare(password, emailOk ? adminHash : DUMMY_HASH);
+  const usernameOk = username === canonicalUsername(adminUsername);
+  const passwordOk = await bcrypt.compare(password, usernameOk ? adminHash : DUMMY_HASH);
 
-  if (!emailOk || !passwordOk) {
+  if (!usernameOk || !passwordOk) {
     await new Promise((r) => setTimeout(r, FAILURE_DELAY_MS));
-    return { error: "Incorrect email or password." };
+    return { error: "Incorrect username or password." };
   }
 
-  const token = await createSessionToken(adminEmail);
+  const token = await createSessionToken(adminUsername);
   const store = await cookies();
   store.set(SESSION_COOKIE, token, sessionCookieOptions());
   redirect(next);

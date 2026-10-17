@@ -11,11 +11,11 @@ export default function LoginForm({ next }) {
   return (
     <form action={action} className="space-y-5" noValidate>
       <input type="hidden" name="next" value={next ?? "/manage"} />
-      <Field label="Email" htmlFor="email">
+      <Field label="Username" htmlFor="username">
         <input
-          id="email"
-          name="email"
-          type="email"
+          id="username"
+          name="username"
+          type="text"
           autoComplete="username"
           required
           className={inputClass}

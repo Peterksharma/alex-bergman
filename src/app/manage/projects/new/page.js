@@ -12,7 +12,7 @@ export default async function NewProjectPage() {
   const session = await requireAdmin();
 
   return (
-    <AdminShell email={session.email} eyebrow="New sheet" title="New project">
+    <AdminShell username={session.username} eyebrow="New sheet" title="New project">
       <SurfaceCard className="p-6 sm:p-8 gap-0">
         <p className="mb-6 text-sm text-tone-muted">
           Save the details first; photos can be added on the next screen.

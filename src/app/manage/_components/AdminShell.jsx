@@ -9,7 +9,7 @@ import { logout } from "../login/actions";
  * block (eyebrow + heading + optional actions) and a thin toolbar with
  * the signed-in address and sign-out.
  */
-export default function AdminShell({ eyebrow, title, actions, email, children }) {
+export default function AdminShell({ eyebrow, title, actions, username, children }) {
   return (
     <Chapter tone="paper" grid className="min-h-screen py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -19,7 +19,7 @@ export default function AdminShell({ eyebrow, title, actions, email, children })
             <Link href="/portfolio" className="hover:text-tone-heading" target="_blank" rel="noreferrer">View site ↗</Link>
           </nav>
           <form action={logout} className="flex items-center gap-3">
-            {email && <span className="normal-case tracking-normal">{email}</span>}
+            {username && <span className="normal-case tracking-normal">{username}</span>}
             <Button type="submit" variant="ghost" size="sm" className="font-mono text-[11px] uppercase tracking-widest">
               Sign out
             </Button>

@@ -4,12 +4,16 @@ import { headers } from 'next/headers'
 import { sendContactEmail } from '@/lib/email'
 import { TURNSTILE_FIELD, clientIpFrom, verifyTurnstile } from '@/lib/turnstile'
 import {
+  expiredFormRetryStamp,
+  isExpiredForm,
   isSuspectedBot,
   normalizeContactInput,
   validateContactInput,
 } from '@/lib/contactSchema'
 
 const GENERIC_FIELD_ERROR = 'Please correct the highlighted fields.'
+const EXPIRED_FORM_ERROR =
+  'This page was open for a while, so your message has not been sent yet. Please press send again.'
 
 /**
  * What a bot sees. Indistinguishable from a real success so the
@@ -27,9 +31,11 @@ function fakeSuccess(values) {
  *                useActionState action).
  * Postcondition: resolves to one of
  *   { success: true, projectType }
- *   { success: false, error, fieldErrors?, values? }
+ *   { success: false, error, fieldErrors?, values?, retryStamp? }
  * `values` echoes the normalized input so the form can re-populate its
- * fields; `fieldErrors` maps field name -> message. Never throws.
+ * fields; `fieldErrors` maps field name -> message; `retryStamp` is the
+ * new timing stamp an expired form must carry so a resend is accepted.
+ * Never throws.
  */
 export async function submitContactForm(previousState, formData) {
   if (!(formData instanceof FormData)) {
@@ -43,6 +49,12 @@ export async function submitContactForm(previousState, formData) {
   if (isSuspectedBot(formData)) {
     console.warn('contact form: dropped suspected bot submission')
     return fakeSuccess(values)
+  }
+
+  /* Usually a person back at an open tab, so never a fake success: the
+     message would vanish while the page said it was sent. */
+  if (isExpiredForm(formData)) {
+    return { success: false, error: EXPIRED_FORM_ERROR, values, retryStamp: expiredFormRetryStamp() }
   }
 
   const fieldErrors = validateContactInput(values)

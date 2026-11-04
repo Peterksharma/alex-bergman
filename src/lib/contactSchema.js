@@ -64,6 +64,11 @@ export const HONEYPOT_FIELD = 'company'
 /** Name of the hidden field holding the form's render time (epoch ms). */
 export const TIMING_FIELD = 't'
 
+/** Read a field from FormData or a plain object. */
+function readField(raw, key) {
+  return typeof raw?.get === 'function' ? raw.get(key) : raw?.[key]
+}
+
 /**
  * Decide whether a submission is probably automated, from two cheap
  * signals that cost a human nothing:
@@ -71,24 +76,58 @@ export const TIMING_FIELD = 't'
  *   1. Honeypot: the hidden `company` input is filled in. Browsers never
  *      show it; bots fill every field they find.
  *   2. Timing: `t` is the epoch-ms the form rendered. Submissions faster
- *      than TIMING.minElapsedMs, older than TIMING.maxElapsedMs, missing,
- *      or not a finite number (JS never ran) are treated as automated.
+ *      than TIMING.minElapsedMs, missing, or not a finite number (JS
+ *      never ran) are treated as automated.
+ *
+ * Age is deliberately not a signal here: bot verdicts are answered with a
+ * fake success, and a person who left the tab open must never get that.
+ * See isExpiredForm.
  *
  * Precondition:  `raw` is an object or FormData-like; `now` is epoch ms.
  * Postcondition: returns true iff at least one signal fires. Pure: the
  *                clock is an argument so tests are deterministic.
  */
 export function isSuspectedBot(raw, now = Date.now()) {
-  const read = (key) =>
-    typeof raw?.get === 'function' ? raw.get(key) : raw?.[key]
+  if (asTrimmedString(readField(raw, HONEYPOT_FIELD)) !== '') return true
 
-  if (asTrimmedString(read(HONEYPOT_FIELD)) !== '') return true
-
-  const renderedAt = Number(asTrimmedString(read(TIMING_FIELD)))
+  const renderedAt = Number(asTrimmedString(readField(raw, TIMING_FIELD)))
   if (!Number.isFinite(renderedAt) || renderedAt <= 0) return true
 
-  const elapsed = now - renderedAt
-  return elapsed < TIMING.minElapsedMs || elapsed > TIMING.maxElapsedMs
+  return now - renderedAt < TIMING.minElapsedMs
+}
+
+/**
+ * Decide whether a form was rendered too long ago to accept. Usually this
+ * is a person returning to an open tab, occasionally a replayed payload,
+ * and the two look alike. So it is answered honestly: no email is sent,
+ * and the visitor is asked to send again. A replay gains nothing, because
+ * resending the same timestamp keeps failing this check.
+ *
+ * Precondition:  `raw` is an object or FormData-like; `now` is epoch ms.
+ * Postcondition: true iff `t` is a positive finite number older than
+ *                TIMING.maxElapsedMs. A malformed `t` is isSuspectedBot's
+ *                concern, so it returns false here. Pure.
+ */
+export function isExpiredForm(raw, now = Date.now()) {
+  const renderedAt = Number(asTrimmedString(readField(raw, TIMING_FIELD)))
+  if (!Number.isFinite(renderedAt) || renderedAt <= 0) return false
+  return now - renderedAt > TIMING.maxElapsedMs
+}
+
+/**
+ * The `t` value a form should carry after its submission expired.
+ *
+ * Plain Date.now() would be wrong: a visitor pressing Send again at once
+ * would then look faster than TIMING.minElapsedMs and be silently dropped
+ * as a bot, the very loss this path exists to prevent. Backdating by the
+ * minimum is honest, since they have already spent that time on the form.
+ *
+ * Postcondition: isSuspectedBot and isExpiredForm both accept this stamp
+ *                at `now` and for the next TIMING.maxElapsedMs less
+ *                TIMING.minElapsedMs.
+ */
+export function expiredFormRetryStamp(now = Date.now()) {
+  return String(now - TIMING.minElapsedMs)
 }
 
 /**

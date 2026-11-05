@@ -11,6 +11,8 @@ import {
   OTHER_PROJECT_TYPE,
   LIMITS,
   TIMING,
+  expiredFormRetryStamp,
+  isExpiredForm,
   isSuspectedBot,
   normalizeContactInput,
   validateContactInput,
@@ -149,9 +151,12 @@ describe('isSuspectedBot', () => {
     assert.equal(isSuspectedBot({ ...human, t: String(NOW - TIMING.minElapsedMs) }, NOW), false)
   })
 
-  test('flags a submission older than the maximum', () => {
-    assert.equal(isSuspectedBot({ ...human, t: String(NOW - TIMING.maxElapsedMs - 1) }, NOW), true)
-    assert.equal(isSuspectedBot({ ...human, t: String(NOW - TIMING.maxElapsedMs) }, NOW), false)
+  test('does not flag an old form: a fake success would lose a real lead', () => {
+    assert.equal(isSuspectedBot({ ...human, t: String(NOW - TIMING.maxElapsedMs - 1) }, NOW), false)
+  })
+
+  test('flags a timestamp from the future', () => {
+    assert.equal(isSuspectedBot({ ...human, t: String(NOW + 60_000) }, NOW), true)
   })
 
   test('flags a missing, empty, or non-numeric timestamp', () => {
@@ -164,6 +169,41 @@ describe('isSuspectedBot', () => {
   test('reads from a FormData-like object', () => {
     const fd = new Map([['company', ''], ['t', String(NOW - 10_000)]])
     assert.equal(isSuspectedBot(fd, NOW), false)
+  })
+})
+
+describe('isExpiredForm', () => {
+  const NOW = 1_800_000_000_000
+
+  test('is true only past the maximum age', () => {
+    assert.equal(isExpiredForm({ t: String(NOW - TIMING.maxElapsedMs - 1) }, NOW), true)
+    assert.equal(isExpiredForm({ t: String(NOW - TIMING.maxElapsedMs) }, NOW), false)
+    assert.equal(isExpiredForm({ t: String(NOW - 30_000) }, NOW), false)
+  })
+
+  test('leaves a malformed timestamp to isSuspectedBot', () => {
+    for (const t of [undefined, '', 'yesterday', '-5', '0']) {
+      assert.equal(isExpiredForm({ t }, NOW), false)
+    }
+  })
+
+  test('reads from a FormData-like object', () => {
+    const fd = new Map([['t', String(NOW - TIMING.maxElapsedMs - 1)]])
+    assert.equal(isExpiredForm(fd, NOW), true)
+  })
+})
+
+describe('expiredFormRetryStamp', () => {
+  const NOW = 1_800_000_000_000
+
+  test('an immediate resend is neither a bot nor expired', () => {
+    const retry = { company: '', t: expiredFormRetryStamp(NOW) }
+    assert.equal(isSuspectedBot(retry, NOW), false)
+    assert.equal(isExpiredForm(retry, NOW), false)
+  })
+
+  test('a plain Date.now() stamp would be dropped, which is why it is backdated', () => {
+    assert.equal(isSuspectedBot({ company: '', t: String(NOW) }, NOW), true)
   })
 })
 

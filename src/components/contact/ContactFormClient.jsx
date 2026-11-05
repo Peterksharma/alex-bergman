@@ -121,6 +121,7 @@ export default function ContactFormClient({ projectTypes }) {
       trackEvent("generate_lead", { method: "contact_form", project_type: state.projectType });
     } else if (state?.success === false) {
       toast.error(state.error || "Error sending message");
+      if (state.retryStamp) setRenderedAt(state.retryStamp);
     }
   }, [state]);
 

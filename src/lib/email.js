@@ -149,13 +149,106 @@ function renderText(line) {
 }
 
 /**
- * Send the lead email for a contact-form submission.
+ * Render the confirmation sent to the person who submitted the form.
+ *
+ * This goes to an address nobody has verified, so a stranger could enter
+ * someone else's. It therefore carries no free text from the form (no
+ * name, address or message): the only submitted value is `projectType`,
+ * which validation limits to our own list. Anyone abusing the form can
+ * make this email arrive but cannot use it to deliver their own words.
+ *
+ * Precondition:  `projectType` has passed validateContactInput.
+ * Postcondition: returns { subject, html, text }. Pure.
+ */
+export function renderConfirmationEmail(projectType) {
+  const line = headerSafe(projectType);
+  const safe = escapeHtml(line);
+  const notice = 'If you did not contact us, you can ignore this email.';
+
+  return {
+    subject: 'We received your message - A.R.Bergman Drafting',
+    html: `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>We received your message</title></head>
+<body style="margin:0;padding:0;background:${PAPER};">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:${PAPER};">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;width:100%;">
+          <tr>
+            <td style="background:${INK};border-top:4px solid ${AMBER};padding:22px 28px;">
+              <div style="font-family:'IBM Plex Mono',Menlo,Consolas,monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:${AMBER};">A.R.Bergman Drafting</div>
+              <div style="font-family:'Public Sans',Helvetica,Arial,sans-serif;font-size:22px;font-weight:700;line-height:1.25;color:#f5f7fa;margin-top:8px;">We received your message</div>
+            </td>
+          </tr>
+          <tr>
+            <td style="background:#ffffff;border:1px solid ${RULE};border-top:0;padding:24px 28px;font-family:'Public Sans',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.6;color:${BODY};">
+              <p style="margin:0 0 14px;">Thanks for reaching out. Your project inquiry (${safe}) has reached us, and we'll get back to you soon.</p>
+              <p style="margin:0;">If there's anything you'd like to add, just reply to this email.</p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:14px 28px;font-family:'IBM Plex Mono',Menlo,Consolas,monospace;font-size:11px;letter-spacing:0.06em;color:${MUTED};">${notice}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`,
+    text: [
+      'WE RECEIVED YOUR MESSAGE - A.R.Bergman Drafting',
+      '',
+      `Thanks for reaching out. Your project inquiry (${line}) has reached us, and we'll get back to you soon.`,
+      '',
+      "If there's anything you'd like to add, just reply to this email.",
+      '',
+      notice,
+    ].join('\n'),
+  };
+}
+
+/**
+ * Send the submitter their confirmation.
+ *
+ * Runs only after the lead email succeeded, and its outcome never changes
+ * the form's reply: the lead is what matters, and an error here would tell
+ * the visitor to resend a message Alex already has.
+ *
+ * Auto-Submitted marks this as machine-sent (RFC 3834), so a visitor's
+ * out-of-office does not answer it. Replies go to Alex, not the sender.
+ *
+ * Postcondition: resolves to true iff Resend accepted it. Never throws.
+ */
+async function sendConfirmationEmail({ email, projectType }) {
+  try {
+    const { error } = await resend.emails.send({
+      from: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
+      to: email,
+      replyTo: process.env.CONTACT_EMAIL,
+      headers: { 'Auto-Submitted': 'auto-replied' },
+      ...renderConfirmationEmail(projectType),
+    });
+    if (error) {
+      console.error('Resend confirmation error:', error);
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error('Confirmation email error:', error);
+    return false;
+  }
+}
+
+/**
+ * Send the lead email for a contact-form submission, then a confirmation
+ * to the submitter.
  *
  * Precondition:  `data` has the CONTACT_FIELDS keys (message may be
  *                under `body`). It is normalized and validated again
  *                here so this function is safe to call from anywhere,
  *                not only from the already-validating server action.
- * Postcondition: resolves to { success: true, messageId } or
+ * Postcondition: resolves to { success: true, messageId, confirmationSent } or
  *                { success: false, error, fieldErrors? }. Never throws.
  */
 export async function sendContactEmail(data) {
@@ -216,7 +309,8 @@ export async function sendContactEmail(data) {
       return { success: false, error: 'Failed to send email' };
     }
 
-    return { success: true, messageId: emailData?.id };
+    const confirmationSent = await sendConfirmationEmail(values);
+    return { success: true, messageId: emailData?.id, confirmationSent };
   } catch (error) {
     console.error('Email sending error:', error);
     return { success: false, error: 'Internal server error' };

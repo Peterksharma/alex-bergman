@@ -6,7 +6,7 @@
 import { test, describe } from 'node:test'
 import assert from 'node:assert/strict'
 
-import { escapeHtml, headerSafe, mapsUrlFor, sendContactEmail } from './email.js'
+import { escapeHtml, headerSafe, mapsUrlFor, renderConfirmationEmail, sendContactEmail } from './email.js'
 
 describe('escapeHtml', () => {
   test('escapes all five significant characters', () => {
@@ -60,5 +60,24 @@ describe('sendContactEmail', () => {
     assert.ok(result.fieldErrors.name)
     assert.ok(result.fieldErrors.email)
     assert.ok(result.fieldErrors.address)
+  })
+})
+
+describe('renderConfirmationEmail', () => {
+  test('names the project type in both parts', () => {
+    const { subject, html, text } = renderConfirmationEmail('Additions')
+    assert.ok(subject.length > 0)
+    assert.ok(html.includes('Additions'))
+    assert.ok(text.includes('Additions'))
+  })
+
+  test('escapes the project type in HTML and keeps it to one line', () => {
+    const { html, text } = renderConfirmationEmail('<b>x</b>\r\nBcc: a@b.c')
+    assert.ok(!html.includes('<b>x</b>'))
+    assert.ok(!text.includes('\r'))
+  })
+
+  test('takes nothing but the project type, so it cannot relay form text', () => {
+    assert.equal(renderConfirmationEmail.length, 1)
   })
 })
